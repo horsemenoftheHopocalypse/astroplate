@@ -1,13 +1,19 @@
 ---
-import ImageMod from "@/components/ImageMod.astro";
+import config from "@/config/config.json";
+import ImageMod from "@/layouts/components/ImageMod.astro";
 import Base from "@/layouts/Base.astro";
 import { getListPage } from "@/lib/contentParser.astro";
 import { markdownify } from "@/lib/utils/textConverter";
 import { render } from "astro:content";
 
+const { src, srcDarkmode }: { src?: string; srcDarkmode?: string } =
+  Astro.props;
+
+
 const aboutIndex = await getListPage("about", "-index");
 const { Content } = await render(aboutIndex);
-const { title, description, meta_title, image } = aboutIndex.data;
+const { title, description, meta_title, image, image_darkmode } = aboutIndex.data;
+const { theme_switcher }: { theme_switcher: boolean } = config.settings;
 
 if (aboutIndex.data.draft) {
   return Astro.redirect("/404");
@@ -26,14 +32,26 @@ if (aboutIndex.data.draft) {
         <div class="text-center md:col-10 lg:col-7">
           {
             image && (
-              <ImageMod
-                class="mx-auto mb-6 rounded-lg"
-                src={image}
-                width={200}
-                height={200}
-                alt={title}
-                format="webp"
-              />
+              <>
+                <ImageMod
+                  class={`mx-auto mb-6 rounded-lg ${theme_switcher && "dark:hidden"}`}
+                  src={image}
+                  width={200}
+                  height={200}
+                  alt={title}
+                  format="webp"
+                />
+                {theme_switcher && image_darkmode && (
+                  <ImageMod
+                    class="mx-auto mb-6 rounded-lg hidden dark:inline-block"
+                    src={image_darkmode}
+                    width={200}
+                    height={200}
+                    alt={title}
+                    format="webp"
+                  />
+                )}
+              </>
             )
           }
           <h2 set:html={markdownify(title)} class="h3 mb-6" />

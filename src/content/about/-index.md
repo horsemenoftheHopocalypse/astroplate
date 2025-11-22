@@ -2,7 +2,8 @@
 title: "The Horsemen of the Hopocalypse"
 meta_title: "About"
 description: "*American Homebrew Association’s 2023 Radegast Club of the Year"
-image: "/images/HorsemenLogo-Only.png"
+image: "/images/HorsemenLogo-Only.png"  
+image_darkmode: "/images/HorsemenLogo-Only-dark.png"
 draft: false
 ---
 
