@@ -1,11 +1,11 @@
 ---
-title: What Are Cryo Hops?"
+title: "What Are Cryo Hops?"
 meta_title: ""
 description: "this is meta description"
 date: 2025-02-25T05:00:00Z
 image: "/images/cryohops.png"
 categories: ["Education"]
-author: "Greg Smith
+author: "Greg Smith"
 tags: ["hops", "education"]
 draft: false
 ---
