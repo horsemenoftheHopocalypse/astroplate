@@ -1,13 +1,13 @@
 ---
 # Banner
 banner:
-  title: "The Ultimate Starter Template You Need To Start Your Astro Project"
-  content: "Astroplate is a free starter template built with Astro and TailwindCSS, providing everything you need to jumpstart your Astro project and save valuable time."
-  image: "/images/banner.png"
-  button:
-    enable: true
-    label: "Get Started For Free"
-    link: "https://github.com/zeon-studio/astroplate"
+  title: "Welcome to the Horsemen of the Hopocalypse"
+    image: "/images/service-2.png"
+  content: "We are a homebrew club where beer enthusiasts and hobbyists come together to share their passion for brewing and everything related to beer. Our club comprises a close-knit community of homebrewers, ranging from beginners to experienced brewers. We meet to exchange tips, techniques, and ideas on how to create the perfect pint. 
+
+Whether you’re a seasoned brewer looking to refine your craft or a curious newcomer eager to learn about the art of brewing, our club offers a welcoming and supportive environment. Here, you can connect with fellow beer lovers and enhance your brewing skills. We host activities, including tastings, competitions, workshops, and social events, ensuring there’s something for everyone.
+
+We are always excited to welcome new members to our community. Join us today and discover the joy of homebrewing in Fort Worth!"
 
 # Features
 features:

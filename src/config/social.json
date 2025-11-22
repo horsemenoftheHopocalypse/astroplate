@@ -3,22 +3,17 @@
     {
       "name": "facebook",
       "icon": "FaFacebook",
-      "link": "https://www.facebook.com/"
+      "link": "https://www.facebook.com/groups/120123548021319"
     },
     {
-      "name": "x",
-      "icon": "FaXTwitter",
-      "link": "https://x.com/"
+      "name": "instagram",
+      "icon": "FaInstagram",
+      "link": "https://www.instagram.com/horsemenofthehop/"
     },
     {
-      "name": "github",
-      "icon": "FaGithub",
-      "link": "https://www.github.com/"
-    },
-    {
-      "name": "linkedin",
-      "icon": "FaLinkedin",
-      "link": "https://www.linkedin.com/"
+      "name": "youtube",
+      "icon": "FaYoutube",
+      "link": "https://www.youtube.com/@HorsemenoftheHops"
     }
   ]
 }

@@ -2,5 +2,25 @@
   "files.associations": {
     "*.mdx": "markdown"
   },
-  "tailwindCSS.experimental.configFile": "src/styles/main.css"
+  "tailwindCSS.experimental.configFile": "src/styles/main.css",
+  "workbench.colorCustomizations": {
+    "activityBar.activeBackground": "#4f9f68",
+    "activityBar.background": "#4f9f68",
+    "activityBar.foreground": "#15202b",
+    "activityBar.inactiveForeground": "#15202b99",
+    "activityBarBadge.background": "#624a95",
+    "activityBarBadge.foreground": "#e7e7e7",
+    "commandCenter.border": "#e7e7e799",
+    "sash.hoverBorder": "#4f9f68",
+    "statusBar.background": "#3e7d52",
+    "statusBar.foreground": "#e7e7e7",
+    "statusBarItem.hoverBackground": "#4f9f68",
+    "statusBarItem.remoteBackground": "#3e7d52",
+    "statusBarItem.remoteForeground": "#e7e7e7",
+    "titleBar.activeBackground": "#3e7d52",
+    "titleBar.activeForeground": "#e7e7e7",
+    "titleBar.inactiveBackground": "#3e7d5299",
+    "titleBar.inactiveForeground": "#e7e7e799"
+  },
+  "peacock.color": "#3e7d52"
 }
