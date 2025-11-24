@@ -56,7 +56,8 @@
     }
   ],
   "footer": [
-    {      "name": "Home",
+    {
+      "name": "Home",
       "url": "/"
 
     }
