@@ -22,6 +22,16 @@ export const getSinglePage = async <C extends CollectionKey>(
     collectionName,
     ({ data, id }) => !(data as PageData)?.draft && !id.startsWith("-")
   );
+
+  // Sort authors by the sort field
+  if (collectionName === "authors") {
+    return allPages.sort((a, b) => {
+      const sortA = (a.data as any).sort ?? Number.MAX_SAFE_INTEGER;
+      const sortB = (b.data as any).sort ?? Number.MAX_SAFE_INTEGER;
+      return sortA - sortB;
+    });
+  }
+
   return allPages;
 };
 
