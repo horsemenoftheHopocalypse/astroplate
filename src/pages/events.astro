@@ -1,0 +1,17 @@
+---
+import ImageMod from "@/components/ImageMod.astro";
+import Base from "@/layouts/Base.astro";
+import PageHeader from "@/partials/PageHeader.astro";
+
+---
+
+<Base >
+  <PageHeader title="Events" />
+    <section class="section pt-14">
+    <div class="container">
+      <div class="row justify-center">
+        <iframe loading="lazy" src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=1&amp;ctz=America%2FChicago&amp;showPrint=0&amp;mode=AGENDA&amp;src=aG9yc2VtZW5vZnRoZWhvcHNAZ21haWwuY29t&amp;src=ZmEwOWI3ODJjYzFmODRmZDQ3M2JmMTA0ZTI1MjkzZjQ5ODhiMmRjNWNkMDg4OTdjZDk1YjhhYWMyNDVmODMyY0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t&amp;src=MTBiNzdmOWVhODA4MGQ2NmM2MDVlMGUzNDNkM2E2YzgyNzFkZDllYzE5OGJlMWEyYWI1OTliZTM3MTZkMjFhNkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&amp;src=ZW4udXNhI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&amp;color=%23039be5&amp;color=%239e69af&amp;color=%23f4511e&amp;color=%230b8043" frameborder="0" style="border:0" scrolling="no" height="600" width="100%" sandbox="allow-scripts allow-same-origin allow-popups"></iframe>
+      </div>
+    </div>
+  </section>
+</Base>

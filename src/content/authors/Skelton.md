@@ -1,18 +1,16 @@
 ---
-title: Barry Forrest
-position: Director, IT
-sort: 10
-email: bforrest30@gmail.com
-image: "/images/barry.jpeg"
+title: John Skelton
+position: Sergeant-at-Arms
+sort: 1
+email: Sgt@horsemenofthehops.com
+image: "/images/JSkelton.jpg"
+
 description: this is meta description
 social:
   - name: facebook
     icon: FaFacebook
-    link: https://www.facebook.com/bforrest30
+    link: https://www.facebook.com/john.skelton.716
 
-  - name: linkedin
-    icon: FaLinkedin
-    link: https://www.linkedin.com/in/barryforrest/
 ---
 
 lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostr navigation et dolore magna aliqua.
