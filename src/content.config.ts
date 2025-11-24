@@ -1,5 +1,6 @@
 import { glob } from "astro/loaders";
 import { defineCollection, z } from "astro:content";
+import { link } from "fs";
 
 const commonFields = {
   title: z.string(),
@@ -100,7 +101,13 @@ const homepageCollection = defineCollection({
         }),
       }),
     ),
-  }),
+    countdown: z.object({
+      image: z.string(),
+      title: z.string(),
+      date: z.date(),
+      link: z.string(),
+    }),
+  })
 });
 
 // Call to Action collection schema
