@@ -33,7 +33,6 @@ We have members from many areas in DFW ranging from Arlington, Burleson, and Den
       label: "Get Started Now"
       link: "#"
 
-
   - title: "What's Included in Astroplate"
     image: "/images/service-1.png"
     content: "Astroplate is a comprehensive starter template that includes everything you need to get started with your Astro project. What's Included in Astroplate"

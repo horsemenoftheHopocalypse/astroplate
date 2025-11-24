@@ -150,6 +150,25 @@ const testimonialSectionCollection = defineCollection({
   }),
 });
 
+const photoGalleryCollection = defineCollection({
+  loader: glob({
+    pattern: "image-gallary.{md,mdx}",
+    base: "src/content/sections",
+  }),
+  schema: z.object({
+    enable: z.boolean(),
+    title: z.string(),
+    description: z.string(),
+    photos: z.array(
+      z.object({
+        image: z.string(),
+        "alt-text": z.string(),
+        description: z.string(),
+      }),
+    ),
+  }),
+});
+
 // Export collections
 export const collections = {
   // Pages
@@ -163,4 +182,5 @@ export const collections = {
   // sections
   ctaSection: ctaSectionCollection,
   testimonialSection: testimonialSectionCollection,
+  imageGallarySection: photoGalleryCollection,
 };
