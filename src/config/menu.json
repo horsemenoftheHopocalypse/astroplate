@@ -21,6 +21,14 @@
       "url": "/authors"
     },
     {
+      "name": "Competitions",
+      "url": "/competitions"
+    },
+    {
+      "name": "Memberships",
+      "url": "/memberships"
+    },
+    {
       "name": "Pages",
       "url": "",
       "hasChildren": true,
@@ -29,19 +37,9 @@
           "name": "Contact",
           "url": "/contact"
         },
-
-
-        {
-          "name": "Categories",
-          "url": "/categories"
-        },
         {
           "name": "Tags",
           "url": "/tags"
-        },
-        {
-          "name": "404 Page",
-          "url": "/404"
         }
       ]
     }
