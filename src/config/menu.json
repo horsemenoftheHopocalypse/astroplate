@@ -13,6 +13,14 @@
       "url": "/events"
     },
     {
+        "name": "Blog",
+        "url": "/blog"
+    },
+    {
+      "name": "Officers",
+      "url": "/authors"
+    },
+    {
       "name": "Pages",
       "url": "",
       "hasChildren": true,
@@ -21,14 +29,8 @@
           "name": "Contact",
           "url": "/contact"
         },
-        {
-          "name": "Blog",
-          "url": "/blog"
-        },
-        {
-          "name": "Officers",
-          "url": "/authors"
-        },
+
+
         {
           "name": "Categories",
           "url": "/categories"
