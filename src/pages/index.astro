@@ -8,25 +8,26 @@ import Testimonial from "@/partials/Testimonial.astro";
 import { FaCheck } from "react-icons/fa";
 import ContactUs from "@/components/ContactUs.astro";
 import CountDown from "@/components/CountDown.astro";
+import PhotoGallery from "@/partials/PhotoGallery.astro";
 
 const homepage = await getListPage("homepage", "-index");
 const call_to_action = await getListPage("ctaSection", "call-to-action");
 const testimonial = await getListPage("testimonialSection", "testimonial");
-
+const photoGallary = await getListPage("imageGallarySection", "image-gallary");
 const { banner, countdown } = homepage.data;
 ---
 
 <Base>
   <!-- Banner -->
-  <section class="section pt-14">
-    <div class="container">
+  <section class="section pt-0">
+    <div class="container border-blue-500">
       <div class="row justify-center">
         <div class="lg:col-7 md:col-9 mb-8 text-center">
           <h1
             set:html={markdownify(banner.title)}
             class="mb-4 text-h3 lg:text-h1"
           />
-          <p set:html={markdownify(banner.content)} class="mb-8" />
+          <p set:html={markdownify(banner.content)} class="mb-8" style="border-blue-500 border-opacity-100"/>
           {
             banner.button.enable && (
               <a
@@ -42,27 +43,11 @@ const { banner, countdown } = homepage.data;
             )
           }
         </div>
-        <!--
-        {
-          banner.image && (
-            <div class="col-12">
-              <ImageMod
-                src={banner.image}
-                height={380}
-                width={1200}
-                alt="banner"
-                format="webp"
-              />
-            </div>
-          )
-        } -->
       </div>
     </div>
   </section>
-  <!-- /Banner -->
-<ContactUs />
 
-  <section class="section pt-14">
+  <section class="section pt-0">
     <div class="container">
       <div class="row justify-center">
         <CountDown image={countdown.image} title={countdown.title} date={countdown.date} link={countdown.link} />
@@ -70,6 +55,16 @@ const { banner, countdown } = homepage.data;
     </div>
   </section>
 
+  <PhotoGallery photoGallary={photoGallary} />
+
+
   <Testimonial testimonial={testimonial} />
-  <CallToAction call_to_action={call_to_action} />
+
+  <section class="section pt-14">
+    <div class="container">
+      <div class="row justify-center">
+      <ContactUs />
+      </div>
+    </div>
+  </section>
 </Base>
