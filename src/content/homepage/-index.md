@@ -16,6 +16,24 @@ We are always excited to welcome new members to our community. Join us today and
 
 # Features
 features:
+  - title: "Interested in learning more?"
+    image: "/images/service-1.png"
+    content: "Not sure where to start brewing? Want to come to an event? Learn about membership? Our favorite brewery in the area? Contact us with any questions you might have. Would love to hear from you!
+
+We have members from many areas in DFW ranging from Arlington, Burleson, and Denton. We are centralized in Ft. Worth and frequent breweries such as Cowtown, Maple Branch, and HopFusion."
+    bulletpoints:
+      - "10+ Pre-build pages"
+      - "95+ Google Pagespeed Score"
+      - "Build with Astro and TailwindCSS for easy and customizable styling"
+      - "Fully responsive on all devices"
+      - "SEO-optimized for better search engine rankings"
+      - "**Open-source and free** for personal and commercial use"
+    button:
+      enable: false
+      label: "Get Started Now"
+      link: "#"
+
+
   - title: "What's Included in Astroplate"
     image: "/images/service-1.png"
     content: "Astroplate is a comprehensive starter template that includes everything you need to get started with your Astro project. What's Included in Astroplate"

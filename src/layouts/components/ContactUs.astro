@@ -1,0 +1,56 @@
+---
+const { source, className } = Astro.props;
+import DynamicIcon from "@/helpers/DynamicIcon";
+
+---
+<section class="section-sm false">
+  <div class="container max-w-5xl px-8 md:px-12 lg:px-16">
+    <div class="row items-center gap-4 md:gap-6">
+      <div class="md:col-6 lg:col-5 mb-6 md:mb-0">
+        <h2>Interested in learning more?</h2>
+        <p>
+          Not sure where to start brewing? Want to come to an event? Learn about membership? Our favorite brewery in the area? Contact us with any questions you might have. Would love to hear from you!</p>
+        <p>
+          We have members from many areas in DFW ranging from Arlington, Burleson, and Denton. We are centralized in Ft. Worth and frequent breweries such as Cowtown, Maple Branch, and HopFusion.
+        </p>
+        <a
+          href="https://forms.gle/ebbSoH58B9XEmrtK8"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-primary mt-4">
+          Contact Us
+        </a>
+      </div>
+      <div class="md:col-6 lg:col-5 mb-6 md:mb-0">
+        <img src="/images/horsemen-of-the-hops-bluebonnet-brew-off_2.jpg" alt="Horsemen of the Hops Bluebonnet Brew Off" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--
+<section class="section-sm false">
+  <div class="container">
+    <div class="row items-center justify-between">
+      <div class="mb:md-0 mb-6 md:col-5 md:order-2">
+        <img src="/_image?href=%2F%40fs%2FUsers%2Fbarryforrest%2FProjects%2FHorsemen%2Fastro%2Fastroplate%2Fpublic%2Fimages%2Fservice-3.png%3ForigWidth%3D532%26origHeight%3D433%26origFormat%3Dpng&amp;w=520&amp;h=480&amp;f=webp" data-image-component="true" alt="The Top Reasons to Choose Astro for Your Next Project" loading="lazy" decoding="async" fetchpriority="auto" width="520" height="480">
+      </div>
+      <div class="md:col-7 lg:col-6 md:order-1">
+        <h2 class="mb-4">The Top Reasons to Choose Astro for Your Next Project</h2>
+        <p class="mb-8 text-lg">With Astro, you can build modern and content-focused websites without sacrificing performance or ease of use.</p>
+        <ul>
+          <li class="relative mb-4 pl-6">
+            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" class="absolute left-0 top-1.5" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"></path></svg>
+            <span>Instantly load static sites for better user experience and SEO.</span> </li>
+          <li class="relative mb-4 pl-6"> <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" class="absolute left-0 top-1.5" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"></path></svg>
+            <span>Intuitive syntax and support for popular frameworks make learning and using Astro a breeze.</span> </li>
+          <li class="relative mb-4 pl-6"> <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" class="absolute left-0 top-1.5" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"></path></svg>
+            <span>Use any front-end library or framework, or build custom components, for any project size.</span> </li>
+          <li class="relative mb-4 pl-6"> <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" class="absolute left-0 top-1.5" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"></path></svg> <span>Built on cutting-edge technology to keep your projects up-to-date with the latest web standards.</span> </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+-->
