@@ -11,6 +11,7 @@ const { title, description, meta_title, image } = contactIndex.data;
 if (contactIndex.data.draft) {
   return Astro.redirect("/404");
 }
+import ContactUs from "@/components/ContactUs.astro";
 ---
 
 <Base
@@ -20,7 +21,8 @@ if (contactIndex.data.draft) {
   image={image}
 >
   <PageHeader title={title} />
-  <section class="section-sm">
+  <ContactUs />
+
     <div class="container">
       <div class="row">
         <div class="mx-auto md:col-10 lg:col-6">
