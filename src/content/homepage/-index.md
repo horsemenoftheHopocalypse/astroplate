@@ -73,4 +73,11 @@ We have members from many areas in DFW ranging from Arlington, Burleson, and Den
       enable: false
       label: ""
       link: ""
+# BBO Countdown
+countdown:
+  image: "/images/2026 BBO Logo.jpeg"
+  title: "BBO Account Registration"
+  date: 2025-12-29T15:00:00-06:00
+  link: https://www.bcoem.bluebonnetbrewoff.org/
+
 ---

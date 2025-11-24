@@ -1,6 +1,6 @@
 ---
 title: Brian Street
-position: Social Media Maver
+position: Social Media Maven
 sort: 5
 email: socials@horsemenofthehops.com
 image: "/images/Brian.jpg"
