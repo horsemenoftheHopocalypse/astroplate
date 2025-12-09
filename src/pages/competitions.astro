@@ -1,0 +1,71 @@
+---
+import ImageMod from "@/components/ImageMod.astro";
+import Base from "@/layouts/Base.astro";
+import PageHeader from "@/partials/PageHeader.astro";
+---
+
+<Base>
+  <PageHeader title="Competitions" />
+  <section class="section pt-14">
+    <div class="container max-w-3xl mx-auto">
+      <div class="row justify-center">
+        <!-- Club Competition Card -->
+        <div
+          id="card1"
+          class="w-full mb-8 bg-white dark:bg-gray-800 p-1 border-bottom-2 border-primary"
+        >
+          <div id="clubcontent" class="text-center">
+            <h3 class="mb-4">Club Competition</h3>
+
+            <h3 class="mb-4">Enter</h3>
+            <div class="max-w-4xl mx-auto w-full mt-10">
+              <a
+                class="btn btn-primary"
+                href="https://docs.google.com/forms/d/e/1FAIpQLSfLDezM8tgVlDAyUwMhwtjQeMUbNNV32Bk7h6zKqQfq4CfIxQ/viewform"
+                target="_blank"
+                rel="noopener">2025 Horsemen Club Comp Entry Form</a
+              >
+            </div>
+            <div class="max-w-4xl mx-auto w-full mt-10">
+              <iframe
+                src="https://www.canva.com/design/DAGcCy8Csoo/Is_hKjKmQP43w49PxeAqyA/watch?embed"
+                width="100%"
+                height="500"
+                frameborder="0"></iframe>
+            </div>
+
+            <h4 class="mb-6">Standings</h4>
+            <div class="max-w-4xl mx-auto w-full mt-10">
+              <iframe
+                src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQtXNZ_wKF83IzdCWUD0VUN1X8ApJv7g8QWwbzbHr91asArH4sGfLBUuIFKmosrRVcqYPSAiiriofqC/pubhtml?gid=854398095&single=true&widget=true&headers=false"
+                style="width:100%; height:400px;"></iframe>
+            </div>
+          </div>
+        </div>
+
+        <!-- Texas Competition Circuits Card -->
+        <div class="w-full mb-8 bg-white dark:bg-gray-800 borde pt-8 p-8">
+          <div class="text-center">
+            <h3 class="mb-6">Texas Competition Circuits</h3>
+            <div class="space-y-4">
+              <p>
+                <a
+                  href="https://horsemenofthehops.com/north-texas-homebrew-circuit"
+                  class="text-primary hover:underline">North Texas Circuit</a
+                >
+              </p>
+              <p>
+                <a
+                  href="https://www.lonestarcircuit.com/qualcomps.html"
+                  target="_blank"
+                  rel="noopener"
+                  class="text-primary hover:underline">Lone Star Circuit</a
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

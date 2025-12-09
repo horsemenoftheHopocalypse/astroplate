@@ -3,6 +3,7 @@
     {
       "name": "Home",
       "url": "/"
+<<<<<<< Updated upstream
     },    {
       "name": "About",
       "url": "/about"
@@ -10,6 +11,28 @@
     {
       "name": "Elements",
       "url": "/elements"
+=======
+    },
+    {
+      "name": "Events",
+      "url": "/events"
+    },
+    {
+        "name": "Blog",
+        "url": "/blog"
+    },
+    {
+      "name": "Officers",
+      "url": "/authors"
+    },
+    {
+      "name": "Competitions",
+      "url": "/competitions"
+    },
+    {
+      "name": "Memberships",
+      "url": "/memberships"
+>>>>>>> Stashed changes
     },
     {
       "name": "Pages",
@@ -45,12 +68,17 @@
   ],
   "footer": [
     {
+<<<<<<< Updated upstream
       "name": "Elements",
       "url": "/elements"
     },
     {
       "name": "Privacy Policy",
       "url": "/privacy-policy"
+=======
+      "name": "Home",
+      "url": "/"
+>>>>>>> Stashed changes
     }
   ]
 }
