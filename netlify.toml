@@ -1,6 +1,18 @@
 [build]
-publish = "dist"
 command = "yarn build"
+functions = "netlify/functions"
+publish = "dist"
+
+[dev]
+command = "npm start"
+functions = "netlify/functions"
+port = 5173
+targetPort = 5173
+
+[[redirects]]
+from = "/api/*"
+status = 200
+to = "/.netlify/functions/:splat"
 
 [build.environment]
 NODE_VERSION = "22.20.0"
