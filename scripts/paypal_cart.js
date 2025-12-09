@@ -56,6 +56,14 @@ window.paypal
         });
 
         const orderData = await response.json();
+        console.log("Capture response:", orderData);
+        console.log("Response status:", response.status);
+
+        // Check if the response is successful
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
         // Three cases to handle:
         //   (1) Recoverable INSTRUMENT_DECLINED -> call actions.restart()
         //   (2) Other non-recoverable errors -> Show a failure message
@@ -71,23 +79,21 @@ window.paypal
         } else if (errorDetail) {
           // (2) Other non-recoverable errors -> Show a failure message
           throw new Error(`${errorDetail.description} (${orderData.debug_id})`);
-        } else if (!orderData.purchase_units) {
-          throw new Error(JSON.stringify(orderData));
-        } else {
+        } else if (orderData.status === "COMPLETED") {
           // (3) Successful transaction -> Show confirmation or thank you message
-          // Or go to another URL:  actions.redirect('thank_you.html');
           const transaction =
             orderData?.purchase_units?.[0]?.payments?.captures?.[0] ||
             orderData?.purchase_units?.[0]?.payments?.authorizations?.[0];
+
+          console.log("Capture result", orderData, JSON.stringify(orderData, null, 2));
+
           resultMessage(
-            `Transaction ${transaction.status}: ${transaction.id}<br>
+            `Transaction ${transaction?.status || orderData.status}: ${transaction?.id || orderData.id}<br>
           <br>See console for all available details`
           );
-          console.log(
-            "Capture result",
-            orderData,
-            JSON.stringify(orderData, null, 2)
-          );
+        } else {
+          // If status is not COMPLETED, something went wrong
+          throw new Error(`Unexpected order status: ${orderData.status}. Full response: ${JSON.stringify(orderData)}`);
         }
       } catch (error) {
         console.error(error);

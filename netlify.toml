@@ -4,10 +4,10 @@ functions = "netlify/functions"
 publish = "dist"
 
 [dev]
-command = "npm start"
+command = "yarn dev:astro"
 functions = "netlify/functions"
-port = 5173
-targetPort = 5173
+port = 8888
+targetPort = 4321
 
 [[redirects]]
 from = "/api/*"
