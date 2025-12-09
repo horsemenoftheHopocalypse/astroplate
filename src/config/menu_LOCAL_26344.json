@@ -3,6 +3,15 @@
     {
       "name": "Home",
       "url": "/"
+<<<<<<< Updated upstream
+    },    {
+      "name": "About",
+      "url": "/about"
+    },
+    {
+      "name": "Elements",
+      "url": "/elements"
+=======
     },
     {
       "name": "Events",
@@ -23,7 +32,9 @@
     {
       "name": "Memberships",
       "url": "/memberships"
-},{
+>>>>>>> Stashed changes
+    },
+    {
       "name": "Pages",
       "url": "",
       "hasChildren": true,
@@ -33,17 +44,41 @@
           "url": "/contact"
         },
         {
+          "name": "Blog",
+          "url": "/blog"
+        },
+        {
+          "name": "Officers",
+          "url": "/authors"
+        },
+        {
+          "name": "Categories",
+          "url": "/categories"
+        },
+        {
           "name": "Tags",
           "url": "/tags"
+        },
+        {
+          "name": "404 Page",
+          "url": "/404"
         }
       ]
     }
   ],
   "footer": [
     {
+<<<<<<< Updated upstream
+      "name": "Elements",
+      "url": "/elements"
+    },
+    {
+      "name": "Privacy Policy",
+      "url": "/privacy-policy"
+=======
       "name": "Home",
       "url": "/"
-
+>>>>>>> Stashed changes
     }
   ]
 }
