@@ -6,6 +6,9 @@
   "license": "MIT",
   "packageManager": "yarn@1.22.22",
   "type": "module",
+  "resolutions": {
+    "jws": "^4.0.0"
+  },
   "scripts": {
     "dev": "yarn generate-json && netlify dev",
     "dev:astro": "yarn generate-json && astro dev",
