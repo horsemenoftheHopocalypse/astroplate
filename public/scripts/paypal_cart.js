@@ -134,11 +134,30 @@ window.clearCart = function() {
   updateCartDisplay();
 };
 
-// Initialize cart display on load
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', updateCartDisplay);
-} else {
+// Initialize cart display and attach event listeners
+function initializeCart() {
   updateCartDisplay();
+
+  // Add event delegation for "Add to Cart" buttons
+  document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('add-to-cart-btn')) {
+      const button = e.target;
+      const productName = button.dataset.productName;
+      const productPrice = parseFloat(button.dataset.productPrice);
+      const qtyInputId = button.dataset.qtyInput;
+      const quantity = parseInt(document.getElementById(qtyInputId)?.value || 1);
+
+      if (productName && !isNaN(productPrice) && quantity > 0) {
+        window.addToCart(productName, productPrice, quantity);
+      }
+    }
+  });
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initializeCart);
+} else {
+  initializeCart();
 }
 
 window.paypal

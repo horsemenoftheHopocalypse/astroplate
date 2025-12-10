@@ -35,8 +35,10 @@ const { memberships } = membershipsData;
                 class="w-16 border rounded px-2 py-1 text-center"
               />
               <button
-                onclick={`addToCart('${membership.name}', ${membership.price}, parseInt(document.getElementById('qty-membership-${membership.id}').value))`}
-                class="btn btn-primary flex-1 bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700"
+                class="btn btn-primary flex-1 bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 add-to-cart-btn"
+                data-product-name={membership.name}
+                data-product-price={membership.price}
+                data-qty-input={`qty-membership-${membership.id}`}
               >
                 Add to Cart
               </button>

@@ -57,8 +57,10 @@ const activeEvents = events.filter((event) => event.active);
                 class="w-16 border rounded px-2 py-1 text-center"
               />
               <button
-                onclick={`addToCart('${event.name} Ticket', ${event.price}, parseInt(document.getElementById('qty-${event.id}').value))`}
-                class="btn btn-primary flex-1 bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700"
+                class="btn btn-primary flex-1 bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 add-to-cart-btn"
+                data-product-name={`${event.name} Ticket`}
+                data-product-price={event.price}
+                data-qty-input={`qty-${event.id}`}
               >
                 Add to Cart
               </button>

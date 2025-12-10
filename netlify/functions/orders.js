@@ -6,8 +6,43 @@ import {
   LogLevel,
   OrdersController,
 } from "@paypal/paypal-server-sdk";
+import { readFileSync } from "fs";
+import { fileURLToPath } from "url";
+import { dirname, join } from "path";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const { PUBLIC_PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET } = process.env;
+
+// Load authoritative prices from JSON files
+const membershipsData = JSON.parse(
+  readFileSync(join(__dirname, "../../src/config/memberships.json"), "utf-8")
+);
+const eventsData = JSON.parse(
+  readFileSync(join(__dirname, "../../src/config/events.json"), "utf-8")
+);
+
+// Create a price lookup map
+const priceMap = new Map();
+
+// Add memberships to price map
+membershipsData.memberships.forEach((membership) => {
+  priceMap.set(membership.name, {
+    price: membership.price,
+    type: "membership",
+    id: membership.id,
+  });
+});
+
+// Add events to price map (append " Ticket" to match cart item names)
+eventsData.events.forEach((event) => {
+  priceMap.set(`${event.name} Ticket`, {
+    price: event.price,
+    type: "event",
+    id: event.id,
+  });
+});
 
 const client = new Client({
   clientCredentialsAuthCredentials: {
@@ -34,20 +69,46 @@ const ordersController = new OrdersController(client);
  * @see https://developer.paypal.com/docs/api/orders/v2/#orders_create
  */
 const createOrder = async (cart) => {
-  // Calculate total from cart items
-  const cartTotal = cart.reduce((total, item) => {
-    return total + (parseFloat(item.price) * parseInt(item.quantity));
-  }, 0);
+  // Validate cart items and recalculate with server-side authoritative prices
+  const validatedItems = [];
+  let cartTotal = 0;
 
-  // Build line items for the order
-  const items = cart.map(item => ({
-    name: item.name,
-    quantity: item.quantity.toString(),
-    unitAmount: {
-      currencyCode: "USD",
-      value: parseFloat(item.price).toFixed(2),
-    },
-  }));
+  for (const item of cart) {
+    const productInfo = priceMap.get(item.name);
+
+    if (!productInfo) {
+      throw new Error(`Invalid product: ${item.name}`);
+    }
+
+    // Use server-side authoritative price, not client-provided price
+    const authoritativePrice = productInfo.price;
+    const quantity = parseInt(item.quantity);
+
+    if (isNaN(quantity) || quantity < 1) {
+      throw new Error(`Invalid quantity for ${item.name}`);
+    }
+
+    // Log if client tried to manipulate the price
+    const clientPrice = parseFloat(item.price);
+    if (Math.abs(clientPrice - authoritativePrice) > 0.01) {
+      console.warn(
+        `Price mismatch detected for ${item.name}. Client sent: ${clientPrice}, Server price: ${authoritativePrice}`
+      );
+    }
+
+    validatedItems.push({
+      name: item.name,
+      quantity: quantity.toString(),
+      unitAmount: {
+        currencyCode: "USD",
+        value: authoritativePrice.toFixed(2),
+      },
+    });
+
+    cartTotal += authoritativePrice * quantity;
+  }
+
+  const items = validatedItems;
 
   const collect = {
     body: {
