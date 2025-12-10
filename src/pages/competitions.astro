@@ -2,6 +2,26 @@
 import ImageMod from "@/components/ImageMod.astro";
 import Base from "@/layouts/Base.astro";
 import PageHeader from "@/partials/PageHeader.astro";
+
+// Fetch Lone Star Circuit standings at build time
+let standingsHtml = "";
+let standingsError = null;
+
+try {
+  const baseUrl = import.meta.env.DEV
+    ? "http://localhost:8888"
+    : import.meta.env.SITE || "https://horsemenofthehopocalypse.netlify.app";
+
+  const response = await fetch(`${baseUrl}/.netlify/functions/fetch-standings`);
+  if (response.ok) {
+    standingsHtml = await response.text();
+  } else {
+    standingsError = `Failed to fetch standings: ${response.status}`;
+  }
+} catch (error) {
+  standingsError = `Error loading standings: ${error.message}`;
+  console.error("Error fetching standings:", error);
+}
 ---
 
 <Base>
@@ -64,8 +84,8 @@ import PageHeader from "@/partials/PageHeader.astro";
                   height="500"></iframe>
               </div>
 
-              <div id="competition-content" class="text-center mt-10">
-                <h4 class="mb-4">
+              <div id="competition-content" class="mt-10">
+                <h4 class="mb-4 text-center">
                   <a
                     href="https://www.lonestarcircuit.com/qualcomps.html"
                     target="_blank"
@@ -73,12 +93,80 @@ import PageHeader from "@/partials/PageHeader.astro";
                     class="text-primary hover:underline">Lone Star Circuit</a
                   >
                 </h4>
-                <div class="space-y-4">
-                  <iframe
-                    src="https://www.lonestarcircuit.com/currentStandings.html"
-                    width="100%"
-                    height="500"></iframe>
-                </div>
+                {
+                  standingsError ? (
+                    <div class="text-red-600 p-4 text-center">
+                      <p>{standingsError}</p>
+                      <p class="text-sm mt-2">
+                        <a
+                          href="https://www.lonestarcircuit.com/currentStandings.html"
+                          target="_blank"
+                          class="underline"
+                        >
+                          View standings directly
+                        </a>
+                      </p>
+                    </div>
+                  ) : standingsHtml ? (
+                    <div id="lsc-standings" class="space-y-4">
+                      <div class="border rounded-lg bg-white dark:bg-gray-800 overflow-hidden">
+                        <div class="bg-gray-100 dark:bg-gray-700 p-3 font-semibold text-center">
+                          Individual Standings
+                        </div>
+                        <div class="p-4 overflow-y-auto" style="max-height: 500px;">
+                          <div id="individual-standings"></div>
+                        </div>
+                      </div>
+                      <div class="border rounded-lg bg-white dark:bg-gray-800 overflow-hidden">
+                        <div class="bg-gray-100 dark:bg-gray-700 p-3 font-semibold text-center">
+                          Team Standings
+                        </div>
+                        <div class="p-4 overflow-y-auto" style="max-height: 500px;">
+                          <div id="team-standings"></div>
+                        </div>
+                      </div>
+                      <div class="border rounded-lg bg-white dark:bg-gray-800 overflow-hidden">
+                        <div class="bg-gray-100 dark:bg-gray-700 p-3 font-semibold text-center">
+                          Club Standings
+                        </div>
+                        <div class="p-4 overflow-y-auto" style="max-height: 500px;">
+                          <div id="club-standings"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <script define:vars={{ standingsHtml }}>
+                      // Parse the standings HTML and distribute to appropriate cards
+                      const parser = new DOMParser();
+                      const doc = parser.parseFromString(standingsHtml, 'text/html');
+
+                      // Find each h3 section
+                      const h3Tags = doc.querySelectorAll('h3');
+
+                      h3Tags.forEach(h3 => {
+                        const heading = h3.textContent.trim();
+                        let content = '';
+                        let currentElement = h3.nextElementSibling;
+
+                        // Collect all content until the next h3 or end
+                        while (currentElement && currentElement.tagName !== 'H3') {
+                          content += currentElement.outerHTML;
+                          currentElement = currentElement.nextElementSibling;
+                        }
+
+                        // Distribute to appropriate container
+                        if (heading.includes('Individual')) {
+                          document.getElementById('individual-standings').innerHTML = content;
+                        } else if (heading.includes('Team')) {
+                          document.getElementById('team-standings').innerHTML = content;
+                        } else if (heading.includes('Club')) {
+                          document.getElementById('club-standings').innerHTML = content;
+                        }
+                      });
+                    </script>
+                  ) : (
+                    <div class="text-gray-500 text-center">Loading standings...</div>
+                  )
+                }
               </div>
             </div>
           </div>
