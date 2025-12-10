@@ -3,20 +3,56 @@ import ImageMod from "@/components/ImageMod.astro";
 import Base from "@/layouts/Base.astro";
 import PageHeader from "@/partials/PageHeader.astro";
 
-// Fetch Lone Star Circuit standings at build time
+// Fetch Lone Star Circuit standings at build time directly from source
 let standingsHtml = "";
 let standingsError = null;
 
 try {
-  const baseUrl = import.meta.env.DEV
-    ? "http://localhost:8888"
-    : import.meta.env.SITE || "https://horsemenofthehopocalypse.netlify.app";
+  const response = await fetch("https://www.lonestarcircuit.com/currentStandings.html");
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
 
-  const response = await fetch(`${baseUrl}/.netlify/functions/fetch-standings`);
-  if (response.ok) {
-    standingsHtml = await response.text();
+  const html = await response.text();
+
+  // Extract the three standings sections by their h3 tags
+  const standingsSections = [];
+  const targetHeadings = ['Individual Standings', 'Team Standings', 'Club Standings'];
+
+  for (const heading of targetHeadings) {
+    const h3Pattern = new RegExp(`<h3[^>]*>\\s*${heading}\\s*<\\/h3>`, 'i');
+    const h3Match = html.match(h3Pattern);
+
+    if (!h3Match) continue;
+
+    const h3Index = html.indexOf(h3Match[0]);
+    const h3EndIndex = h3Index + h3Match[0].length;
+
+    const nextHeadingPattern = /<h[23][^>]*>/gi;
+    const remainingHtml = html.substring(h3EndIndex);
+    const nextHeadingMatch = remainingHtml.match(nextHeadingPattern);
+
+    let sectionEndIndex;
+    if (nextHeadingMatch) {
+      const nextHeadingIndex = remainingHtml.indexOf(nextHeadingMatch[0]);
+      sectionEndIndex = h3EndIndex + nextHeadingIndex;
+    } else {
+      const lastUpdatedMatch = remainingHtml.match(/Last Updated:|© Copyright/i);
+      if (lastUpdatedMatch) {
+        sectionEndIndex = h3EndIndex + remainingHtml.indexOf(lastUpdatedMatch[0]);
+      } else {
+        sectionEndIndex = html.length;
+      }
+    }
+
+    const sectionContent = html.substring(h3Index, sectionEndIndex);
+    standingsSections.push(sectionContent);
+  }
+
+  if (standingsSections.length > 0) {
+    standingsHtml = standingsSections.join('\n\n');
   } else {
-    standingsError = `Failed to fetch standings: ${response.status}`;
+    standingsError = "Could not find standings sections";
   }
 } catch (error) {
   standingsError = `Error loading standings: ${error.message}`;
