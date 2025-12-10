@@ -1,5 +1,5 @@
 ---
-import membershipsData from "@/config/memberships.json";
+import eventsData from "@/config/events.json";
 
 const PAYPAL_CLIENT_ID =
   import.meta.env.PUBLIC_PAYPAL_CLIENT_ID || import.meta.env.PAYPAL_CLIENT_ID;
@@ -8,34 +8,56 @@ console.log(
   PAYPAL_CLIENT_ID?.substring(0, 10),
 );
 
-const { memberships } = membershipsData;
+const { events } = eventsData;
+const activeEvents = events.filter((event) => event.active);
 ---
 
 <div class="paypal-checkout-container max-w-4xl mx-auto p-4">
-  <!-- Membership Catalog -->
+  <!-- Event Tickets Catalog -->
   <div class="product-catalog mb-8">
-    <h2 class="text-2xl font-bold mb-4">Membership Options</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <h2 class="text-2xl font-bold mb-4">Event Tickets</h2>
+    <div class="grid grid-cols-1 gap-4">
       {
-        memberships.map((membership) => (
+        activeEvents.map((event) => (
           <div class="product-card border rounded-lg p-4 shadow-sm flex flex-col">
             <div class="flex-1">
-              <h3 class="font-semibold text-lg">{membership.name}</h3>
-              <p class="text-gray-600 my-2">{membership.description}</p>
-              <p class="text-xl font-bold mb-3">
-                ${membership.price.toFixed(2)}
-              </p>
+              <h3 class="font-semibold text-lg">{event.name}</h3>
+              <p class="text-gray-600 my-2">{event.description}</p>
+              <p class="text-gray-600 my-2">{event.fullDescription}</p>
+
+              {event.highlights &&
+                event.highlights.map((highlight) => (
+                  <p class="text-gray-600 my-2">
+                    {highlight.icon} <strong>{highlight.title}:</strong>{" "}
+                    {highlight.description}
+                  </p>
+                ))}
+
+              <div class="mt-4 mb-3">
+                <ul class="list-disc list-inside text-gray-700">
+                  <li>
+                    <strong>DATE:</strong> {event.date}
+                  </li>
+                  <li>
+                    <strong>TIME:</strong> {event.time}
+                  </li>
+                  <li>
+                    <strong>LOCATION:</strong> {event.location}
+                  </li>
+                </ul>
+              </div>
+              <p class="text-xl font-bold mb-3">${event.price.toFixed(2)}</p>
             </div>
             <div class="flex gap-2 mt-auto">
               <input
                 type="number"
-                id={`qty-membership-${membership.id}`}
+                id={`qty-${event.id}`}
                 value="1"
                 min="1"
                 class="w-16 border rounded px-2 py-1 text-center"
               />
               <button
-                onclick={`addToCart('${membership.name}', ${membership.price}, parseInt(document.getElementById('qty-membership-${membership.id}').value))`}
+                onclick={`addToCart('${event.name} Ticket', ${event.price}, parseInt(document.getElementById('qty-${event.id}').value))`}
                 class="btn btn-primary flex-1 bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700"
               >
                 Add to Cart
@@ -70,18 +92,18 @@ const { memberships } = membershipsData;
       </div>
     </div>
   </div>
-</div>
 
-<!-- PayPal Button -->
-<div
-  id="paypal-button-container"
-  class="paypal-button-container"
-  style="display: none;"
->
-</div>
+  <!-- PayPal Button -->
+  <div
+    id="paypal-button-container"
+    class="paypal-button-container"
+    style="display: none;"
+  >
+  </div>
 
-<!-- Result Message -->
-<div id="result-message" class="mt-4 p-4 rounded"></div>
+  <!-- Result Message -->
+  <div id="result-message" class="mt-4 p-4 rounded"></div>
+</div>
 
 <link
   rel="stylesheet"

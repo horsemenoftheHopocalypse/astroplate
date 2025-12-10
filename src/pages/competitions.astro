@@ -47,23 +47,39 @@ import PageHeader from "@/partials/PageHeader.astro";
         <div class="w-full mb-8 bg-white dark:bg-gray-800 borde pt-8 p-8">
           <div class="text-center">
             <h3 class="mb-6">Texas Competition Circuits</h3>
-            <div class="space-y-4">
-              <p>
+
+            <div id="competition-content" class="text-center">
+              <h4 class="mb-4">
                 <a
                   href="https://horsemenofthehops.com/north-texas-homebrew-circuit"
                   target="_blank"
                   rel="noopener"
                   class="text-primary hover:underline">North Texas Circuit</a
                 >
-              </p>
-              <p>
-                <a
-                  href="https://www.lonestarcircuit.com/qualcomps.html"
-                  target="_blank"
-                  rel="noopener"
-                  class="text-primary hover:underline">Lone Star Circuit</a
-                >
-              </p>
+              </h4>
+              <div class="max-w-4xl mx-auto w-full mt-10">
+                <iframe
+                  src="https://docs.google.com/spreadsheets/d/1ZiHRvY3G-ixQlfPL9HuBNqJf6GZE7ofv0xr5RdrLrvQ/edit?gid=0#gid=0"
+                  width="100%"
+                  height="500"></iframe>
+              </div>
+
+              <div id="competition-content" class="text-center mt-10">
+                <h4 class="mb-4">
+                  <a
+                    href="https://www.lonestarcircuit.com/qualcomps.html"
+                    target="_blank"
+                    rel="noopener"
+                    class="text-primary hover:underline">Lone Star Circuit</a
+                  >
+                </h4>
+                <div class="space-y-4">
+                  <iframe
+                    src="https://www.lonestarcircuit.com/currentStandings.html"
+                    width="100%"
+                    height="500"></iframe>
+                </div>
+              </div>
             </div>
           </div>
         </div>

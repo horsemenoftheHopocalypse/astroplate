@@ -1,0 +1,27 @@
+{
+  "events": [
+    {
+      "id": "christmas-party-2025",
+      "name": "Christmas Party",
+      "description": "Saddle up for the most festive and hop-tastic event of the season - the Horsemen of the Hopocalypse Christmas Party!",
+      "fullDescription": "Join us as we transform your holiday celebrations into a beer lover's paradise. Indulge in a spirited evening filled with the finest brews, joyous camaraderie, and a touch of Christmas magic.",
+      "price": 20.00,
+      "date": "December 13th, 2025",
+      "time": "6 PM",
+      "location": "Hampton Inn & Suites, 1600 Hurst Town Center Dr, Hurst, TX",
+      "highlights": [
+        {
+          "icon": "🍺",
+          "title": "BEER GALORE",
+          "description": "Immerse yourself in a world of craft beers that will tantalize your taste buds and keep the good times flowing all night long."
+        },
+        {
+          "icon": "🎉",
+          "title": "FUN RAFFLES",
+          "description": "Take a chance and try your luck with our entertaining raffles! Prizes suitable for any homebrewer!"
+        }
+      ],
+      "active": true
+    }
+  ]
+}

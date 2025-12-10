@@ -45,10 +45,10 @@ function updateCartDisplay() {
         <div class="flex items-center gap-1">
           <button
             onclick="updateQuantity(${index}, -1)"
-            class="px-2 py-1 hover:bg-gray-100 rounded text-sm h-8"
+            class="hover:bg-gray-100 rounded text-sm h-8 flex items-center justify-center"
             style="width: 30px !important; min-width: 30px !important; max-width: 30px !important;"
             ${item.quantity <= 1 ? 'disabled style="opacity: 0.5; cursor: not-allowed; width: 30px !important; min-width: 30px !important; max-width: 30px !important;"' : ''}
-          >−</button>
+          ><i class="fas fa-minus"></i></button>
           <input
             type="number"
             value="${item.quantity}"
@@ -59,12 +59,12 @@ function updateCartDisplay() {
           />
           <button
             onclick="updateQuantity(${index}, 1)"
-            class="px-2 py-1 hover:bg-gray-100 rounded text-sm h-8"
+            class="hover:bg-gray-100 rounded text-sm h-8 flex items-center justify-center"
             style="width: 30px !important; min-width: 30px !important; max-width: 30px !important;"
-          >+</button>
+          ><i class="fas fa-plus"></i></button>
         </div>
         <span class="font-semibold text-sm w-20 text-right">${'$'}${(item.price * item.quantity).toFixed(2)}</span>
-        <button onclick="removeFromCart(${index})" class="text-red-500 hover:text-red-700 h-8 flex items-center justify-center" style="width: 30px !important; min-width: 30px !important; max-width: 30px !important;">✕</button>
+        <button onclick="removeFromCart(${index})" class="text-red-500 hover:text-red-700 h-8 flex items-center justify-center" style="width: 30px !important; min-width: 30px !important; max-width: 30px !important;"><i class="fas fa-times"></i></button>
       </div>
     </div>
   `).join('');

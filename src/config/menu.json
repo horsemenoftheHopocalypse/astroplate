@@ -5,8 +5,8 @@
       "url": "/"
     },
     {
-      "name": "Events",
-      "url": "/events"
+      "name": "Calendar",
+      "url": "/calendar"
     },
     {
         "name": "Blog",
@@ -22,13 +22,18 @@
       "url": "/competitions"
     },
     {
-      "name": "Memberships",
-      "url": "/memberships"
-},{
       "name": "Pages",
       "url": "",
       "hasChildren": true,
       "children": [
+        {
+          "name": "Memberships",
+          "url": "/memberships"
+        },
+        {
+          "name": "Event Tickets",
+          "url": "/tickets"
+        },
         {
           "name": "Contact",
           "url": "/contact"
