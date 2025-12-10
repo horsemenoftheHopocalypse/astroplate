@@ -1,0 +1,28 @@
+{
+  "memberships": [
+    {
+      "id": "individual",
+      "name": "Individual Membership",
+      "description": "Annual membership for one person",
+      "price": 30.00,
+      "features": [
+        "Access to all club events",
+        "Monthly newsletter",
+        "Voting rights",
+        "Discounts on competitions"
+      ]
+    },
+    {
+      "id": "family",
+      "name": "Family Membership",
+      "description": "Annual membership for family",
+      "price": 40.00,
+      "features": [
+        "Access to all club events for family",
+        "Monthly newsletter",
+        "Voting rights",
+        "Discounts on competitions"
+      ]
+    }
+  ]
+}

@@ -3,13 +3,23 @@
     {
       "name": "Home",
       "url": "/"
-    },    {
-      "name": "About",
-      "url": "/about"
     },
     {
-      "name": "Elements",
-      "url": "/elements"
+      "name": "Calendar",
+      "url": "/calendar"
+    },
+    {
+        "name": "Blog",
+        "url": "/blog"
+    },
+    {
+      "name": "Officers",
+      "url": "/authors"
+    },
+
+    {
+      "name": "Competitions",
+      "url": "/competitions"
     },
     {
       "name": "Pages",
@@ -17,40 +27,29 @@
       "hasChildren": true,
       "children": [
         {
+          "name": "Memberships",
+          "url": "/memberships"
+        },
+        {
+          "name": "Event Tickets",
+          "url": "/tickets"
+        },
+        {
           "name": "Contact",
           "url": "/contact"
         },
         {
-          "name": "Blog",
-          "url": "/blog"
-        },
-        {
-          "name": "Officers",
-          "url": "/authors"
-        },
-        {
-          "name": "Categories",
-          "url": "/categories"
-        },
-        {
           "name": "Tags",
           "url": "/tags"
-        },
-        {
-          "name": "404 Page",
-          "url": "/404"
         }
       ]
     }
   ],
   "footer": [
     {
-      "name": "Elements",
-      "url": "/elements"
-    },
-    {
-      "name": "Privacy Policy",
-      "url": "/privacy-policy"
+      "name": "Home",
+      "url": "/"
+
     }
   ]
 }

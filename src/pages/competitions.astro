@@ -1,0 +1,213 @@
+---
+import ImageMod from "@/components/ImageMod.astro";
+import Base from "@/layouts/Base.astro";
+import PageHeader from "@/partials/PageHeader.astro";
+
+// Fetch Lone Star Circuit standings at build time directly from source
+let standingsHtml = "";
+let standingsError = null;
+
+try {
+  const response = await fetch("https://www.lonestarcircuit.com/currentStandings.html");
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+
+  const html = await response.text();
+
+  // Extract the three standings sections by their h3 tags
+  const standingsSections = [];
+  const targetHeadings = ['Individual Standings', 'Team Standings', 'Club Standings'];
+
+  for (const heading of targetHeadings) {
+    const h3Pattern = new RegExp(`<h3[^>]*>\\s*${heading}\\s*<\\/h3>`, 'i');
+    const h3Match = html.match(h3Pattern);
+
+    if (!h3Match) continue;
+
+    const h3Index = html.indexOf(h3Match[0]);
+    const h3EndIndex = h3Index + h3Match[0].length;
+
+    const nextHeadingPattern = /<h[23][^>]*>/gi;
+    const remainingHtml = html.substring(h3EndIndex);
+    const nextHeadingMatch = remainingHtml.match(nextHeadingPattern);
+
+    let sectionEndIndex;
+    if (nextHeadingMatch) {
+      const nextHeadingIndex = remainingHtml.indexOf(nextHeadingMatch[0]);
+      sectionEndIndex = h3EndIndex + nextHeadingIndex;
+    } else {
+      const lastUpdatedMatch = remainingHtml.match(/Last Updated:|© Copyright/i);
+      if (lastUpdatedMatch) {
+        sectionEndIndex = h3EndIndex + remainingHtml.indexOf(lastUpdatedMatch[0]);
+      } else {
+        sectionEndIndex = html.length;
+      }
+    }
+
+    const sectionContent = html.substring(h3Index, sectionEndIndex);
+    standingsSections.push(sectionContent);
+  }
+
+  if (standingsSections.length > 0) {
+    standingsHtml = standingsSections.join('\n\n');
+  } else {
+    standingsError = "Could not find standings sections";
+  }
+} catch (error) {
+  standingsError = `Error loading standings: ${error.message}`;
+  console.error("Error fetching standings:", error);
+}
+---
+
+<Base>
+  <PageHeader title="Competitions" />
+  <section class="section pt-14">
+    <div class="container max-w-3xl mx-auto">
+      <div class="row justify-center">
+        <!-- Club Competition Card -->
+        <div
+          id="card1"
+          class="w-full mb-8 bg-white dark:bg-gray-800 p-1 border-bottom-2 border-primary"
+        >
+          <div id="clubcontent" class="text-center">
+            <h3 class="mb-4">Club Competition</h3>
+
+            <h3 class="mb-4">Enter</h3>
+            <div class="max-w-4xl mx-auto w-full mt-10">
+              <a
+                class="btn btn-primary"
+                href="https://docs.google.com/forms/d/e/1FAIpQLSfLDezM8tgVlDAyUwMhwtjQeMUbNNV32Bk7h6zKqQfq4CfIxQ/viewform"
+                target="_blank"
+                rel="noopener">2025 Horsemen Club Comp Entry Form</a
+              >
+            </div>
+            <div class="max-w-4xl mx-auto w-full mt-10">
+              <iframe
+                src="https://www.canva.com/design/DAGcCy8Csoo/Is_hKjKmQP43w49PxeAqyA/watch?embed"
+                width="100%"
+                height="500"
+                frameborder="0"></iframe>
+            </div>
+
+            <h4 class="mb-6">Standings</h4>
+            <div class="max-w-4xl mx-auto w-full mt-10">
+              <iframe
+                src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQtXNZ_wKF83IzdCWUD0VUN1X8ApJv7g8QWwbzbHr91asArH4sGfLBUuIFKmosrRVcqYPSAiiriofqC/pubhtml?gid=854398095&single=true&widget=true&headers=false"
+                style="width:100%; height:400px;"></iframe>
+            </div>
+          </div>
+        </div>
+
+        <!-- Texas Competition Circuits Card -->
+        <div class="w-full mb-8 bg-white dark:bg-gray-800 borde pt-8 p-8">
+          <div class="text-center">
+            <h3 class="mb-6">Texas Competition Circuits</h3>
+
+            <div id="competition-content" class="text-center">
+              <h4 class="mb-4">
+                <a
+                  href="https://horsemenofthehops.com/north-texas-homebrew-circuit"
+                  target="_blank"
+                  rel="noopener"
+                  class="text-primary hover:underline">North Texas Circuit</a
+                >
+              </h4>
+              <div class="max-w-4xl mx-auto w-full mt-10">
+                <iframe
+                  src="https://docs.google.com/spreadsheets/d/1ZiHRvY3G-ixQlfPL9HuBNqJf6GZE7ofv0xr5RdrLrvQ/edit?gid=0#gid=0"
+                  width="100%"
+                  height="500"></iframe>
+              </div>
+
+              <div id="competition-content" class="mt-10">
+                <h4 class="mb-4 text-center">
+                  <a
+                    href="https://www.lonestarcircuit.com/qualcomps.html"
+                    target="_blank"
+                    rel="noopener"
+                    class="text-primary hover:underline">Lone Star Circuit</a
+                  >
+                </h4>
+                {
+                  standingsError ? (
+                    <div class="text-red-600 p-4 text-center">
+                      <p>{standingsError}</p>
+                      <p class="text-sm mt-2">
+                        <a
+                          href="https://www.lonestarcircuit.com/currentStandings.html"
+                          target="_blank"
+                          class="underline"
+                        >
+                          View standings directly
+                        </a>
+                      </p>
+                    </div>
+                  ) : standingsHtml ? (
+                    <div id="lsc-standings" class="space-y-4">
+                      <div class="border rounded-lg bg-white dark:bg-gray-800 overflow-hidden">
+                        <div class="bg-gray-100 dark:bg-gray-700 p-3 font-semibold text-center">
+                          Individual Standings
+                        </div>
+                        <div class="p-4 overflow-y-auto" style="max-height: 500px;">
+                          <div id="individual-standings"></div>
+                        </div>
+                      </div>
+                      <div class="border rounded-lg bg-white dark:bg-gray-800 overflow-hidden">
+                        <div class="bg-gray-100 dark:bg-gray-700 p-3 font-semibold text-center">
+                          Team Standings
+                        </div>
+                        <div class="p-4 overflow-y-auto" style="max-height: 500px;">
+                          <div id="team-standings"></div>
+                        </div>
+                      </div>
+                      <div class="border rounded-lg bg-white dark:bg-gray-800 overflow-hidden">
+                        <div class="bg-gray-100 dark:bg-gray-700 p-3 font-semibold text-center">
+                          Club Standings
+                        </div>
+                        <div class="p-4 overflow-y-auto" style="max-height: 500px;">
+                          <div id="club-standings"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <script define:vars={{ standingsHtml }}>
+                      // Parse the standings HTML and distribute to appropriate cards
+                      const parser = new DOMParser();
+                      const doc = parser.parseFromString(standingsHtml, 'text/html');
+
+                      // Find each h3 section
+                      const h3Tags = doc.querySelectorAll('h3');
+
+                      h3Tags.forEach(h3 => {
+                        const heading = h3.textContent.trim();
+                        let content = '';
+                        let currentElement = h3.nextElementSibling;
+
+                        // Collect all content until the next h3 or end
+                        while (currentElement && currentElement.tagName !== 'H3') {
+                          content += currentElement.outerHTML;
+                          currentElement = currentElement.nextElementSibling;
+                        }
+
+                        // Distribute to appropriate container
+                        if (heading.includes('Individual')) {
+                          document.getElementById('individual-standings').innerHTML = content;
+                        } else if (heading.includes('Team')) {
+                          document.getElementById('team-standings').innerHTML = content;
+                        } else if (heading.includes('Club')) {
+                          document.getElementById('club-standings').innerHTML = content;
+                        }
+                      });
+                    </script>
+                  ) : (
+                    <div class="text-gray-500 text-center">Loading standings...</div>
+                  )
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

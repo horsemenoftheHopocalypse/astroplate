@@ -1,0 +1,68 @@
+---
+import { markdownify } from "@/lib/utils/textConverter";
+import ImageMod from "@/components/ImageMod.astro";
+import { text } from "stream/consumers";
+const { photoGallary } = Astro.props;
+---
+
+{
+  photoGallary.data.enable && (
+    <section class="section">
+      <div class="container">
+        <div class="row">
+          <div class="mx-auto mb-12 text-center md:col-10 lg:col-8 xl:col-6">
+            <h2 set:html={markdownify(photoGallary.data.title)} class="mb-4" />
+            <p set:html={markdownify(photoGallary.data.description)} />
+          </div>
+          <div class="col-12">
+              <div class="swiper testimonial-slider">
+                <div class="swiper-wrapper">
+                {photoGallary.data.photos.map(
+                  (item: {
+                    name: string;
+                    "alt-text": string;
+                    image: string;
+                    description: string;
+                  }) => (
+                    <div class="swiper-slide">
+                      <div class="rounded-lg bg-light px-7 py-10 dark:bg-darkmode-light h-full flex flex-col">
+                        <div class="text-text-dark dark:text-white mb-4">
+                          <ImageMod
+                            height={250}
+                            width={400}
+                            class="rounded-lg w-full h-[250px] object-cover"
+                            src={item.image}
+                            alt={item["alt-text"]}
+                            format="webp"
+                          />
+                        </div>
+                        <blockquote
+                          class="mt-8"
+                          set:html={markdownify(item.description)}
+                        />
+
+                      </div>
+                    </div>
+                  )
+                )}
+                </div>
+                <div class="testimonial-slider-pagination mt-9 flex items-center justify-center text-center" />
+              </div>
+          </div>
+        </div>
+      </div>
+      </section>
+  )
+
+}
+
+<style>
+  .testimonial-slider .swiper-wrapper {
+    align-items: stretch;
+  }
+  
+  .testimonial-slider .swiper-slide {
+    height: auto;
+    display: flex;
+  }
+</style>

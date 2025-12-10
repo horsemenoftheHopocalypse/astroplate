@@ -33,7 +33,6 @@ We have members from many areas in DFW ranging from Arlington, Burleson, and Den
       label: "Get Started Now"
       link: "#"
 
-
   - title: "What's Included in Astroplate"
     image: "/images/service-1.png"
     content: "Astroplate is a comprehensive starter template that includes everything you need to get started with your Astro project. What's Included in Astroplate"
@@ -73,4 +72,11 @@ We have members from many areas in DFW ranging from Arlington, Burleson, and Den
       enable: false
       label: ""
       link: ""
+# BBO Countdown
+countdown:
+  image: "/images/2026 BBO Logo.jpeg"
+  title: "BBO Account Registration"
+  date: 2025-12-29T15:00:00-06:00
+  link: https://www.bcoem.bluebonnetbrewoff.org/
+
 ---

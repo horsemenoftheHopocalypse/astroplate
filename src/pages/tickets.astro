@@ -1,0 +1,16 @@
+---
+import Base from "@/layouts/Base.astro";
+import PageHeader from "@/partials/PageHeader.astro";
+import PayPalEvents from "@/components/PayPalEvents.astro";
+---
+
+<Base>
+  <PageHeader title="Event Tickets" />
+  <section class="section pt-14">
+    <div class="container">
+      <div class="row justify-center">
+        <PayPalEvents />
+      </div>
+    </div>
+  </section>
+</Base>

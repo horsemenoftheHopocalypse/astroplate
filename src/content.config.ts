@@ -1,5 +1,6 @@
 import { glob } from "astro/loaders";
 import { defineCollection, z } from "astro:content";
+import { link } from "fs";
 
 const commonFields = {
   title: z.string(),
@@ -32,6 +33,8 @@ const authorsCollection = defineCollection({
   loader: glob({ pattern: "**/*.{md,mdx}", base: "src/content/authors" }),
   schema: z.object({
     ...commonFields,
+    position: z.string().optional(),
+    sort: z.number().optional(),
     social: z
       .array(
         z
@@ -98,7 +101,13 @@ const homepageCollection = defineCollection({
         }),
       }),
     ),
-  }),
+    countdown: z.object({
+      image: z.string(),
+      title: z.string(),
+      date: z.date(),
+      link: z.string(),
+    }),
+  })
 });
 
 // Call to Action collection schema
@@ -141,6 +150,25 @@ const testimonialSectionCollection = defineCollection({
   }),
 });
 
+const photoGalleryCollection = defineCollection({
+  loader: glob({
+    pattern: "image-gallary.{md,mdx}",
+    base: "src/content/sections",
+  }),
+  schema: z.object({
+    enable: z.boolean(),
+    title: z.string(),
+    description: z.string(),
+    photos: z.array(
+      z.object({
+        image: z.string(),
+        "alt-text": z.string(),
+        description: z.string(),
+      }),
+    ),
+  }),
+});
+
 // Export collections
 export const collections = {
   // Pages
@@ -154,4 +182,5 @@ export const collections = {
   // sections
   ctaSection: ctaSectionCollection,
   testimonialSection: testimonialSectionCollection,
+  imageGallarySection: photoGalleryCollection,
 };

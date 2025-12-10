@@ -1,0 +1,128 @@
+---
+import eventsData from "@/config/events.json";
+
+const PAYPAL_CLIENT_ID =
+  import.meta.env.PUBLIC_PAYPAL_CLIENT_ID || import.meta.env.PAYPAL_CLIENT_ID;
+console.log(
+  "PayPal Client ID (first 10 chars):",
+  PAYPAL_CLIENT_ID?.substring(0, 10),
+);
+
+const { events } = eventsData;
+const activeEvents = events.filter((event) => event.active);
+---
+
+<div class="paypal-checkout-container max-w-4xl mx-auto p-4">
+  <!-- Event Tickets Catalog -->
+  <div class="product-catalog mb-8">
+    <h2 class="text-2xl font-bold mb-4">Event Tickets</h2>
+    <div class="grid grid-cols-1 gap-4">
+      {
+        activeEvents.map((event) => (
+          <div class="product-card border rounded-lg p-4 shadow-sm flex flex-col">
+            <div class="flex-1">
+              <h3 class="font-semibold text-lg">{event.name}</h3>
+              <p class="text-gray-600 my-2">{event.description}</p>
+              <p class="text-gray-600 my-2">{event.fullDescription}</p>
+
+              {event.highlights &&
+                event.highlights.map((highlight) => (
+                  <p class="text-gray-600 my-2">
+                    {highlight.icon} <strong>{highlight.title}:</strong>{" "}
+                    {highlight.description}
+                  </p>
+                ))}
+
+              <div class="mt-4 mb-3">
+                <ul class="list-disc list-inside text-gray-700">
+                  <li>
+                    <strong>DATE:</strong> {event.date}
+                  </li>
+                  <li>
+                    <strong>TIME:</strong> {event.time}
+                  </li>
+                  <li>
+                    <strong>LOCATION:</strong> {event.location}
+                  </li>
+                </ul>
+              </div>
+              <p class="text-xl font-bold mb-3">${event.price.toFixed(2)}</p>
+            </div>
+            <div class="flex gap-2 mt-auto">
+              <input
+                type="number"
+                id={`qty-${event.id}`}
+                value="1"
+                min="1"
+                class="w-16 border rounded px-2 py-1 text-center"
+              />
+              <button
+                class="btn btn-primary flex-1 bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 add-to-cart-btn"
+                data-product-name={`${event.name} Ticket`}
+                data-product-price={event.price}
+                data-qty-input={`qty-${event.id}`}
+              >
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+
+  <!-- Shopping Cart -->
+  <div class="shopping-cart border rounded-lg p-6 bg-gray-50 mb-4">
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-2xl font-bold">Shopping Cart</h2>
+      <button
+        onclick="clearCart()"
+        class="text-sm text-red-600 hover:text-red-800"
+      >
+        Clear Cart
+      </button>
+    </div>
+
+    <div id="cart-items" class="mb-4">
+      <p class="text-gray-500">Your cart is empty</p>
+    </div>
+
+    <div class="border-t pt-4">
+      <div class="flex justify-between items-center text-xl font-bold">
+        <span>Total:</span>
+        <span id="cart-total">$0.00</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PayPal Button -->
+  <div
+    id="paypal-button-container"
+    class="paypal-button-container"
+    style="display: none;"
+  >
+  </div>
+
+  <!-- Result Message -->
+  <div id="result-message" class="mt-4 p-4 rounded"></div>
+</div>
+
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+/>
+
+<script is:inline define:vars={{ PAYPAL_CLIENT_ID }}>
+  const script = document.createElement("script");
+  script.src = `https://www.paypal.com/sdk/js?client-id=${PAYPAL_CLIENT_ID}&buyer-country=US&currency=USD&components=buttons&enable-funding=venmo`;
+  script.onload = () => {
+    // Load the cart script after PayPal SDK is loaded
+    const cartScript = document.createElement("script");
+    cartScript.src = "/scripts/paypal_cart.js";
+    document.body.appendChild(cartScript);
+  };
+  document.body.appendChild(script);
+</script>

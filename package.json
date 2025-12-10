@@ -6,8 +6,12 @@
   "license": "MIT",
   "packageManager": "yarn@1.22.22",
   "type": "module",
+  "resolutions": {
+    "jws": "^4.0.0"
+  },
   "scripts": {
-    "dev": "yarn generate-json && astro dev",
+    "dev": "yarn generate-json && netlify dev",
+    "dev:astro": "yarn generate-json && astro dev",
     "build": "yarn generate-json && astro build",
     "preview": "astro preview",
     "check": "astro check",
@@ -22,6 +26,7 @@
     "@astrojs/sitemap": "3.6.0",
     "@digi4care/astro-google-tagmanager": "^1.6.0",
     "@justinribeiro/lite-youtube": "^1.9.0",
+    "@paypal/paypal-server-sdk": "^2.1.0",
     "astro": "5.15.9",
     "astro-auto-import": "^0.4.5",
     "astro-font": "^1.1.0",
@@ -47,6 +52,7 @@
     "@types/react": "19.2.6",
     "@types/react-dom": "19.2.3",
     "eslint": "^9.39.1",
+    "netlify-cli": "^23.12.3",
     "prettier": "^3.6.2",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-tailwindcss": "^0.7.1",

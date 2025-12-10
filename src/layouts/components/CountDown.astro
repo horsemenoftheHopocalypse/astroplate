@@ -1,0 +1,66 @@
+---
+const { image, title, date, link } = Astro.props;
+const eventDate = new Date(date).getTime();
+---
+
+<div class="max-w-sm rounded text-center overflow-hidden shadow-lg">
+  <img class="w-full" src={image} alt={title} />
+  <div class="px-6 py-4">
+    <div class="font-bold text-xl mb-2">{title}</div>
+    <div class="text-gray-700 text-base mb-4">
+      <div class="flex justify-center gap-4 my-4">
+        <div class="text-center">
+          <div class="text-3xl font-bold" id="days">--</div>
+          <div class="text-sm">Days</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold" id="hours">--</div>
+          <div class="text-sm">Hours</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold" id="minutes">--</div>
+          <div class="text-sm">Minutes</div>
+        </div>
+        <div class="text-center">
+          <div class="text-3xl font-bold" id="seconds">--</div>
+          <div class="text-sm">Seconds</div>
+        </div>
+      </div>
+      <p class="text-sm mt-2">
+        Event Date: {date.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} at {date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZoneName: 'short' })}
+      </p>
+      {link && (
+        <a href={link} target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">More Info</a>
+      )}
+    </div>
+  </div>
+</div>
+
+<script define:vars={{ eventDate }}>
+  function updateCountdown() {
+    const now = new Date().getTime();
+    const distance = eventDate - now;
+
+    if (distance < 0) {
+      document.getElementById('days').textContent = '0';
+      document.getElementById('hours').textContent = '0';
+      document.getElementById('minutes').textContent = '0';
+      document.getElementById('seconds').textContent = '0';
+      return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    document.getElementById('days').textContent = days;
+    document.getElementById('hours').textContent = hours;
+    document.getElementById('minutes').textContent = minutes;
+    document.getElementById('seconds').textContent = seconds;
+  }
+
+  // Update immediately and then every second
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+</script>
