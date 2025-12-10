@@ -1,6 +1,10 @@
 ---
-const PAYPAL_CLIENT_ID = import.meta.env.PAYPAL_CLIENT_ID;
-console.log;
+const PAYPAL_CLIENT_ID =
+  import.meta.env.PUBLIC_PAYPAL_CLIENT_ID || import.meta.env.PAYPAL_CLIENT_ID;
+console.log(
+  "PayPal Client ID (first 10 chars):",
+  PAYPAL_CLIENT_ID?.substring(0, 10),
+);
 ---
 
 <div id="paypal-button-container" class="paypal-button-container"></div>
