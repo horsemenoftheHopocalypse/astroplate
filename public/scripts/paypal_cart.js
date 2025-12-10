@@ -1,3 +1,146 @@
+// Shopping cart state
+let shoppingCart = [];
+
+// Get cart from global state or localStorage
+function getCart() {
+  if (window.paypalCart && window.paypalCart.length > 0) {
+    return window.paypalCart;
+  }
+
+  const saved = localStorage.getItem('paypalCart');
+  return saved ? JSON.parse(saved) : [];
+}
+
+// Calculate cart total
+function calculateTotal() {
+  const cart = getCart();
+  return cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+}
+
+// Update cart display
+function updateCartDisplay() {
+  const cart = getCart();
+  const cartItems = document.getElementById('cart-items');
+  const cartTotal = document.getElementById('cart-total');
+  const paypalContainer = document.getElementById('paypal-button-container');
+
+  if (!cartItems || !cartTotal) return;
+
+  if (cart.length === 0) {
+    cartItems.innerHTML = '<p class="text-gray-500">Your cart is empty</p>';
+    cartTotal.textContent = '$0.00';
+    if (paypalContainer) paypalContainer.style.display = 'none';
+    return;
+  }
+
+  if (paypalContainer) paypalContainer.style.display = 'block';
+
+  cartItems.innerHTML = cart.map((item, index) => `
+    <div class="cart-item flex flex-col sm:flex-row sm:justify-between sm:items-center py-3 border-b gap-2">
+      <div class="flex-1 min-w-0 pr-2">
+        <h4 class="font-semibold text-sm">${item.name}</h4>
+        <p class="text-xs text-gray-600">$${item.price.toFixed(2)} each</p>
+      </div>
+      <div class="flex items-center gap-2 shrink-0">
+        <div class="flex items-center gap-1">
+          <button
+            onclick="updateQuantity(${index}, -1)"
+            class="px-2 py-1 hover:bg-gray-100 rounded text-sm h-8"
+            style="width: 30px !important; min-width: 30px !important; max-width: 30px !important;"
+            ${item.quantity <= 1 ? 'disabled style="opacity: 0.5; cursor: not-allowed; width: 30px !important; min-width: 30px !important; max-width: 30px !important;"' : ''}
+          >−</button>
+          <input
+            type="number"
+            value="${item.quantity}"
+            min="1"
+            class="text-center border rounded text-sm h-8"
+            style="width: 48px !important; min-width: 48px !important; max-width: 48px !important;"
+            onchange="setQuantity(${index}, this.value)"
+          />
+          <button
+            onclick="updateQuantity(${index}, 1)"
+            class="px-2 py-1 hover:bg-gray-100 rounded text-sm h-8"
+            style="width: 30px !important; min-width: 30px !important; max-width: 30px !important;"
+          >+</button>
+        </div>
+        <span class="font-semibold text-sm w-20 text-right">${'$'}${(item.price * item.quantity).toFixed(2)}</span>
+        <button onclick="removeFromCart(${index})" class="text-red-500 hover:text-red-700 h-8 flex items-center justify-center" style="width: 30px !important; min-width: 30px !important; max-width: 30px !important;">✕</button>
+      </div>
+    </div>
+  `).join('');
+
+  const total = calculateTotal();
+  cartTotal.textContent = `$${total.toFixed(2)}`;
+}
+
+// Add to cart function (global for easy access)
+window.addToCart = function(name, price, quantity = 1) {
+  const cart = getCart();
+  const existingItem = cart.find(item => item.name === name);
+
+  if (existingItem) {
+    existingItem.quantity += quantity;
+  } else {
+    cart.push({ name, price: parseFloat(price), quantity });
+  }
+
+  window.paypalCart = cart;
+  localStorage.setItem('paypalCart', JSON.stringify(cart));
+  updateCartDisplay();
+};
+
+// Remove from cart
+window.removeFromCart = function(index) {
+  const cart = getCart();
+  cart.splice(index, 1);
+  window.paypalCart = cart;
+  localStorage.setItem('paypalCart', JSON.stringify(cart));
+  updateCartDisplay();
+};
+
+// Update quantity by increment/decrement
+window.updateQuantity = function(index, change) {
+  const cart = getCart();
+  if (cart[index]) {
+    const newQuantity = cart[index].quantity + change;
+    if (newQuantity >= 1) {
+      cart[index].quantity = newQuantity;
+      window.paypalCart = cart;
+      localStorage.setItem('paypalCart', JSON.stringify(cart));
+      updateCartDisplay();
+    }
+  }
+};
+
+// Set quantity directly
+window.setQuantity = function(index, value) {
+  const cart = getCart();
+  const quantity = parseInt(value);
+  if (cart[index] && quantity >= 1) {
+    cart[index].quantity = quantity;
+    window.paypalCart = cart;
+    localStorage.setItem('paypalCart', JSON.stringify(cart));
+    updateCartDisplay();
+  } else if (quantity < 1) {
+    // If invalid quantity, restore the display
+    updateCartDisplay();
+  }
+};
+
+// Clear cart
+window.clearCart = function() {
+  window.paypalCart = [];
+  localStorage.removeItem('paypalCart');
+  updateCartDisplay();
+};
+
+// Initialize cart display on load
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', updateCartDisplay);
+} else {
+  updateCartDisplay();
+}
+
 window.paypal
   .Buttons({
     style: {
@@ -6,26 +149,22 @@ window.paypal
       color: "gold",
       label: "paypal",
     },
-    message: {
-      amount: 100,
-    },
 
     async createOrder() {
       try {
+        const cart = getCart();
+
+        if (cart.length === 0) {
+          throw new Error('Your cart is empty');
+        }
+
         const response = await fetch("/api/orders", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          // use the "body" param to optionally pass additional order information
-          // like product ids and quantities
           body: JSON.stringify({
-            cart: [
-              {
-                id: "Christmas Party Tickets",
-                quantity: "2",
-              },
-            ],
+            cart: cart,
           }),
         });
 
@@ -87,9 +226,12 @@ window.paypal
 
           console.log("Capture result", orderData, JSON.stringify(orderData, null, 2));
 
+          // Clear the cart after successful payment
+          clearCart();
+
           resultMessage(
             `Transaction ${transaction?.status || orderData.status}: ${transaction?.id || orderData.id}<br>
-          <br>See console for all available details`
+          <br>Thank you for your purchase!<br>See console for all available details`
           );
         } else {
           // If status is not COMPLETED, something went wrong

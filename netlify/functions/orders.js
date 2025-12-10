@@ -34,6 +34,21 @@ const ordersController = new OrdersController(client);
  * @see https://developer.paypal.com/docs/api/orders/v2/#orders_create
  */
 const createOrder = async (cart) => {
+  // Calculate total from cart items
+  const cartTotal = cart.reduce((total, item) => {
+    return total + (parseFloat(item.price) * parseInt(item.quantity));
+  }, 0);
+
+  // Build line items for the order
+  const items = cart.map(item => ({
+    name: item.name,
+    quantity: item.quantity.toString(),
+    unitAmount: {
+      currencyCode: "USD",
+      value: parseFloat(item.price).toFixed(2),
+    },
+  }));
+
   const collect = {
     body: {
       intent: CheckoutPaymentIntent.Capture,
@@ -41,8 +56,15 @@ const createOrder = async (cart) => {
         {
           amount: {
             currencyCode: "USD",
-            value: "100.00",
+            value: cartTotal.toFixed(2),
+            breakdown: {
+              itemTotal: {
+                currencyCode: "USD",
+                value: cartTotal.toFixed(2),
+              },
+            },
           },
+          items: items,
         },
       ],
     },
