@@ -16,7 +16,7 @@ console.log(
       <div class="product-card border rounded-lg p-4 shadow-sm">
         <h3 class="font-semibold text-lg">Membership - Individual</h3>
         <p class="text-gray-600 my-2">Annual membership for one person</p>
-        <p class="text-xl font-bold mb-3">$50.00</p>
+        <p class="text-xl font-bold mb-3">$30.00</p>
         <div class="flex gap-2">
           <input
             type="number"
@@ -26,7 +26,7 @@ console.log(
             class="w-16 border rounded px-2 py-1 text-center"
           />
           <button
-            onclick="addToCart('Membership - Individual', 50.00, parseInt(document.getElementById('qty-membership-individual').value))"
+            onclick="addToCart('Membership - Individual', 30.00, parseInt(document.getElementById('qty-membership-individual').value))"
             class="btn btn-primary flex-1 bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700"
           >
             Add to Cart
@@ -37,7 +37,7 @@ console.log(
       <div class="product-card border rounded-lg p-4 shadow-sm">
         <h3 class="font-semibold text-lg">Membership - Family</h3>
         <p class="text-gray-600 my-2">Annual membership for family</p>
-        <p class="text-xl font-bold mb-3">$75.00</p>
+        <p class="text-xl font-bold mb-3">$40.00</p>
         <div class="flex gap-2">
           <input
             type="number"
@@ -47,49 +47,7 @@ console.log(
             class="w-16 border rounded px-2 py-1 text-center"
           />
           <button
-            onclick="addToCart('Membership - Family', 75.00, parseInt(document.getElementById('qty-membership-family').value))"
-            class="btn btn-primary flex-1 bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700"
-          >
-            Add to Cart
-          </button>
-        </div>
-      </div>
-
-      <div class="product-card border rounded-lg p-4 shadow-sm">
-        <h3 class="font-semibold text-lg">Event Ticket</h3>
-        <p class="text-gray-600 my-2">Ticket to upcoming event</p>
-        <p class="text-xl font-bold mb-3">$25.00</p>
-        <div class="flex gap-2">
-          <input
-            type="number"
-            id="qty-event-ticket"
-            value="1"
-            min="1"
-            class="w-16 border rounded px-2 py-1 text-center"
-          />
-          <button
-            onclick="addToCart('Event Ticket', 25.00, parseInt(document.getElementById('qty-event-ticket').value))"
-            class="btn btn-primary flex-1 bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700"
-          >
-            Add to Cart
-          </button>
-        </div>
-      </div>
-
-      <div class="product-card border rounded-lg p-4 shadow-sm">
-        <h3 class="font-semibold text-lg">Competition Entry</h3>
-        <p class="text-gray-600 my-2">Entry fee for brewing competition</p>
-        <p class="text-xl font-bold mb-3">$10.00</p>
-        <div class="flex gap-2">
-          <input
-            type="number"
-            id="qty-competition-entry"
-            value="1"
-            min="1"
-            class="w-16 border rounded px-2 py-1 text-center"
-          />
-          <button
-            onclick="addToCart('Competition Entry', 10.00, parseInt(document.getElementById('qty-competition-entry').value))"
+            onclick="addToCart('Membership - Family', 40.00, parseInt(document.getElementById('qty-membership-family').value))"
             class="btn btn-primary flex-1 bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700"
           >
             Add to Cart
@@ -99,41 +57,91 @@ console.log(
     </div>
   </div>
 
-  <!-- Shopping Cart -->
-  <div class="shopping-cart border rounded-lg p-6 bg-gray-50 mb-4">
-    <div class="flex justify-between items-center mb-4">
-      <h2 class="text-2xl font-bold">Shopping Cart</h2>
-      <button
-        onclick="clearCart()"
-        class="text-sm text-red-600 hover:text-red-800"
-      >
-        Clear Cart
-      </button>
-    </div>
+  <div class="product-catatlog mb-8">
+    <h2 class="text-2xl font-bold mb-4">Event Tickets</h2>
+    <div class="product-card border rounded-lg p-4 shadow-sm">
+      <h3 class="font-semibold text-lg">Christmas Party</h3>
+      <p class="text-gray-600 my-2">
+        Saddle up for the most festive and hop-tastic event of the season - the
+        Horsemen of the Hopocalypse Christmas Party!
+      </p>
+      <p class="text-gray-600 my-2">
+        time as we transform your holiday celebrations into a beer lover's
+        paradise. Indulge in a spirited evening filled with the finest brews,
+        joyous camaraderie, and a touch of Christmas magic.
+      </p>
+      <p class="text-gray-600 my-2">
+        🍺 <strong>BEER GALORE:</strong> Immerse yourself in a world of craft beers
+        that will tantalize your taste buds and keep the good times flowing all night
+        long.
+      </p>
+      <p class="text-gray-600 my-2">
+        🎉 <strong>FUN RAFFLES:</strong> Take a chance and try your luck with our
+        entertaining raffles! Prizes suitable for any homebrewer!
+      </p>
 
-    <div id="cart-items" class="mb-4">
-      <p class="text-gray-500">Your cart is empty</p>
-    </div>
-
-    <div class="border-t pt-4">
-      <div class="flex justify-between items-center text-xl font-bold">
-        <span>Total:</span>
-        <span id="cart-total">$0.00</span>
+      <p>
+        <ul>
+          <li>DATE: December 13th, 2025</li>
+          <li>TIME: 6 pm</li>
+          <li>
+            LOCATION: Hampton Inn & Suites 1600 Hurst Town Center Dr. Hurst, TX
+          </li>
+        </ul>
+      </p>
+      <p class="text-xl font-bold mb-3">$20.00</p>
+      <div class="flex gap-2">
+        <input
+          type="number"
+          id="qty-event-ticket"
+          value="1"
+          min="1"
+          class="w-16 border rounded px-2 py-1 text-center"
+        />
+        <button
+          onclick="addToCart('Christmas Party', 20.00, parseInt(document.getElementById('qty-event-ticket').value))"
+          class="btn btn-primary flex-1 bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700"
+        >
+          Add to Cart
+        </button>
       </div>
     </div>
   </div>
-
-  <!-- PayPal Button -->
-  <div
-    id="paypal-button-container"
-    class="paypal-button-container"
-    style="display: none;"
-  >
-  </div>
-
-  <!-- Result Message -->
-  <div id="result-message" class="mt-4 p-4 rounded"></div>
 </div>
+<!-- Shopping Cart -->
+<div class="shopping-cart border rounded-lg p-6 bg-gray-50 mb-4">
+  <div class="flex justify-between items-center mb-4">
+    <h2 class="text-2xl font-bold">Shopping Cart</h2>
+    <button
+      onclick="clearCart()"
+      class="text-sm text-red-600 hover:text-red-800"
+    >
+      Clear Cart
+    </button>
+  </div>
+
+  <div id="cart-items" class="mb-4">
+    <p class="text-gray-500">Your cart is empty</p>
+  </div>
+
+  <div class="border-t pt-4">
+    <div class="flex justify-between items-center text-xl font-bold">
+      <span>Total:</span>
+      <span id="cart-total">$0.00</span>
+    </div>
+  </div>
+</div>
+
+<!-- PayPal Button -->
+<div
+  id="paypal-button-container"
+  class="paypal-button-container"
+  style="display: none;"
+>
+</div>
+
+<!-- Result Message -->
+<div id="result-message" class="mt-4 p-4 rounded"></div>
 
 <script is:inline define:vars={{ PAYPAL_CLIENT_ID }}>
   const script = document.createElement("script");
