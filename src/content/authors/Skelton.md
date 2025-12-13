@@ -1,7 +1,7 @@
 ---
 title: John Skelton
 position: Sergeant-at-Arms
-sort: 1
+sort: 6
 email: Sgt@horsemenofthehops.com
 image: "/images/JSkelton.jpg"
 
