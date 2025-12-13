@@ -1,5 +1,5 @@
 .header {
-  @apply bg-body dark:bg-darkmode-body py-6;
+  @apply bg-nav dark:bg-darkmode-nav py-6;
 }
 
 /* navbar items */
@@ -8,7 +8,7 @@
 }
 
 .navbar-brand {
-  @apply text-text-dark dark:text-darkmode-text-dark text-xl font-semibold;
+  @apply text-white dark:text-white text-xl font-semibold pl-6;
   image {
     @apply max-h-full max-w-full;
   }
@@ -19,7 +19,7 @@
 }
 
 .nav-link {
-  @apply text-text-dark hover:text-primary dark:text-darkmode-text-dark dark:hover:text-darkmode-primary block p-3 cursor-pointer font-semibold transition lg:px-2 lg:py-3;
+  @apply text-white hover:text-gray-200 dark:text-white dark:hover:text-gray-200 block p-3 cursor-pointer font-semibold transition lg:px-2 lg:py-3;
 }
 
 .nav-dropdown {

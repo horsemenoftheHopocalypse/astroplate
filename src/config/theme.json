@@ -6,7 +6,8 @@
         "body": "#fff",
         "border": "#eaeaea",
         "light": "#f6f6f6",
-        "dark": "#040404"
+        "dark": "#040404",
+        "nav": "#486e9e"
       },
       "text_color": {
         "text": "#444444",
@@ -20,7 +21,8 @@
         "body": "#1c1c1c",
         "border": "#3E3E3E",
         "light": "#222222",
-        "dark": "#fff"
+        "dark": "#fff",
+        "nav": "#486e9e"
       },
       "text_color": {
         "text": "#B4AFB6",
