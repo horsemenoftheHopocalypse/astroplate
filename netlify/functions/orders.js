@@ -10,17 +10,18 @@ import { readFileSync } from "fs";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+// Get directory paths for ES modules
+const currentFilePath = fileURLToPath(import.meta.url);
+const currentDir = dirname(currentFilePath);
 
 const { PUBLIC_PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET } = process.env;
 
 // Load authoritative prices from JSON files
 const membershipsData = JSON.parse(
-  readFileSync(join(__dirname, "../../src/config/memberships.json"), "utf-8")
+  readFileSync(join(currentDir, "../../src/config/memberships.json"), "utf-8")
 );
 const eventsData = JSON.parse(
-  readFileSync(join(__dirname, "../../src/config/events.json"), "utf-8")
+  readFileSync(join(currentDir, "../../src/config/events.json"), "utf-8")
 );
 
 // Create a price lookup map
