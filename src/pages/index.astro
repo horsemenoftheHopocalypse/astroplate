@@ -19,7 +19,7 @@ const { banner, countdown } = homepage.data;
 
 <Base>
   <!-- Banner -->
-  <section class="section pt-0">
+  <section class="section pt-14 pb-0">
     <div class="container border-blue-500">
       <div class="row justify-center">
         <div class="lg:col-7 md:col-9 mb-8 text-center">
@@ -27,7 +27,11 @@ const { banner, countdown } = homepage.data;
             set:html={markdownify(banner.title)}
             class="mb-4 text-h3 lg:text-h1"
           />
-          <p set:html={markdownify(banner.content)} class="mb-8" style="border-blue-500 border-opacity-100"/>
+          <p
+            set:html={markdownify(banner.content)}
+            class="mb-8"
+            style="border-blue-500 border-opacity-100"
+          />
           {
             banner.button.enable && (
               <a
@@ -47,23 +51,27 @@ const { banner, countdown } = homepage.data;
     </div>
   </section>
 
-  <section class="section pt-0">
+  <PhotoGallery photoGallary={photoGallary} />
+
+  <Testimonial testimonial={testimonial} />
+
+  <section class="section pt-8 pb-0">
     <div class="container">
       <div class="row justify-center">
-        <CountDown image={countdown.image} title={countdown.title} date={countdown.date} link={countdown.link} />
+        <ContactUs />
       </div>
     </div>
   </section>
 
-  <PhotoGallery photoGallary={photoGallary} />
-
-
-  <Testimonial testimonial={testimonial} />
-
-  <section class="section pt-14">
+  <section class="section pt-0">
     <div class="container">
       <div class="row justify-center">
-      <ContactUs />
+        <CountDown
+          image={countdown.image}
+          title={countdown.title}
+          date={countdown.date}
+          link={countdown.link}
+        />
       </div>
     </div>
   </section>
