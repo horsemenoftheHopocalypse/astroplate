@@ -16,6 +16,10 @@ const { photoGallary } = Astro.props;
           </div>
           <div class="col-12">
             <div class="swiper testimonial-slider">
+              <!-- Navigation buttons -->
+              <div class="swiper-button-prev"></div>
+              <div class="swiper-button-next"></div>
+
               <div class="swiper-wrapper">
                 {photoGallary.data.photos.map(
                   (item: {
@@ -53,6 +57,43 @@ const { photoGallary } = Astro.props;
     </section>
   )
 }
+
+<script>
+  import Swiper from "swiper";
+  import "swiper/css";
+  import "swiper/css/pagination";
+  import "swiper/css/navigation";
+  import { Autoplay, Pagination, Navigation } from "swiper/modules";
+
+  document.addEventListener("astro:page-load", () => {
+    new Swiper(".testimonial-slider", {
+      modules: [Pagination, Autoplay, Navigation],
+      spaceBetween: 24,
+      loop: true,
+      autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+      pagination: {
+        el: ".testimonial-slider-pagination",
+        type: "bullets",
+        clickable: true,
+      },
+      breakpoints: {
+        768: {
+          slidesPerView: 2,
+        },
+        992: {
+          slidesPerView: 3,
+        },
+      },
+    });
+  });
+</script>
 
 <style>
   .testimonial-slider .swiper-wrapper {
