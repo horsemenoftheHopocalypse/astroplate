@@ -1,7 +1,7 @@
 ---
 title: Amy Yvonne Patton
 position: Historian
-sort: 6
+sort: 7
 email: history@horsemenofthehops.com
 image: "/images/Amy.jpg"
 description: this is meta description

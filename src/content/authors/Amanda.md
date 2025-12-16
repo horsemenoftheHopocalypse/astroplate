@@ -1,7 +1,7 @@
 ---
 title: Amanda Berckenhoff Long
 position: Secretary
-sort: 4
+sort: 3
 email: secretary@horsemenofthehops.com
 image: "/images/Amanda.jpg"
 description: this is meta description

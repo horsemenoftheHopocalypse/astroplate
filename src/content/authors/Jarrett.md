@@ -1,8 +1,8 @@
 ---
 title: Jarrett Long
-position: Treasure
-sort: 3
-email: treaseruer@horsemenofthehops.com
+position: Director of Mayhem
+sort: 6
+email: mayhem@horsemenofthehops.com
 image: "/images/Jarret.jpg"
 description: this is meta description
 social:

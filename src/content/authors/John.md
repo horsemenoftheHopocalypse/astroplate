@@ -1,7 +1,7 @@
 ---
 title: John Bates
-position: Prident
-sort: 1
+position: President Emiritas
+sort: 10
 email: president@horsemenofthehops.com
 image: "/images/John.jpg"
 

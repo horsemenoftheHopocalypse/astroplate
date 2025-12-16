@@ -1,8 +1,8 @@
 ---
 title: Gregory Smith
-position: Director, Education
-sort: 6
-email: education@horsemenofthehops.com
+position: Treasurer & Director of Education
+sort: 4
+email: treasurer@horsemenofthehops.com
 image: "/images/Gregory.jpg"
 description: this is meta description
 social:

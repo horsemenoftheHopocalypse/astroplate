@@ -1,8 +1,8 @@
 ---
 title: Reni Newsom Morris
-position: Vice President
-sort: 2
-email: vp@horsemenofthehops.com
+position: President
+sort: 1
+email: president@horsemenofthehops.com
 image: "/images/Reni.jpg"
 description: this is meta description
 social:

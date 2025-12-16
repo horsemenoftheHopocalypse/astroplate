@@ -1,7 +1,7 @@
 ---
 title: Barry Forrest
-position: Director, IT
-sort: 10
+position: VP & IT Director
+sort: 2
 email: bforrest30@gmail.com
 image: "/images/barry.jpeg"
 description: this is meta description
