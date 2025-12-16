@@ -3,7 +3,7 @@ title: Amy Yvonne Patton
 position: Historian
 sort: 7
 email: history@horsemenofthehops.com
-image: "/images/Amy.jpg"
+image: "/images/amy-tx-whiskey.jpg"
 description: this is meta description
 social:
   - name: facebook

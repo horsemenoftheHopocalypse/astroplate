@@ -3,7 +3,7 @@ title: Jarrett Long
 position: Director of Mayhem
 sort: 6
 email: mayhem@horsemenofthehops.com
-image: "/images/Jarret.jpg"
+image: "/images/jarrett-mayhem.jpg"
 description: this is meta description
 social:
   - name: facebook

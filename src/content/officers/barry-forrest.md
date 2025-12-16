@@ -3,7 +3,7 @@ title: Barry Forrest
 position: VP & IT Director
 sort: 2
 email: bforrest30@gmail.com
-image: "/images/barry.jpeg"
+image: "/images/barry-tx-whiskey.png"
 description: this is meta description
 social:
   - name: facebook

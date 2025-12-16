@@ -3,7 +3,7 @@ title: John Bates
 position: President Emiritas
 sort: 10
 email: president@horsemenofthehops.com
-image: "/images/John.jpg"
+image: "/images/Bates-stein.jpg"
 
 description: this is meta description
 social:

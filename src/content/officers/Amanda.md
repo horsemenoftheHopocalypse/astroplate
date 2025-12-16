@@ -3,7 +3,7 @@ title: Amanda Berckenhoff Long
 position: Secretary
 sort: 3
 email: secretary@horsemenofthehops.com
-image: "/images/Amanda.jpg"
+image: "/images/amanda-tx-whiskey.jpg"
 description: this is meta description
 social:
   - name: facebook

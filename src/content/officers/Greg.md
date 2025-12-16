@@ -3,7 +3,7 @@ title: Gregory Smith
 position: Treasurer & Director of Education
 sort: 4
 email: treasurer@horsemenofthehops.com
-image: "/images/Gregory.jpg"
+image: "/images/greg-tx-whiskey.jpg"
 description: this is meta description
 social:
   - name: facebook
