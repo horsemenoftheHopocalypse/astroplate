@@ -28,9 +28,9 @@ const blogCollection = defineCollection({
   }),
 });
 
-// Author collection schema
-const authorsCollection = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "src/content/authors" }),
+// Officer collection schema
+const officersCollection = defineCollection({
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "src/content/officers" }),
   schema: z.object({
     ...commonFields,
     position: z.string().optional(),
@@ -174,7 +174,7 @@ export const collections = {
   // Pages
   homepage: homepageCollection,
   blog: blogCollection,
-  authors: authorsCollection,
+  officers: officersCollection,
   pages: pagesCollection,
   about: aboutCollection,
   contact: contactCollection,
