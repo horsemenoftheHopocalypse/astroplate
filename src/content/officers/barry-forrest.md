@@ -15,4 +15,8 @@ social:
     link: https://www.linkedin.com/in/barryforrest/
 ---
 
-lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostr navigation et dolore magna aliqua.
+Barry discovered `craft beer` about 14 years ago. After slinging beers  on tour weekends at Peticolas his wife, Silvia Eyster, conned him into learning how to make their own beers.
+
+With backgrounds in medical lab technology, they jumped into the hobby headfirst and bought a set of orange coolers found on Craig's List. The first batchs was an all grain oatmeal stout recipe from BYO magazine. Since then they've brewed 47 different styles, become members of 4 different homebrew clubs and won 4 steins at Bluebonnet.
+
+Barry is happy to fly the flag 🏴‍☠️ and call Horsemen of the Hopocalypse home.

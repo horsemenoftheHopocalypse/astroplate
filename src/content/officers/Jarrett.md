@@ -1,6 +1,6 @@
 ---
 title: Jarrett Long
-position: Director of Mayhem
+position: Director of War (Competitions)
 sort: 6
 email: mayhem@horsemenofthehops.com
 image: "/images/jarrett-mayhem.jpg"
