@@ -344,3 +344,76 @@ Ferment with German lager yeast.
 IBU: 38
 
 ABV: 5.9
+
+
+#### Charlie’s Smoked Pecan Porter
+5 gallon batch
+
+Malt/Grain Bill
+6 lbs 2-Row malt
+
+3.5 lb Victory malt
+1.25 lb Smoked malt
+
+14 oz Pale chocolate malt
+
+1.25 lb Smoked pecans
+
+Hop Addition
+1.5 oz Glacier @ 60 mins
+
+1 oz Glacier @ 15 mins
+
+.75 oz Golding @ flameout
+
+
+
+Yeast
+Safale US-05 or similar
+
+To prepare pecans 
+
+Spread evenly on a baking sheet lined with butcher paper, and roast in the smoker at 300°. Every half hour, lightly crush pecans with a rolling pin. Every hour, replace the butcher paper. Cook until pecans have leached all their oils, or 2 to 2.5 hours.
+
+
+OG: 1.060
+
+FG: 1.013
+
+IBU: 41.6
+
+ABV: 6.2
+
+
+#### Brandy’s Summer Ryepaul
+My favorite recipe is basically just a summer rye from Modern Home Brews by Gordon Strong, only I substitute Mandarina Bavaria hops, use a saison yeast strain and generally add various adjuncts. I also have tweaked the hop volume and timing over the years and of course the adjuncts have changed constantly. It's a great base recipe though.
+
+
+
+6.5 gallon batch
+
+Malt/Grain Bill
+4 lbs US 2-Row malt
+
+3 lb UK Golden Promise malt
+3 lb Wheat malt
+
+1.5 lb Rye malt
+
+
+
+Hop Addition
+2 oz Mandarina Bavaria @ flameout
+
+Yeast
+Saison-style yeast
+
+
+
+OG: 1.049
+
+FG: 1.006
+
+IBU: 25
+
+ABV: 5.7
