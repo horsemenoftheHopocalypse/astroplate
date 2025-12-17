@@ -250,20 +250,38 @@ Mash at 150°F for 60 minutes. Mash out at 168°F for 10 minutes. Fly sparge at 
 Fermentation Process
 Ferment 10 days. Transfer over 1 lb toasted coconut. Prepare coconut by lightly toasting shredded coconut in the stove at 350°F for 20 minutes, taking it out of the oven and mixing it every five minutes. Let cool and add to sanitized muslin bag. Let the beer age on the coconut for two days, and cold crash for an additional two days on the coconut.
 
-Facebook icon
-Website icon
-Instagram icon
-Would you like to #flytheflag and brew with us?
-Fill out this form to join the Horsemen of the Hopocalypse!
+
+#### Matt Wilson’s Sierra Nevada Bigfoot Ale Clone
+5.5 gallon batch
+
+Malt/Grain Bill
+20 lbs 13 oz Pale 2-row
+2 lbs 8 oz Caramel Malt 80L
+
+Hop Addition
+1.4 oz Centennial @ 90 mins
+1.3 oz Cascade @ 90 mins
+.87 oz Cascade @ 60 mins
+.9 oz Chinook @ 30 mins
+.9 oz Chinook @ flamemout
+1 oz Cascade @ 3-day dry-hop
+1 oz Centennial @ 3-day dry-hop
+
+1 oz Chinook @ 3-day dry-hop
 
 
-Copyright (C) 2023 Horsemen of the Hopocalypse. All rights reserved.
+
+Brew Day Process
+Mash at 151°F for 60 minutes with 11.52 gallons of water. Boil for 120 minutes.
+
+Fermentation Process
+Ferment at 68° F until fermentation is complete. Increase to 72° F for three days. Cold crash for three days. Transfer to serving vessel and force carbonate.
 
 
-This newsletter is produced by Scudder Storycraft LLC.
 
+Pre-Boil Gravity: 1.063
+OG: 1.098
+FG: 1.023
+IBU: 110
+SRM: 19
 
-Want to change how you receive these emails?
-You can update your preferences or unsubscribe
-
-Email Marketing Powered by Mailchimp
