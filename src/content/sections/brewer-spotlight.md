@@ -397,7 +397,7 @@ spotlights:
         answer: "I can’t say I have a go-to commercial beer but I have had a few that I truly enjoy, Shannon Brewing Company made a great Irish red ale, and recently I tried a pretty good beer from Eagle Brewery in the UK called banana bread beer."
       
       - question: "What's in your fermenter now?"
-        answer: "Right now I am working on a couple of things. I have a few funky beers fermenting with Bootleg Biology’s the Rare Barrel mixed culture yeast and I am making a boozy version of \“Mavi,\” a drink from Puerto Rico."
+        answer: "Right now I am working on a couple of things. I have a few funky beers fermenting with Bootleg Biology’s the Rare Barrel mixed culture yeast and I am making a boozy version of “Mavi,” a drink from Puerto Rico."
       
       - question: "What's your favorite BJCP style to brew? To drink?"
         answer: "My favorite BJCP style would have to be 15A Irish Red Ale, still trying to get the color just right. My favorite to drink is 3D Dark Czech Lager."
@@ -407,6 +407,35 @@ spotlights:
       
       - question: "Why do you homebrew?"
         answer: "I homebrew because I love the hobby. Past hobbies I’ve had have been short-lived it felt like once I had done them a few times I had had enough. Homebrewing is different. It is a great community to be a part of and you never stop learning. There are always new recipes to try and old ones you want to master. It’s something I see myself doing for a long time to come!"
+
+  - name: "Rachel Brasovan"
+    avatar: "/images/rachel-brasovan-spotlight.jpeg"
+    designation: "Homebrewer"
+    date: "November 3, 2023"
+    questions:
+      - question: "Tell us about your first batch of homebrew. When did you start?"
+        answer: "My first batch was an Irish Red Ale extract kit from Texas Brewing. My dad's friend that used to homebrew brewed it with me and gave me a lot of helpful tips which I really appreciated. I definitely owe it to him for teaching me good habits and how good it turned out! Yum!"
+      
+      - question: "What's your favorite beer you've ever brewed?"
+        answer: "My favorite beer was probably an IPA I brewed relatively recently. I used my favorite hops for the dry-hop (Cascade and Centennial) and then a few experimental hops for the boil. The flavor turned out perfect and just what I wanted in an IPA. Ended up scoring really well too. "
+      
+      - question: "What about your biggest brew-fail?"
+        answer: "Biggest brew failure happened recently. I've been getting into kegging and the second beer I kegged got badly infected. Then after the next one I kegged, a piece for the CO2 line into the keg BROKE and I never realized it so I lost all my CO2 and then I had to replace the piece. So it has been a process for sure."
+      
+      - question: "What's your go-to commercial beer?"
+        answer: "Lagunitas IPA"
+      
+      - question: "What's in your fermenter now?"
+        answer: "A Freedom hops smash IPA!"
+      
+      - question: "What's your favorite BJCP style to brew? To drink?"
+        answer: "IPA (....can you see a theme?)"
+      
+      - question: "Tell us about your brewery. What does your set-up look like?"
+        answer: "My brewery is called Voltaic Brewery and the setup used to be all extract. Recently, I have gotten an older Anvil system that is working fantastic so far! I can only brew with it at a house though, since the cooling part I am unable to do from my apartment at the moment. Voltaic Brewery is also home to two brew cats which greatly help with brewing (they like the boxes.)"
+      
+      - question: "Why do you homebrew?"
+        answer: "I started homebrewing to pick up a hobby and quickly fell in love with the community. I owe that mostly to Chris at Brewhound for introducing me to you guys and now I will never leave!"
 
   - name: "Stacy Myers"
     avatar: "/images/myers-spotlight.jpg"

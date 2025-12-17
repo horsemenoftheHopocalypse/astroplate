@@ -443,3 +443,13 @@ Hop Addition
 
 .5 oz El Dorado (11.6% aa) @ 5 min.
 
+#### Rachael’s IPA
+Malt/Grain Bill
+12.5 lbs pale malt
+1.25 lbs carmel 40L malt
+
+Hop Addition
+1.25 oz Centennial @ 60 min.
+1.25 oz Cascade @ 20 min.
+1 tsp irish moss @ 10 min.
+1 oz Cascade @ flameout
