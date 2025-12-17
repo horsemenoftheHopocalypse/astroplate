@@ -407,6 +407,42 @@ spotlights:
       - question: "Why do you homebrew?"
         answer: "My \"purpose\" for brewing has evolved. When I started in 1996, it was almost out of necessity. In a small town in upstate NY, there was no \"good beer.\"  Macro lagers were predominantly the only game in town. I knew there was better beer. When, the opportunity arose to brew some, I was all in.  It didn't take long to realize it was fun to make. My third batch was all-grain (not a great success story, but enjoyable). I was always a solo brewer, as there was not much of a homebrewing community close to me when I was in New York, nor when I lived in south Florida. I would share at home and bring beer to friends' gatherings. I'm sure many of those batches had that \"homebrew flavor.\" There was almost a fear factor in sharing my beer with knowledgeable homebrewers.  However, I somewhat climbed out of my comfort zone, realizing I need good feedback in order to make better beer. Being part of a social homebrew club has fostered that. From Day 1, fellow Horsemen members were inquisitive, encouraging, challenging, knowledgeable, and then some. I've discovered that I've learned more, and hopefully even offered a few tips myself.  Today, I brew more than I did 20+ years ago even though craft beer is readily available everywhere. If anything, many of today's craft beers inspire me to ask myself \"could I make that?\" So the passion and camaraderie of homebrewing definitely outweigh the need today. There is always something to learn and I want to keep improving my craft."
 
+  - name: "Jonathan Rollins"
+    avatar: "/images/jonathan-rollins-spotlight.jpg"
+    designation: "Homebrewer"
+    date: "September 16, 2024"
+    questions:
+      - question: "Tell us about your first batch of homebrew. When did you start?"
+        answer: "I brewed my first batch of beer in 2007, after getting back into winemaking and realizing that I wanted something that would turn around faster than a red wine would. At the time we lived in downtown Denver, not far from the Central Branch of their library system. As you can image, there were a few books on homebrewing available. I read a couple, and settled on designing a Robust Porter using the calculations in Randy Mosher's \"Radical Brewing\". Math isn't always my strong suit, and I ended up with a beer closer to 10% than the 6.5% I'd calculated. I also ended up overcarbonating the beer... by a lot. However, the four ounces or so I got from every 22 ounce bottle of my Imperial Smoked Porter with Green Cardamom was actually pretty good. I took some time to do a little more research and get some brewing software."
+      
+      - question: "What's your favorite beer you've ever brewed?"
+        answer: "This is a hard one- among the tops are:
+
+* A pale bitter beer that started life as an ESB (BJCP 2008) and shared some elements of an American Pale Ale. I brewed this recipe over and over, changing out one or two ingredients at a time for over 10 years.
+
+* My Peach Table Beer
+
+* An American Stout I brewed a couple of years ago. The recipe was a collaboration with Joel Darbro, who has a small hop farm in SE Kansas.
+
+* My Hibiscus Table Beer.
+
+* A Black IPA made with 100% Michigan Copper hops. I am hoping to brew this again soon!"
+      
+      - question: "What's your go-to commercial beer?"
+        answer: "Another tough one - for local beers, I like the Haziess at Turning Point and Maple Branch's English beers. When I am in Austin I try to stop in to Batch Brewing and Jester King. Trips to Houston mean picking up mixed ferm beers from True Anomaly and hop water from St. Arnold's. When I get the chance, AZ Wilderness' \"American Presidential Stout\" is also a favorite."
+      
+      - question: "What's in your fermenter now?"
+        answer: "Haha! Are you ready? Imperial Stout, aged Porter (to blend with sours for a Oud Brune-ish project), a British Strong Ale, a few iterations of my House Culture, Peach Table beer, a Sour Brown Solera (there are three pulls of this aging for the project mentioned before), a Golden Sour aging on Montmorency Cherries, a mixed culture Rye Grissette aging on foraged Chickasaw plums, two Golden Sour base beers for later blending/fruiting/etc, a Golden Sour resting on Alvarinho grape pomace, a mixed fermentation cider, a Table Beer base for later fruiting, a mixed ferm experiment aging on Honeybell Fruit and Pineapple, a Gewurztraminer and a Petit Sirah."
+      
+      - question: "What's your favorite BJCP style to brew? To drink?"
+        answer: "I love doing mixed ferm Table Beers. Think Jester King's \"La Petit Prince\"; they're incredibly light, refreshing and easy to brew. Most batches get split so I get half as straight beer and half with fruit or other additions of some sort."
+      
+      - question: "Tell us about your brewery. What does your set-up look like?"
+        answer: "I recently added an Anvil to the setup, and am working on learning that. Otherwise it's a pretty manual two burner propane stand with a 6- and 8- gallon pots. A giant cooler I use for mashing large amounts of grain that don't fit it the other vessels. I also do no-chill brewing, so I have several funky looking plastic buckets. Other than the Anvil, it's all very low tech."
+      
+      - question: "Why do you homebrew?"
+        answer: "Partially for the creative challenge, and partially because I can't afford to drink the beers I like, so I am figuring out how to make them! If anyone wants to follow along, I am fairly active on Instagram under the handle @curmudgeonaleworks"
+
   - name: "Jack Knapp"
     avatar: "/images/jack-knapp.jpeg"
     designation: "Homebrewer"
