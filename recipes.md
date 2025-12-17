@@ -417,3 +417,29 @@ FG: 1.006
 IBU: 25
 
 ABV: 5.7
+
+
+#### Jack Knapp Tropical Haze IPA
+7 gallon batch
+
+Malt/Grain Bill
+8 lbs 15.9 oz UK Golden Promise malt
+
+1 lb 8 oz flaked wheat
+1 lb 4.1 oz flaked oats
+8.1 oz table sugar
+6 oz Victory malt
+
+15.9 oz rice hulls
+
+
+
+Hop Addition
+.61 oz Chinook (13% aa) @ 60 min.
+
+.49 oz Cascade (7% aa) @ 60 min.
+
+.5 oz Azacca (15% aa) @ 5 min.
+
+.5 oz El Dorado (11.6% aa) @ 5 min.
+

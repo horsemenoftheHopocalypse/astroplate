@@ -378,6 +378,36 @@ spotlights:
       - question: "Why do you homebrew?"
         answer: "I lied to myself and got into it to “save money”. Now as I catalog my three-tap kegerator with a nitro tap, my over a dozen corny kegs, keg cleaning station, fermentation freezer, bottle capper, my new mill, all the chemicals, jars with yeast cultures, stir plate, etc… Nevermind, I think I made my point. Last year I decided to finally enter Bluebonnet with a saison and my wife’s hot cocoa stout. While we were watching, I said if we win a medal I’m going all in with homebrewing, if not I’m going to find another hobby. Well darn it the saison got a silver medal and both beers went to the BOS rounds. Her beer scored 42 points! So now we’re competitive homebrewers."
 
+  - name: "Jack Knapp"
+    avatar: "/images/jack-knapp.jpeg"
+    designation: "Homebrewer"
+    date: "October 6, 2023"
+    questions:
+      - question: "Tell us about your first batch of homebrew. When did you start?"
+        answer: "My first batch of homebrew was “funktional fruit sour” by Norther Brewer. It was an extract beer and I added raspberry purée in secondary fermentation. After that batch I was hooked.
+"
+      
+      - question: "What's your favorite beer you've ever brewed?"
+        answer: "Favorite beer so far has to be Dark Czech Lager."
+      
+      - question: "What about your biggest brew-fail?"
+        answer: "I would have to say my biggest fail would be when brewing my first high-gravity beer. It was my first stout, an imperial stout at that and one night after dinner I heard a pop in the other room. When I went to investigate I found the airlock on the floor and beer all over the walls and everywhere! I had filled the fermenter to full and didn’t even know about a blow off tube. Needless to say, now I do!"
+      
+      - question: "What's your go-to commercial beer?"
+        answer: "I can’t say I have a go-to commercial beer but I have had a few that I truly enjoy, Shannon Brewing Company made a great Irish red ale, and recently I tried a pretty good beer from Eagle Brewery in the UK called banana bread beer."
+      
+      - question: "What's in your fermenter now?"
+        answer: "Right now I am working on a couple of things. I have a few funky beers fermenting with Bootleg Biology’s the Rare Barrel mixed culture yeast and I am making a boozy version of \“Mavi,\” a drink from Puerto Rico."
+      
+      - question: "What's your favorite BJCP style to brew? To drink?"
+        answer: "My favorite BJCP style would have to be 15A Irish Red Ale, still trying to get the color just right. My favorite to drink is 3D Dark Czech Lager."
+      
+      - question: "Tell us about your brewery. What does your set-up look like?"
+        answer: "My brewery is electric. I made my own electric kettle with a TC 5500w heating element and a 15 gallon gas-one kettle I found online. With that I pair my mash tun — I started with a 10-gallon Igloo cooler and early this year upgraded to an SS Brewtech infusion mash tun. Finally my fermentors at the moment are of many types I use glass carboys and plastic buckets for some things and my homemade stainless bucket fermentor with a glycol chilling coil for my more traditional brews."
+      
+      - question: "Why do you homebrew?"
+        answer: "I homebrew because I love the hobby. Past hobbies I’ve had have been short-lived it felt like once I had done them a few times I had had enough. Homebrewing is different. It is a great community to be a part of and you never stop learning. There are always new recipes to try and old ones you want to master. It’s something I see myself doing for a long time to come!"
+
   - name: "Stacy Myers"
     avatar: "/images/myers-spotlight.jpg"
     designation: "Homebrewer"
