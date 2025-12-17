@@ -222,3 +222,48 @@ FG: 1.013
 IBU: 125.5
 SRM: 48
 ABV: 8.9%
+
+#### Edward’s Coconut Hefe
+“The coconut really compliments the banana and clove in this style. This recipe won my one and only stein at Bluebonnet, in 2019.”
+- Edward Lamothe
+
+5 gallon batch
+
+Malt/Grain Bill
+8 lbs American white wheat
+2.5 lbs American pale 2-row
+.25 lbs Rice hulls
+
+Hop Addition
+1.2 oz Crystal @ 45 mins
+
+
+
+Yeast
+Omega Hefeweizen Ale I OYL-021
+
+
+
+Brew Day Process
+Mash at 150°F for 60 minutes. Mash out at 168°F for 10 minutes. Fly sparge at 168°F for 30 minutes.
+
+Fermentation Process
+Ferment 10 days. Transfer over 1 lb toasted coconut. Prepare coconut by lightly toasting shredded coconut in the stove at 350°F for 20 minutes, taking it out of the oven and mixing it every five minutes. Let cool and add to sanitized muslin bag. Let the beer age on the coconut for two days, and cold crash for an additional two days on the coconut.
+
+Facebook icon
+Website icon
+Instagram icon
+Would you like to #flytheflag and brew with us?
+Fill out this form to join the Horsemen of the Hopocalypse!
+
+
+Copyright (C) 2023 Horsemen of the Hopocalypse. All rights reserved.
+
+
+This newsletter is produced by Scudder Storycraft LLC.
+
+
+Want to change how you receive these emails?
+You can update your preferences or unsubscribe
+
+Email Marketing Powered by Mailchimp
