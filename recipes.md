@@ -487,3 +487,107 @@ Final Gravity: 1.009
 Batch Size: 5.5 gal
 Boil Time: 60 min
 
+
+#### Jarrett’s Das Oktoberfest Märzen
+
+Recipe by Jarrett Long
+
+Batch Size: 6.08 US Gal
+
+Losses: 0.5 US Gal
+
+Boil Time: 60 mins
+
+Mash Efficiency: 75%
+
+Mash Volume: 5.158 US Gal
+
+Sparge Volume: 3.201 US Gal
+
+
+
+OG (SG): 1.053
+
+FG (SG): 1.011
+
+ABV: 5.48%
+
+
+
+IBU: 20.4
+
+Color (EBC): 21.8
+
+
+
+
+
+Fermentables
+
+ViennaMalt (Bairds)
+
+Supplier: Bairds 4.00 lb (31%) Mash 36.3 7.0
+
+Bonlander Munich - US
+
+Supplier: Briess 3.50 lb (27%) Mash 36.0 25.2
+
+Pilsner- US
+
+Supplier: Generic 3.50 lb (27%) Mash 34.0 1.2
+
+Aromatic Malt - UK
+
+Supplier: Generic 1.00 lb (8%) Mash 35.0 51.9
+
+Cara Munich- BE
+
+Supplier: Weyermann 0.75 lb (6%) Mash 34.0 147.9
+
+Cara Vienna- BE
+
+Supplier: Briess 0.33 lb (3%) Mash 34.0 57.2
+
+Mash and Sparge volumes calculated using the "Grainfather (110V) - Bluetooth Controller" profile.
+
+
+
+Mash Steps
+
+Mash at 129 °F for  5 min
+
+Mash at 150 °F for 30 min
+
+Mash at 160 °F for 15 min
+
+Mash Out at 167 °F for 7 min
+
+
+
+Hops
+
+Hallertau (IBU: 12.7) 1.00 oz (50%) Pellet Boil 60 min
+
+Hallertau (IBU: 7.7) 1.00 oz (50%) Pellet Boil 20 min
+
+
+
+Yeast
+
+Wyeast Octoberfest Lager Blend 2633
+
+
+
+Fermentation
+
+Ferment at 52 °F for 17 days
+
+Diacetyl rest at 60 °F for 3 days
+
+Ferment at 48 °F for 8 days
+
+Lager at 33 °F for 16 days
+
+
+
+Notes: You must do your own mash profile for this recipe (regular, step mash or decoction)
