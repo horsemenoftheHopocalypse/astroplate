@@ -61,7 +61,7 @@ spotlights:
       - question: "Why do you homebrew?"
         answer: "The commercial market just can't offer everything that I want. As much as the commercial offerings have improved over the years (and I still buy plenty of beer every year), my brain buzzes with flavors, aromas and ingredients that either don't have commercial viability or are maybe too 'out there.' Reading about beer and brewing is what really keeps me going in pursuit of something new or something more."
 
-- name: "Bob Sumien"
+  - name: "Bob Sumien"
     avatar: "/images/Bob Sumien.jpg"
     designation: "Homebrewer"
     date: "January 5, 2023"
@@ -128,6 +128,63 @@ spotlights:
       - question: Why do you homebrew?
         answer: To beat Randy Daily :0)
       - question: Any other fun facts
-        answer: I have 2 refrigerators. A commercial beer fridge and a competition beer fridge. When I’m ready to submit beers for competition they are ready to grab and go for mailing or dropping off. I also maintain a spreadsheet on my homebrews that allows me to track the results and scores on competition beers. 
+        answer: I have 2 refrigerators. A commercial beer fridge and a competition beer fridge. When I’m ready to submit beers for competition they are ready to grab and go for mailing or dropping off. I also maintain a spreadsheet on my homebrews that allows me to track the results and scores on competition beers.
 
+  - name: "Rick Couch"
+    avatar: "/images/rick-couch-spotlight.jpeg"
+    designation: "Homebrewer"
+    date: "December 3, 2022"
+    questions:
+      - question: "Tell us about your first batch of homebrew. When did you start?"
+        answer: "I guess it was around 2006 or so, I was at a LAN party (if you know, you know) and one of our crew had brought in some homebrew that he had made. I got to asking Nick about it, and he told me I should check out one of these homebrewing kits if I was interested in learning how to brew my own beer. I bought a simple Brewer’s Best two-bucket kit, a recipe kit for a hefeweizen, and the rest is history."
+      
+      - question: "What's your favorite beer you've ever brewed?"
+        answer: "Probably my Vanilla Bourbon Milk Stout."
+      
+      - question: "What about your biggest brew-fail?"
+        answer: "Without a doubt, my strawberry blonde ale. Trying to be clever (my wife is a ginger), I decided I would make a strawberry blonde ale in her honor. Great idea, right? Unless you use a terrible strawberry extract AND manage to get your wort infected during bottling. Not so much a strawberry blonde ale as a `Robitussin and Band-Aids` ale."
+      
+      - question: "What's your go-to commercial beer?"
+        answer: "Yuengling Black and Tan, whenever I can get my hands on it. On the regular? Wild Acre Billy Jenkins."
+      
+      - question: "What's in your fermenter now?"
+        answer: "Nothing at the moment, as I’m currently renovating my office. Just kegged a Maibock, but nothing in the fermenter right now."
+      
+      - question: "What's your favorite BJCP style to brew? To drink?"
+        answer: "To brew and drink, honestly it’s anything German. Hefeweizen and doppelbock at the top of the list, though."
+      
+      - question: "Tell us about your brewery. What does your set-up look like?"
+        answer: "I’m still working with my original all-grain setup – an Igloo mash tun, 8-gallon Megapot 2.0 brew kettle, standard wort chiller that I run through a cooler of ice. I have two 7-gallon Fermonsters, a chest freezer fermentation chamber, and a new 3-tap keezer I completed about 2 months back. Thinking about moving to either a Foundry or a Grainfather in the not-too-distant future."
+      
+      - question: "Why do you homebrew?"
+        answer: "I love the mad science of it all. Not only am I making delicious beer that I can share with friends and family, but I get to be the “Doc Brown” behind the scenes. I get to develop my own recipes, tinkering all the time, and really customize the beers to my own tastes. While experimenting with recipes is a blast, and brewing even more fun…honestly, it’s also gratifying to get inebriated on beer that I made from water, barley, and hops in my own garage."
+
+  - name: "Brian Schoolcraft"
+    avatar: "/images/schooly-spotlight.jpeg"
+    designation: "Homebrewer"
+    date: "March 3, 2023"
+    questions:
+      - question: "Tell us about your first batch of homebrew. When did you start?"
+        answer: "I don't exactly remember it has been a long time, but when I started, all-grain wasn't a thing for homebrewers.  I brewed my first batch in 2002. A neighbor taught me how to brew with extract using specialty grains. It was basically a turkey fryer set-up and a glass carboy as a fermenter that I kept in a cool closet.  And the saying is absolutely true: 'Give a man a beer and he will waste a day.  Teach a man to brew and he will waste a lifetime'"
+      
+      - question: "What's your favorite beer you've ever brewed?"
+        answer: "Eisbock! I brewed a recipe that has been handed down several times and the stars literally lined up the first time I brewed it. It took first at Bluebonnet and Nationals that year and Rabbit Hole selected it to brew (and invited me to help brew it) and called it [School of Bock](https://homebrewersassociation.org/homebrew-recipe/the-king-of-eisbocks/). The cool thing about this recipe (which you can find on the AHA website) is there is no freezing involved."
+      
+      - question: "What about your biggest brew-fail?"
+        answer: "There was one winter our temps were expected to drop below freezing for a time and someone suggested it would be a good time to freeze a keg. I happened to have a dopplebock in a keg and set it out on the patio to make a traditional eisbock. I weighed it before it froze and after I racked off the non-frozen liquid to another keg. 20% remained in the original keg as ice. I set that keg aside for a year to let it lager and when I tasted it, it had picked up an infection and it went sour and I had to dump it."
+      
+      - question: "What's your go-to commercial beer?"
+        answer: "I am a huge fan of Cowtown's Vienna. I can't tell you how much money I've dropped on that particular beer. Now I wished I had invested when they started. =) When I have commercial beer at the house, the styles are all over the place. I like a variety."
+      
+      - question: "What's in your fermenter now?"
+        answer: "Unfortunately, nothing. I started my own business a little over 5-years ago and it takes up a lot of time and has severely reduced my ability to brew. When I do brew, I will try to knock out two beers over a weekend. I have managed to cobble seven entries together for Bluebonnet this year."
+      
+      - question: "What's your favorite BJCP style to brew? To drink?"
+        answer: "Oktoberfest for both. Every year as breweries produce their seasonal Oktoberfests I end up buying probably 8-10 different six-packs of Oktoberfest to see who's best. I usually hover toward Ayinger and Hacker-Pschorr. I am a big fan of German lagers and like to brew Helles, Vienna, Oktoberfest, and Doppelbocks."
+      
+      - question: "Tell us about your brewery. What does your set-up look like?"
+        answer: "t's a two-tier HERMS set-up. I bought the burner stand at Academy a long time ago. I welded in a banjo burner on the boil kettle side to get up to temp faster. If I have time to pre-plan my brew day I will get all the water ready the night before and will use a heat stick in the hot liquor tank overnight to get it up to about 160F which saves some time in the morning. I have two different mash-tuns depending on what I am brewing, a 10-gallon for lower OG beers and a 15-gallon for big beers or if I am splitting a batch with a friend. I have been through a couple different mashtuns and am sold on Blichmann."
+      
+      - question: "Why do you homebrew?"
+        answer: "I really like beer and the brewing process. I like having creative control over the process and trying to duplicate a good beer over again, which isn't always easy to do."
 ---
