@@ -318,3 +318,29 @@ OG: 1.070
 FG: 1.020
 IBU: 24.8
 
+#### Ken’s Helles Export
+5 gallon batch
+
+Malt/Grain Bill
+11lb Pilsner malt
+
+1.4lb Munich malt
+
+Hop Addition
+1.5 oz Mandarina Bavaria @ 60 mins
+
+1 oz German Opal @ 15 mins
+
+Brew Day Process
+
+Single-step infusion mash at 150º for 60 mins. 
+
+
+
+Fermentation Process
+Ferment with German lager yeast.
+
+
+IBU: 38
+
+ABV: 5.9
