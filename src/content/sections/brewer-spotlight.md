@@ -87,9 +87,9 @@ spotlights:
       - question: "Why do you homebrew?"
         answer: "It is relaxing and I enjoy the product. We owned a gelato ice cream shop and still have a food truck and cater that and coffee/espresso drinks. Now that I am all-grain I can play with recipes much like I do with the gelato and adjust recipes to my liking."
 
-  - name: "Barry Forrest"
-    avatar: "/images/barry-tx-whiskey.png"
-    designation: "Homebrewer"
+  - name: "Silvia Eyster and Barry Forrest"
+    avatar: "/images/eyster-forrest-spotlight.jpeg"
+    designation: "Homebrewers"
     date: "January 5, 2023"
     questions:
       - question: Tell us about your first batch of homebrew.
@@ -106,6 +106,8 @@ spotlights:
         answer: There’s a dual element Spike Trio that runs off of 220v, there’s a Grainfather, and 2 orange coolers and a Spike kettle from the early days. 
       - question: Why do you homebrew?
         answer: As a recovering microbiologist, and at the encouragement of Silvia tasking me to find a hobby, I became interested in homebrewing. I researched Craiglist for equipment and started attending Dallas Homebrew Collective meetings to learn more about the craft. There’s a harmonious blend of science to it and creativity to it. Also it’s a good team building effort for my marriage. It’s also about the friendships and the camaraderie within the community.
+      - question: "What is your favorite part of being members of the Horsemen?"
+        answer: "\"Drinking with good people on Sundays\" - Barry"
       - question: Any other fun facts
         answer: We travel for beer! My Untapped currently has us at 290 breweries and over 5,000 unique beers. I recently brewed with Sam Calgione (Dogfish Head),  Vinny Cilurzo (Russian River), Neil Fisher (Weld Works), Jason Perkins (Allagash) and Doug Riser (Burial) at Brewer’s Retreat in Rehoboth Beach, DE. It was epic! Last year I brewed with Dick Cantwell (Elysian) and Silvia brewed with Shawn Lawson (Lawson’s Finest Liquids) and JC Tetreault(Trillium) at the Brewer’s Retreat at Russian River.
   - name: Chris Daily
