@@ -5,7 +5,7 @@ description: "this is meta description"
 date: 2025-02-25T05:00:00Z
 image: "/images/FrozenYeast.png"
 categories: ["Education"]
-author: "Greg Smith"
+author: "Gregory Smith"
 tags: ["yeast", "education"]
 draft: false
 ---

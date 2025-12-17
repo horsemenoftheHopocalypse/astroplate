@@ -19,4 +19,9 @@ social:
 
 ---
 
-lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostr navigation et dolore magna aliqua.
+After being involved peripherally with the club for a few years, Brian decided to take the plunge and join this motley group of the best damn home brewers full time. 
+
+He was been home brewing more than 2 decades, favorite styles tend to be British, but he loves everything we can make via fermentation…except NEIPA, that’s not real beer…
+
+I’m willing to help anyone with anything in the club, just ask. 
+#flytheflag 🏴‍☠️🏴‍☠️

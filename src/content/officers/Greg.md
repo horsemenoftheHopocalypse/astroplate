@@ -12,4 +12,8 @@ social:
 
 ---
 
-lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostr navigation et dolore magna aliqua.
+It was a dark time for humanity. Hope was low. Morale was lower. Then Gregory made beer. One batch at a time, civilization stabilized, conversations improved, and the world narrowly avoided collapse. He's not saying his beer saved the world — but he's not not saying that either. Some call it brewing. Others call it heroic intervention. History will decide.
+
+You’re welcome, Earth.
+
+Still waiting on the statue.

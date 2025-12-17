@@ -22,7 +22,8 @@ export async function getStaticPaths() {
 }
 
 const { officer } = Astro.props;
-const { title, social, meta_title, description, image } = officer.data;
+const { title, position, social, meta_title, description, image } =
+  officer.data;
 const { Content } = await render(officer);
 
 // get all posts by officerr
@@ -58,6 +59,7 @@ const postFilterByOfficer = posts.filter(
             )
           }
           <h1 class="h3 mb-6">{title}</h1>
+          <h3 class="h4 mb-6">{position}</h3>
           <div class="content">
             <Content />
           </div>
