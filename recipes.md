@@ -285,3 +285,36 @@ FG: 1.023
 IBU: 110
 SRM: 19
 
+
+#### Danielle’s I-35 Rocky Road Milk Stout
+5 gallon batch
+
+Malt/Grain Bill
+8 oz Pale Chocolate malt
+12 oz Caramel 80L
+1 lb Black Patent malt
+6.6 lb Light LME
+
+Hop Addition
+1 oz East Kent Golding @ 60 mins
+
+
+
+Adjuncts
+1 lb Hershey Cocoa Powder @ 15 mins
+
+1 lb Lactose @ 10 mins
+
+
+
+Brew Day Process
+Heat water to 160°F, steep grains for 30 minutes. Heat to boil and add extracts. Return to boil for 60 minutes, adding hops and adjuncts.
+
+Fermentation Process
+Ferment with Wyeast 1099: Whitbread Ale. In secondary, add 1 Tbsp of almond extract and 1 Tbsp of toasted marshmallow extract, to taste. Taste after a few days or a week to add more if needed. I ended up with 3 Tbsp of each.
+
+
+OG: 1.070
+FG: 1.020
+IBU: 24.8
+

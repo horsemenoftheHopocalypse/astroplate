@@ -242,12 +242,49 @@ spotlights:
         answer: "My favorite style to brew and drink is probably style 21 IPA, which has so much room for interesting variations. For example, I recently brewed my first Hazy IPA, and it was so fun planning three dry hop additions using sous vide magnets, suspending 33 ounces of hops under the top of the fermenter."
       
       - question: "Tell us about your brewery. What does your set-up look like?"
-        answer: "I stopped homebrewing in 1999 when our family moved from Washington to Fort Worth with my job transfer, but with my recent retirement I came back to brewing. In preparation, I framed in and closed off a storage area in our garage and built a little brewery inside to suit my needs. It has a plumbed sink with hot and cold water, 110 and 220-volt power outlets, a 35-gallon RO water system, an exhaust fan housed with a make-up air return and central air and heat. I brew with a 220-volt, 65-liter Brewzilla 3 in 1 system. I also have a 35-liter Brewzilla used mostly for sparge water. I ferment in Kegland Kegmenters of various sizes and Corny kegs, both 5 and 2.5 gallons in size. I have three chest freezers (7 cubic ft.). The set-up provides the option to ferment under pressure and transfer under pressure along the process.
-"
+        answer: "I stopped homebrewing in 1999 when our family moved from Washington to Fort Worth with my job transfer, but with my recent retirement I came back to brewing. In preparation, I framed in and closed off a storage area in our garage and built a little brewery inside to suit my needs. It has a plumbed sink with hot and cold water, 110 and 220-volt power outlets, a 35-gallon RO water system, an exhaust fan housed with a make-up air return and central air and heat. I brew with a 220-volt, 65-liter Brewzilla 3 in 1 system. I also have a 35-liter Brewzilla used mostly for sparge water. I ferment in Kegland Kegmenters of various sizes and Corny kegs, both 5 and 2.5 gallons in size. I have three chest freezers (7 cubic ft.). The set-up provides the option to ferment under pressure and transfer under pressure along the process."
       
       - question: "Why do you homebrew?"
         answer: "I brew for the fun and enjoyment of brewing. I like the challenges inherent in brewing. It’s difficult to make good beer, but when a batch turns out great, it feels so rewarding after all the effort expended in the process. I also really enjoy the social aspects of being a member in the Horsemen of the Hopocalypse. Our gatherings are such a great opportunity to talk about brewing while we share other aspects of our lives together."
   
+  - name: "Danielle Lawson"
+    avatar: "/images/Danielle-Lawson-spotlight.jpg"
+    designation: "Homebrewer"
+    date: "June 2, 2023"
+    questions:
+      - question: "Tell us about your first batch of homebrew. When did you start?"
+        answer: "The first thing I did was a five-gallon batch of mead that I split into single gallons in secondary to play with fun flavors. My husband had been brewing for a few years at this point, and was on his second batch of mead, so he helped me out a lot.
+        
+        The flavors I made were plum, 'pecan pie', apple and strawberry with rose petals. The pecan pie was probably the best one."
+      
+      - question: "What's your favorite beer you've ever brewed?"
+        answer: " It’s a tie.
+
+- **Big O Tatties**, a sweet potato casserole inspired Wee Heavy. I’d wanted to make a beer based on my aunt’s casserole recipe (before you ask, she makes hers with pecans, not marshmallows) and with the help of another homebrew Facebook group I’m in, I decided on a Scotch Ale for the base. It turned out to be accidentally smoked because my oven doesn’t work, so to caramelize the sweet potatoes I used our smoker. This was a neat addition for about two months, and then it went weird. 
+
+- **Plum Out of Control**, a plum pale ale, so named because when I added the plums to the secondary I roused the yeasties a bit too much and at around 4 a.m. the airlock came flying off and I was smacked in the face with plum from across my bedroom! This one was fun because in addition to the Cascade hops that the recipe (from The Homebrewers’ Recipe Guide) called for, I also added rose petals and heather tips. I also added champagne yeast, because I had some on hand, when the pale ale yeast seemed to have stalled in the primary. This all led to a light and bubbly pink beer that was perfect for floating the river."
+      
+      - question: "What about your biggest brew-fail?"
+        answer: "Thankfully the last one didn't become a fail, it was close though! I have to say my biggest fail was my attempt at watermelon mead. If you've tried to brew anything with watermelon then you know what I'm about to say. It started out smelling so good, until one day, it did not. Apparently watermelon rots faster than the yeasties can make alcohol to preserve it, and it went from heavenly to sickening so fast. I had looked at so many homebrew forums and YouTube videos before trying this, to see how much fruit I'd probably need per gallon, and not a single one warned me."
+      
+      - question: "What's your go-to commercial beer?"
+        answer: "Oh, that's tough. I could list my favorite styles for you but to keep it simple let's say I'm at Bull & Bush, I'm definitely going to start with a Smithwicks."
+      
+      - question: "What's in your fermenter now?"
+        answer: "Sadly, nothing. I haven't really had the time to brew in the last year or so. But I have a brew in mind for my next: I've been foraging dewberries and mulberries that grow in our yard for a couple years and I think with this year's crop I should have enough in my freezer to finally do it. I'm leaning towards a wheat ale using the berries. We also have a yucca plant that's blooming right now, if I can dry out the petals I might use that for the bittering. AND I want to set aside at least a gallon of it to do a wild fermentation (or use some of the juniper berries from our trees). Basically I want a beer that tastes like our yard during spring."
+      
+      - question: "What's your favorite BJCP style to brew? To drink?"
+        answer: "To brew? I'm not sure if I've made something that strictly adheres to their guidelines, lol. To drink? Probably an Irish Red. If a brewery has one on tap I'm getting it.
+"
+      
+      - question: "Tell us about your brewery. What does your set-up look like?"
+        answer: " It looks a lot like a storage room, a kitchen and/or my back porch, haha. All of our equipment and other goodies are in our storage room (which I can proudly say you can easily get in and out of now). If I'm doing a mead, wine, cider or an extract brew I'm in my kitchen, and if it's all-grain then we're set up out on the porch with my Clawhammer BIAB system. Sadly, it's only been used once so far because after I got it mine and my husband's work schedules sort of stopped cooperating and I'm still a bit intimidated by it to attempt a solo brew day."
+      
+      - question: "Why do you homebrew?"
+        answer: "As I mentioned many times, playing with flavors is my favorite. I look through cookbooks and how ingredients work together in a dish and think, \"I wonder if that would work in a beer.\"
+        
+        I am a creative by nature. I love to make things and to share them. Brewing is another way to do that."
+
   - name: "Stacy Myers"
     avatar: "/images/myers-spotlight.jpg"
     designation: "Homebrewer"
