@@ -188,6 +188,35 @@ spotlights:
       - question: "Why do you homebrew?"
         answer: "It gives me a creative outlet which is fun to share with others."
 
+  - name: "Stacy Myers"
+    avatar: "/images/myers-spotlight.jpg"
+    designation: "Homebrewer"
+    date: "September 3, 2022"
+    questions:
+      - question: "Tell us about your first batch of homebrew. When did you start?"
+        answer: "Wheat beer extract kit from the local homebrew store. Matt said I nailed the color and carbonation, and that was about it."
+      
+      - question: "What's your favorite beer you've ever brewed?"
+        answer: "I have many favorites including German pils, rauchbier, roggenbier, altbier, IPA, oatmeal stouts, wit, fruit beer, etc. Favorite will depend on time of year."
+      
+      - question: "What about your biggest brew-fail?"
+        answer: "Currently have a keg on tap with acetaldehyde. it happens. Not the first time and won't be the last. Stuck mashes suck too!"
+      
+      - question: "What's your go-to commercial beer?"
+        answer: "Once again, will be determined by time of year. Currently enjoying some of the Oktoberfest that recently hit the shelves"
+      
+      - question: "What's in your fermenter now?"
+        answer: "Kolsch and Oktoberfest"
+      
+      - question: "What's your favorite BJCP style to brew? To drink?"
+        answer: "Lite American lager because it is a challenge to brew. No place for any flaws to hide. To drink, see above."
+      
+      - question: "Tell us about your brewery. What does your set-up look like?"
+        answer: "Three keggle system with RIMS option, fly sparge and copper coil chiller with recirc arm."
+      
+      - question: "Why do you homebrew?"
+        answer: "For the enjoyment, social gatherings and good times. Entering competitions and winning is fun too!"
+
   - name: "Brian Schoolcraft"
     avatar: "/images/schooly-spotlight.jpeg"
     designation: "Homebrewer"

@@ -184,4 +184,41 @@ SRM: 4.3
 ABV: 4.7%
 
 
+#### Stacy’s The Big Shawn Mason
+“This Black IPA won third place at Bluebonnet and was brewed in honor of a past president of the Horsemen who passed away last year.” — Stacy
 
+10 gallon batch, all-grain
+
+Malt/Grain Bill
+22 lbs. UK Pale Malt (2 Row)
+4 lbs. Flaked Barley
+2 lbs. Chocolate Malt
+2 lbs. Midnight Wheat
+2 lbs. Special B Malt
+
+Hop Addition
+1 oz Magnum (12% AA) 90 min.
+1 oz Summit (17% AA) 75 min.
+1 oz Chinook (13% AA) 60 min.
+0.5 oz Magnum (12% AA) 45 min.
+1 oz Chinook (13% AA) 30 min.
+0.5 oz Magnum (12% AA) 15 min.
+2 oz Simcoe (13% AA) 1 min.
+2 oz Centennial (10% AA) Steep/Whirlpool
+1 oz Amallia (7% AA) dry hop, 3 days before bottling
+1 oz Columbus (Tomahawk) (14% AA) dry hop, 3 days before bottling
+
+
+Yeast
+2 packages of White Labs California Ale #WLP001
+
+Single Infusion Mash, Medium Body
+Mash in: Add 44 qt water @ 162.6° F to achieve 152° F and hold for 60 minutes.
+Sparge with 8.3 gallons water @ 168° F.
+Boil for 90 minutes following the hop schedule.
+
+OG: 1.080
+FG: 1.013
+IBU: 125.5
+SRM: 48
+ABV: 8.9%
