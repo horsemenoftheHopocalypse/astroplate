@@ -58,5 +58,5 @@ photos:
   - name: "Another Horsemen Stein!"
     alt-text: "Brian Street collects a stein for an extract brew"
     description: "Brian Street collects a stein for an extract brew"
-    image: "/images/street-stein.jpg"
+    image: "/images/street-stein2.jpg"
 ---
