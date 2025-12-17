@@ -159,6 +159,35 @@ spotlights:
       - question: "Why do you homebrew?"
         answer: "I love the mad science of it all. Not only am I making delicious beer that I can share with friends and family, but I get to be the “Doc Brown” behind the scenes. I get to develop my own recipes, tinkering all the time, and really customize the beers to my own tastes. While experimenting with recipes is a blast, and brewing even more fun…honestly, it’s also gratifying to get inebriated on beer that I made from water, barley, and hops in my own garage."
 
+  - name: "John Bates"
+    avatar: "/images/bates-spotlight.jpg"
+    designation: "Homebrewer"
+    date: "October 3, 2022"
+    questions:
+      - question: "Tell us about your first batch of homebrew. When did you start?"
+        answer: "My first batch was one gallon a version of Joe’s Ancient Orange Mead. Honey, water, yeast, one orange quartered, one cinnamon stick, four cloves. It wasn’t too bad but the cloves overpowered the mead. One day, I would like to repeat the mead but use the better mead processes."
+      
+      - question: "What's your favorite beer you've ever brewed?"
+        answer: "Rum barrel aged tropical stout. It was a style I never tasted so it was a complete chance."
+      
+      - question: "What about your biggest brew-fail?"
+        answer: "I attempted to heat pasteurized bottles of a sweet mead but waited too long before the pasteurization process. Every bottle was a very carbonated fountain upon opening."
+      
+      - question: "What's your go-to commercial beer?"
+        answer: "Weihenstephaner Helles"
+      
+      - question: "What's in your fermenter now?"
+        answer: "art Cherry Buckwheat Session Mead"
+      
+      - question: "What's your favorite BJCP style to brew? To drink?"
+        answer: "Anything German, British or mead"
+      
+      - question: "Tell us about your brewery. What does your set-up look like?"
+        answer: "Anvil Foundry, fermentation buckets and a freezer with temperature control as a fermentation chamber"
+      
+      - question: "Why do you homebrew?"
+        answer: "It gives me a creative outlet which is fun to share with others."
+
   - name: "Brian Schoolcraft"
     avatar: "/images/schooly-spotlight.jpeg"
     designation: "Homebrewer"

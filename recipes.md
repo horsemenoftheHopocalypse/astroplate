@@ -154,3 +154,34 @@ Mash at 156°F. Boil for 60 minutes.
 
 OG: 1.140
 
+#### John’s British Golden Ale
+“This was my first batch of all-grain brewing which took second place at the 2020 Bluebonnet Brew-Off.” — John Bates
+
+5 gallon batch, all-grain
+
+Malt/Grain Bill
+7 lbs Continental Pilsner
+2 lbs Marris Otter
+8 oz Caramel/Crystal 20L
+
+Hop Addition
+1.75 oz East Kent Golding (4.6% AA) 60 mins.
+.25 oz East Kent Golding (4.6 AA) 0 mins.
+.25 oz Cascade (5.5% AA) 0 mins.
+
+
+Yeast
+1 packet of S-04 Safale English Ale Yeast
+
+Single Infusion Mash, Medium Body
+Mash at 152° F and hold for 60 minutes.
+Boil for 60 minutes following the hop schedule.
+
+OG: 1.048
+FG: 1.012
+IBU: 28.5
+SRM: 4.3
+ABV: 4.7%
+
+
+
