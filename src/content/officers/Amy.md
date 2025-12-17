@@ -12,4 +12,4 @@ social:
 
 ---
 
-lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostr navigation et dolore magna aliqua.
+My love of beer started when it brought my husband and me together when we both volunteered at Rahr. With a lifelong passion for photography and a background in art and digital design, I’m proud to serve as our club historian. I document competitions, tastings, and events—preserving our shared memories and the evolution of our club. Cheers!🍻
