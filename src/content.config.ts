@@ -169,6 +169,33 @@ const photoGalleryCollection = defineCollection({
   }),
 });
 
+// Brewer Spotlight Section collection schema
+const brewerSpotlightSectionCollection = defineCollection({
+  loader: glob({
+    pattern: "brewer-spotlight.{md,mdx}",
+    base: "src/content/sections",
+  }),
+  schema: z.object({
+    enable: z.boolean(),
+    title: z.string(),
+    description: z.string(),
+    spotlights: z.array(
+      z.object({
+        name: z.string(),
+        avatar: z.string(),
+        designation: z.string(),
+        date: z.string(),
+        questions: z.array(
+          z.object({
+            question: z.string(),
+            answer: z.string(),
+          }),
+        ),
+      }),
+    ),
+  }),
+});
+
 // Export collections
 export const collections = {
   // Pages
@@ -183,4 +210,5 @@ export const collections = {
   ctaSection: ctaSectionCollection,
   testimonialSection: testimonialSectionCollection,
   imageGallarySection: photoGalleryCollection,
+  brewerSpotlightSection: brewerSpotlightSectionCollection,
 };
