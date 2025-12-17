@@ -35,6 +35,10 @@
           "url": "/tickets"
         },
         {
+          "name": "Brewer Spotlight",
+          "url": "/brewer-spotlight"
+        },
+        {
           "name": "Contact",
           "url": "/contact"
         },
