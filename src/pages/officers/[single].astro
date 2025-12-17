@@ -45,7 +45,7 @@ const postFilterByOfficer = posts.filter(
       <div
         class="row justify-center border-b border-border pb-14 dark:border-darkmode-border"
       >
-        <div class="text-center lg:col-4">
+        <div class="text-center lg:col-10">
           {
             image && (
               <ImageMod
@@ -60,7 +60,7 @@ const postFilterByOfficer = posts.filter(
           }
           <h1 class="h3 mb-6">{title}</h1>
           <h3 class="h4 mb-6">{position}</h3>
-          <div class="content">
+          <div class="content text-justify">
             <Content />
           </div>
           <Social source={social} className="social-icons" />

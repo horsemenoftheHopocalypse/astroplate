@@ -19,9 +19,11 @@ social:
 
 ---
 
-After being involved peripherally with the club for a few years, Brian decided to take the plunge and join this motley group of the best damn home brewers full time. 
 
-He was been home brewing more than 2 decades, favorite styles tend to be British, but he loves everything we can make via fermentation…except NEIPA, that’s not real beer…
+After being involved peripherally with the club for a few years, Brian decided to take the plunge and join this motley group of the best damn home brewers full time.
 
-I’m willing to help anyone with anything in the club, just ask. 
-#flytheflag 🏴‍☠️🏴‍☠️
+He has been home brewing more than 2 decades, favorite styles tend to be British, but he loves everything we can make via fermentation…except NEIPA, that’s not real beer…
+
+Brian is willing to help anyone with anything in the club, just ask.
+
+\#flytheflag 🏴‍☠️🏴‍☠️
