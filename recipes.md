@@ -453,3 +453,37 @@ Hop Addition
 1.25 oz Cascade @ 20 min.
 1 tsp irish moss @ 10 min.
 1 oz Cascade @ flameout
+
+#### Greg’s But It’s a Dry Hop IPL
+Malt/Grain Bill
+11 lb - 2-Row, Premium 2 °L
+1 lb 12 oz - Vienna Malt 3.5 °L
+1 lb - Caravienne Malt 16.8 °L
+8 oz - Rice Hulls 0 °L (3.4%)
+8 oz - Wheat Flaked 1.7 °L
+
+
+Hop Addition
+60 min - 0.5 oz - Magnum - 12%
+10 min - 1 oz - Centennial - 10%
+
+Hop Stand 20 min @ 176 °F 20 min
+2 oz - Centennial - 10%
+2 oz - Idaho #7 - 13.4%
+
+Dry Hops – 4 days
+2 oz - Centennial - 10%
+2 oz - Idaho #7 - 13.4%
+
+Yeast
+Fermentis Saflager Lager W-34/70
+
+ABV: 6.3%
+IBU: 53
+BU/GU: 0.94
+Color: 6 SRM
+Original Gravity: 1.057
+Final Gravity: 1.009
+Batch Size: 5.5 gal
+Boil Time: 60 min
+
