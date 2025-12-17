@@ -17,3 +17,5 @@ It was a dark time for humanity. Hope was low. Morale was lower. Then Gregory ma
 You’re welcome, Earth.
 
 Still waiting on the statue.
+
+Gregory started brewing in ‘96 and was basically a “solo” brewer until becoming active with Horsemen. The instant camaraderie, openness to sharing ideas, and willing to accept brewers of all levels were all big draws for him.
