@@ -6,8 +6,8 @@ import {
   LogLevel,
   OrdersController,
 } from "@paypal/paypal-server-sdk";
-import membershipsData from "../../src/config/memberships.json" assert { type: "json" };
-import eventsData from "../../src/config/events.json" assert { type: "json" };
+import membershipsData from "../../src/config/memberships.json" with { type: "json" };
+import eventsData from "../../src/config/events.json" with { type: "json" };
 
 const { PUBLIC_PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET } = process.env;
 

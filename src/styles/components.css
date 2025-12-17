@@ -168,3 +168,10 @@
   @apply prose-tr:border-border dark:prose-tr:border-darkmode-border;
   @apply prose-td:relative prose-td:z-10 prose-td:px-3 prose-td:py-[18px] dark:prose-td:text-darkmode-text;
 }
+
+/* brewer spotlight link styles */
+.brewer-spotlight-slider p a,
+.bg-light p a,
+.dark .bg-darkmode-light p a {
+  @apply text-primary dark:text-darkmode-primary underline underline-offset-2 font-medium transition-colors duration-200 hover:opacity-80;
+}

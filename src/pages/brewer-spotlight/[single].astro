@@ -2,7 +2,7 @@
 import ImageMod from "@/components/ImageMod.astro";
 import Base from "@/layouts/Base.astro";
 import { getListPage } from "@/lib/contentParser.astro";
-import { slugify } from "@/lib/utils/textConverter";
+import { slugify, markdownify } from "@/lib/utils/textConverter";
 
 // Get all static paths for brewer spotlights
 export async function getStaticPaths() {
@@ -65,9 +65,7 @@ const { name, avatar, designation, questions } = spotlight;
               questions.map((qa: any) => (
                 <div class="bg-light dark:bg-darkmode-light rounded-lg p-6">
                   <h3 class="h5 text-primary mb-4">Q: {qa.question}</h3>
-                  <p class="text-text dark:text-darkmode-text pl-4 border-l-4 border-primary">
-                    {qa.answer}
-                  </p>
+                  <p class="text-text dark:text-darkmode-text pl-4 border-l-4 border-primary" set:html={markdownify(qa.answer)} />
                 </div>
               ))
             }
