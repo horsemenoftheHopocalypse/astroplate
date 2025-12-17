@@ -5,7 +5,7 @@ description: "Making a healthy yeast starter"
 date: 2022-9-04T06:00:00Z
 image: "/images/yeast-starter.jpg"
 categories: ["Education"]
-author: "Michael Myers"
+authors: ["Michael Myers"]
 tags: ["yeast", "brew school", "education"]
 draft: false
 ---

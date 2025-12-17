@@ -5,7 +5,7 @@ description: "this is meta description"
 date: 2025-02-26T05:00:00Z
 image: "/images/recipedesign.png"
 categories: ["Education", "Recipe"]
-author: "Gregory Smith"
+authors: ["Gregory Smith"]
 tags: ["education", "recipe"]
 draft: false
 ---

@@ -5,7 +5,7 @@ description: "this is meta description"
 date: 2025-02-25T05:00:00Z
 image: "/images/cryohops.png"
 categories: ["Education"]
-author: "Gregory Smith"
+authors: ["Gregory Smith"]
 tags: ["hops", "education"]
 draft: false
 ---

@@ -5,7 +5,7 @@ description: "Style in Focus: Munich Helles"
 date: 2022-12-04T06:00:00Z
 image: "/images/munich-helles.jpg"
 categories: ["Education"]
-author: "Michael Myers"
+authors: ["Michael Myers"]
 tags: ["style focus", "brew school", "education"]
 draft: false
 ---

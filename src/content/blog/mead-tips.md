@@ -5,7 +5,7 @@ description: "Seven tips for your best batch of mead"
 date: 2023-05-07T06:00:00Z
 image: "/images/mead-tips.jpg"
 categories: ["Education"]
-author: "Charlie Scudder"
+authors: ["Charlie Scudder"]
 tags: ["mead", "brew school", "education"]
 draft: false
 ---

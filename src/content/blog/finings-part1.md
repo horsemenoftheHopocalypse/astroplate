@@ -5,7 +5,7 @@ description: "Beer Clarity and Finings, part one"
 date: 2022-12-04T06:00:00Z
 image: "/images/finings-part-2.jpeg"
 categories: ["Education"]
-author: "Michael Myers"
+authors: ["Michael Myers"]
 tags: ["finings", "brew school", "education"]
 draft: false
 ---

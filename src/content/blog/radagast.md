@@ -5,7 +5,7 @@ description: "The Horsemen of the Hopocalypse are the American Homebrewers Assoc
 date: 2023-07-07T06:00:00Z
 image: "/images/club-of-the-year.jpg"
 categories: ["Announcements"]
-author: "Charlie Scudder"
+authors: ["Charlie Scudder"]
 tags: ["Announcements"]
 draft: false
 ---

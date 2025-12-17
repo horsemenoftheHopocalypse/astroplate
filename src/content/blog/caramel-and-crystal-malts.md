@@ -5,7 +5,7 @@ description: "Caramel and Crystal Malts"
 date: 2022-10-04T06:00:00Z
 image: "/images/crystal-malts.jpg"
 categories: ["Education"]
-author: "Michael Myers"
+authors: ["Michael Myers"]
 tags: ["style focus", "brew school", "education"]
 draft: false
 ---
