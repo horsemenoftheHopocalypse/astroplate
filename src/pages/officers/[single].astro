@@ -26,7 +26,7 @@ const { title, position, social, meta_title, description, image } =
   officer.data;
 const { Content } = await render(officer);
 
-// get all posts by officer
+// get all posts by officerr
 const BLOG_FOLDER = "blog";
 const posts = await getSinglePage(BLOG_FOLDER);
 const postFilterByOfficer = posts.filter((post) => {

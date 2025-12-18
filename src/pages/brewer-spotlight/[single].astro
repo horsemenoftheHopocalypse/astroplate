@@ -3,7 +3,8 @@ import ImageMod from "@/components/ImageMod.astro";
 import Base from "@/layouts/Base.astro";
 import { getListPage } from "@/lib/contentParser.astro";
 import { slugify, markdownify } from "@/lib/utils/textConverter";
-
+import { getSinglePage } from "@/lib/contentParser.astro";
+import BlogCard from "@/components/BlogCard.astro";
 // Get all static paths for brewer spotlights
 export async function getStaticPaths() {
   const brewerSpotlight = await getListPage(
@@ -23,6 +24,14 @@ export async function getStaticPaths() {
 
 const { spotlight } = Astro.props;
 const { name, avatar, designation, questions } = spotlight;
+
+// get all posts by brewer
+const BLOG_FOLDER = "blog";
+const posts = await getSinglePage(BLOG_FOLDER);
+const postFilterByBrewer = posts.filter((post) => {
+  const authors = post.data.authors || [post.data.author];
+  return authors.some((author) => slugify(author) === slugify(name));
+});
 ---
 
 <Base
@@ -82,6 +91,19 @@ const { name, avatar, designation, questions } = spotlight;
               ← Back to Brewer Spotlights
             </a>
           </div>
+
+          {/* Blog Posts by Brewer */}
+          {
+            postFilterByBrewer.length > 0 && (
+              <div class="row justify-center pb-16 pt-14">
+                {postFilterByBrewer.map((post) => (
+                  <div class="mb-12 md:col-6 lg:col-4">
+                    <BlogCard data={post} />
+                  </div>
+                ))}
+              </div>
+            )
+          }
         </div>
       </div>
     </div>
