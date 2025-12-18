@@ -63,9 +63,14 @@ const { name, avatar, designation, questions } = spotlight;
           <div class="space-y-8 mb-16">
             {
               questions.map((qa: any) => (
-                <div class="bg-light dark:bg-darkmode-light rounded-lg p-6">
-                  <h3 class="h5 text-primary mb-4">Q: {qa.question}</h3>
-                  <p class="text-text dark:text-darkmode-text pl-4 border-l-4 border-primary" set:html={markdownify(qa.answer)} />
+                <div class="bg-body dark:bg-darkmode-body rounded-lg p-6 border border-border dark:border-darkmode-border">
+                  <h3 class="h5 text-primary mb-4 dark:text-darkmode-text">
+                    Q: {qa.question}
+                  </h3>
+                  <p
+                    class="text-text dark:text-darkmode-text pl-4 border-l-4 border-primary"
+                    set:html={markdownify(qa.answer)}
+                  />
                 </div>
               ))
             }
