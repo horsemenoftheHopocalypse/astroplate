@@ -76,8 +76,8 @@ const postFilterByBrewer = posts.filter((post) => {
                   <h3 class="h5 text-primary mb-4 dark:text-darkmode-text">
                     Q: {qa.question}
                   </h3>
-                  <p
-                    class="text-text dark:text-darkmode-text pl-4 border-l-4 border-primary"
+                  <div
+                    class="content text-text dark:text-darkmode-text pl-4 border-l-4 border-primary"
                     set:html={markdownify(qa.answer)}
                   />
                 </div>
