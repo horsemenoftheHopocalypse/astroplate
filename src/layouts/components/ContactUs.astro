@@ -1,6 +1,7 @@
 ---
 const { source, className } = Astro.props;
 import DynamicIcon from "@/helpers/DynamicIcon";
+import ImageMod from "./ImageMod.astro";
 ---
 
 <section class="section-sm false">
@@ -28,11 +29,12 @@ import DynamicIcon from "@/helpers/DynamicIcon";
         </a>
       </div>
       <div class="md:col-6 lg:col-5 mb-6 md:mb-0">
-        <img
+        <ImageMod
           src="/images/horsemen-of-the-hops-bluebonnet-brew-off_2.jpg"
           alt="Horsemen of the Hops Bluebonnet Brew Off"
-          width="800"
-          height="600"
+          width={576}
+          height={432}
+          format="webp"
         />
       </div>
     </div>
