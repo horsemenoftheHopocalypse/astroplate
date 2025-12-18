@@ -76,9 +76,15 @@ const Announcement: React.FC = () => {
       />
       <button
         onClick={handleClose}
-        className="absolute top-1/2 right-2 -translate-y-1/2 cursor-pointer flex items-center justify-center !w-7 !h-7 sm:!w-6 sm:!h-6 !min-w-0 border border-border dark:border-darkmode-border rounded-full text-lg sm:text-base hover:bg-light dark:hover:bg-darkmode-light transition-colors duration-200"
+        className="absolute top-1/2 right-2 -translate-y-1/2 cursor-pointer flex items-center justify-center border border-border dark:border-darkmode-border rounded-full text-lg sm:text-base hover:bg-light dark:hover:bg-darkmode-light transition-colors duration-200"
         aria-label="Close announcement"
-        style={{ width: '1.75rem', height: '1.75rem' }}
+        style={{
+          width: '1.75rem',
+          height: '1.75rem',
+          minWidth: '1.75rem',
+          minHeight: '1.75rem',
+          padding: 0
+        }}
       >
         &times;
       </button>
