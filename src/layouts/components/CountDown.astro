@@ -1,10 +1,19 @@
 ---
+import ImageMod from "./ImageMod.astro";
 const { image, title, date, link } = Astro.props;
 const eventDate = new Date(date).getTime();
 ---
 
 <div class="max-w-sm rounded text-center overflow-hidden shadow-lg">
-  <img class="w-full" src={image} alt={title} width="384" height="256" />
+  <ImageMod
+    class="w-full"
+    src={image}
+    alt={title}
+    width={576}
+    height={576}
+    format="webp"
+    loading="eager"
+  />
   <div class="px-6 py-4">
     <div class="font-bold text-xl mb-2">{title}</div>
     <div class="text-gray-700 text-base mb-4">
@@ -84,7 +93,17 @@ const eventDate = new Date(date).getTime();
     document.getElementById("seconds").textContent = seconds;
   }
 
-  // Update immediately and then every second
+  // Update immediately and then every second using requestAnimationFrame
   updateCountdown();
-  setInterval(updateCountdown, 1000);
+
+  let lastUpdate = Date.now();
+  function animate() {
+    const now = Date.now();
+    if (now - lastUpdate >= 1000) {
+      updateCountdown();
+      lastUpdate = now;
+    }
+    requestAnimationFrame(animate);
+  }
+  requestAnimationFrame(animate);
 </script>

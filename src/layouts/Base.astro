@@ -198,9 +198,9 @@ const { title, meta_title, description, image, noindex, canonical } =
     }
 
     <TwSizeIndicator />
-    <Announcement client:load />
+    <Announcement client:idle />
     <Header />
-    <SearchModal client:load />
+    <SearchModal client:idle />
     <main id="main-content">
       <slot />
     </main>
@@ -210,14 +210,16 @@ const { title, meta_title, description, image, noindex, canonical } =
     <script is:inline>
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {
-          navigator.serviceWorker
-            .register("/sw.js")
-            .then((registration) => {
-              console.log("Service Worker registered:", registration);
-            })
-            .catch((error) => {
-              console.log("Service Worker registration failed:", error);
-            });
+          setTimeout(() => {
+            navigator.serviceWorker
+              .register("/sw.js")
+              .then((registration) => {
+                console.log("Service Worker registered:", registration);
+              })
+              .catch((error) => {
+                console.log("Service Worker registration failed:", error);
+              });
+          }, 2000);
         });
       }
     </script>
