@@ -26,12 +26,13 @@ const { title, position, social, meta_title, description, image } =
   officer.data;
 const { Content } = await render(officer);
 
-// get all posts by officerr
+// get all posts by officer
 const BLOG_FOLDER = "blog";
 const posts = await getSinglePage(BLOG_FOLDER);
-const postFilterByOfficer = posts.filter(
-  (post) => slugify(post.data.author) === slugify(title),
-);
+const postFilterByOfficer = posts.filter((post) => {
+  const authors = post.data.authors || [post.data.author];
+  return authors.some((author) => slugify(author) === slugify(title));
+});
 ---
 
 <Base
