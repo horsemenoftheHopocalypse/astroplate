@@ -1,6 +1,6 @@
 ---
 title: Brian Street
-position: Seargent at Arms & Social Media Maven
+position: Sergeant at Arms & Social Media Maven
 sort: 5
 email: socials@horsemenofthehops.com
 image: "/images/brian-tx-whiskey.jpg"
