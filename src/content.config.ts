@@ -21,16 +21,16 @@ const blogCollection = defineCollection({
     description: z.string().optional(),
     date: z.date().optional(),
     image: z.string().optional(),
-    author: z.string().default("Admin"),
+    authors: z.array(z.string()).default(["Admin"]),
     categories: z.array(z.string()).default(["others"]),
     tags: z.array(z.string()).default(["others"]),
     draft: z.boolean().optional(),
   }),
 });
 
-// Author collection schema
-const authorsCollection = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "src/content/authors" }),
+// Officer collection schema
+const officersCollection = defineCollection({
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "src/content/officers" }),
   schema: z.object({
     ...commonFields,
     position: z.string().optional(),
@@ -169,12 +169,39 @@ const photoGalleryCollection = defineCollection({
   }),
 });
 
+// Brewer Spotlight Section collection schema
+const brewerSpotlightSectionCollection = defineCollection({
+  loader: glob({
+    pattern: "brewer-spotlight.{md,mdx}",
+    base: "src/content/sections",
+  }),
+  schema: z.object({
+    enable: z.boolean(),
+    title: z.string(),
+    description: z.string(),
+    spotlights: z.array(
+      z.object({
+        name: z.string(),
+        avatar: z.string(),
+        designation: z.string(),
+        date: z.string(),
+        questions: z.array(
+          z.object({
+            question: z.string(),
+            answer: z.string(),
+          }),
+        ),
+      }),
+    ),
+  }),
+});
+
 // Export collections
 export const collections = {
   // Pages
   homepage: homepageCollection,
   blog: blogCollection,
-  authors: authorsCollection,
+  officers: officersCollection,
   pages: pagesCollection,
   about: aboutCollection,
   contact: contactCollection,
@@ -183,4 +210,5 @@ export const collections = {
   ctaSection: ctaSectionCollection,
   testimonialSection: testimonialSectionCollection,
   imageGallarySection: photoGalleryCollection,
+  brewerSpotlightSection: brewerSpotlightSectionCollection,
 };

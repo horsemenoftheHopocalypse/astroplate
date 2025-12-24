@@ -14,7 +14,7 @@
     },
     {
       "name": "Officers",
-      "url": "/authors"
+      "url": "/officers"
     },
 
     {
@@ -33,6 +33,10 @@
         {
           "name": "Event Tickets",
           "url": "/tickets"
+        },
+        {
+          "name": "Brewer Spotlight",
+          "url": "/brewer-spotlight"
         },
         {
           "name": "Contact",

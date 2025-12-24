@@ -1,0 +1,111 @@
+---
+import ImageMod from "@/components/ImageMod.astro";
+import Base from "@/layouts/Base.astro";
+import { getListPage } from "@/lib/contentParser.astro";
+import { slugify, markdownify } from "@/lib/utils/textConverter";
+import { getSinglePage } from "@/lib/contentParser.astro";
+import BlogCard from "@/components/BlogCard.astro";
+// Get all static paths for brewer spotlights
+export async function getStaticPaths() {
+  const brewerSpotlight = await getListPage(
+    "brewerSpotlightSection",
+    "brewer-spotlight",
+  );
+
+  const paths = brewerSpotlight.data.spotlights.map((spotlight: any) => ({
+    params: {
+      single: slugify(spotlight.name),
+    },
+    props: { spotlight },
+  }));
+
+  return paths;
+}
+
+const { spotlight } = Astro.props;
+const { name, avatar, designation, questions } = spotlight;
+
+// get all posts by brewer
+const BLOG_FOLDER = "blog";
+const posts = await getSinglePage(BLOG_FOLDER);
+const postFilterByBrewer = posts.filter((post) => {
+  const authors = post.data.authors || [post.data.author];
+  return authors.some((author) => slugify(author) === slugify(name));
+});
+---
+
+<Base
+  title={`${name} - Brewer Spotlight`}
+  meta_title={`${name} - Brewer Spotlight`}
+  description={`Get to know ${name} through their brewing journey.`}
+>
+  <section class="section-sm pb-0">
+    <div class="container">
+      <div class="row justify-center">
+        <div class="lg:col-10">
+          {/* Header */}
+          <div
+            class="text-center mb-12 pb-8 border-b border-border dark:border-darkmode-border"
+          >
+            {
+              avatar && (
+                <ImageMod
+                  src={avatar}
+                  class="mx-auto mb-6 rounded-full"
+                  height={150}
+                  width={150}
+                  alt={name}
+                  format="webp"
+                />
+              )
+            }
+            <h1 class="h2 mb-4">{name}</h1>
+            <p class="text-lg text-text-dark dark:text-white">{designation}</p>
+            <p
+              class="text-sm text-text-light dark:text-darkmode-text-light mt-2"
+            >
+              Interview Date: {spotlight.date}
+            </p>
+          </div>
+
+          {/* Q&A Section */}
+          <div class="space-y-8 mb-16">
+            {
+              questions.map((qa: any) => (
+                <div class="bg-body dark:bg-darkmode-body rounded-lg p-6 border border-border dark:border-darkmode-border">
+                  <h3 class="h5 text-primary mb-4 dark:text-darkmode-text">
+                    Q: {qa.question}
+                  </h3>
+                  <div
+                    class="content text-text dark:text-darkmode-text pl-4 border-l-4 border-primary"
+                    set:html={markdownify(qa.answer)}
+                  />
+                </div>
+              ))
+            }
+          </div>
+
+          {/* Back Link */}
+          <div class="text-center mb-12">
+            <a href="/#brewer-spotlight" class="btn btn-outline-primary">
+              ← Back to Brewer Spotlights
+            </a>
+          </div>
+
+          {/* Blog Posts by Brewer */}
+          {
+            postFilterByBrewer.length > 0 && (
+              <div class="row justify-center pb-16 pt-14">
+                {postFilterByBrewer.map((post) => (
+                  <div class="mb-12 md:col-6 lg:col-4">
+                    <BlogCard data={post} />
+                  </div>
+                ))}
+              </div>
+            )
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

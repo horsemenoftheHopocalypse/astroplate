@@ -1,0 +1,161 @@
+---
+import { markdownify, slugify } from "@/lib/utils/textConverter";
+import ImageMod from "@/components/ImageMod.astro";
+const { brewerSpotlight } = Astro.props;
+---
+
+{
+  brewerSpotlight.data.enable && (
+    <section
+      id="brewer-spotlight"
+      class="section bg-light dark:bg-darkmode-light pt-4 pb-8"
+    >
+      <div class="container">
+        <div class="row">
+          <div class="mx-auto mb-12 text-center md:col-10 lg:col-8 xl:col-6">
+            <h2
+              set:html={markdownify(brewerSpotlight.data.title)}
+              class="mb-4"
+            />
+            <p set:html={markdownify(brewerSpotlight.data.description)} />
+          </div>
+          <div class="col-12">
+            <div class="swiper brewer-spotlight-slider">
+              <div class="swiper-wrapper">
+                {brewerSpotlight.data.spotlights.map((item: any) => (
+                  <div class="swiper-slide">
+                    <div class="rounded-lg bg-body dark:bg-darkmode-body px-7 py-10 h-[500px] flex flex-col">
+                      {/* Header with Avatar and Name */}
+                      <div class="flex items-center mb-6">
+                        <div class="text-text-dark dark:text-white">
+                          <ImageMod
+                            height={80}
+                            width={80}
+                            class="rounded-full"
+                            src={item.avatar}
+                            alt={item.name}
+                            format="webp"
+                          />
+                        </div>
+                        <div class="ml-4">
+                          <a href={`/brewer-spotlight/${slugify(item.name)}`}>
+                            <h3
+                              set:text={item.name}
+                              class="h4 font-primary font-semibold hover:text-primary transition-colors"
+                            />
+                          </a>
+                          <p
+                            set:text={item.designation}
+                            class="text-text-dark dark:text-white"
+                          />
+                          <p class="text-sm text-text-light dark:text-darkmode-text-light">
+                            {item.date}
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Q&A Section - Limited to 3 questions */}
+                      <div class="space-y-4 flex-1 overflow-hidden">
+                        {item.questions.slice(0, 3).map((qa: any) => (
+                          <div>
+                            <p class="font-semibold text-primary mb-1 text-sm">
+                              Q: {qa.question}
+                            </p>
+                            <p
+                              class="text-text dark:text-darkmode-text pl-4 text-sm line-clamp-2"
+                              set:html={markdownify(qa.answer)}
+                            />
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Read More Link */}
+                      <div class="mt-4 pt-4 border-t border-border dark:border-darkmode-border">
+                        <a
+                          href={`/brewer-spotlight/${slugify(item.name)}`}
+                          class="text-primary hover:underline text-sm font-semibold"
+                        >
+                          Read Full Interview →
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Navigation buttons */}
+              <div class="swiper-button-prev" />
+              <div class="swiper-button-next" />
+
+              <div class="brewer-spotlight-slider-pagination mt-9 flex items-center justify-center text-center" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+<script>
+  import { Swiper } from "swiper";
+  import "swiper/css";
+  import "swiper/css/pagination";
+  import "swiper/css/navigation";
+  import { Autoplay, Pagination, Navigation } from "swiper/modules";
+
+  // astro:page-load event is fired when the page is loaded
+  document.addEventListener("astro:page-load", () => {
+    new Swiper(".brewer-spotlight-slider", {
+      modules: [Pagination, Autoplay, Navigation],
+      spaceBetween: 24,
+      loop: true,
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false,
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+      pagination: {
+        el: ".brewer-spotlight-slider-pagination",
+        type: "bullets",
+        clickable: true,
+      },
+      breakpoints: {
+        768: {
+          slidesPerView: 2,
+        },
+        992: {
+          slidesPerView: 3,
+        },
+      },
+    });
+  });
+</script>
+
+<style is:global>
+  .brewer-spotlight-slider-pagination .swiper-pagination-bullet {
+    width: 14px !important;
+    height: 14px !important;
+    background-color: #666 !important;
+    opacity: 1 !important;
+    border: 2px solid #333 !important;
+    margin: 0 6px !important;
+  }
+
+  .brewer-spotlight-slider-pagination .swiper-pagination-bullet-active {
+    background-color: var(--color-primary) !important;
+    border-color: var(--color-primary) !important;
+  }
+
+  .dark .brewer-spotlight-slider-pagination .swiper-pagination-bullet {
+    background-color: #999 !important;
+    border: 2px solid #fff !important;
+  }
+
+  .dark .brewer-spotlight-slider-pagination .swiper-pagination-bullet-active {
+    background-color: var(--color-darkmode-primary) !important;
+    border-color: var(--color-darkmode-primary) !important;
+  }
+</style>

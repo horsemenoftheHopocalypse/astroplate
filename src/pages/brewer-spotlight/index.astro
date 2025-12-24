@@ -1,0 +1,62 @@
+---
+import Base from "@/layouts/Base.astro";
+import { getListPage } from "@/lib/contentParser.astro";
+import PageHeader from "@/partials/PageHeader.astro";
+import ImageMod from "@/components/ImageMod.astro";
+import { slugify } from "@/lib/utils/textConverter";
+
+const brewerSpotlight = await getListPage(
+  "brewerSpotlightSection",
+  "brewer-spotlight",
+);
+const { title, description, spotlights } = brewerSpotlight.data;
+
+// Sort spotlights by last name
+const sortedSpotlights = [...spotlights].sort((a: any, b: any) => {
+  const lastNameA = a.name.split(" ").pop()?.toLowerCase() || "";
+  const lastNameB = b.name.split(" ").pop()?.toLowerCase() || "";
+  return lastNameA.localeCompare(lastNameB);
+});
+---
+
+<Base title={title} meta_title={title} description={description}>
+  <PageHeader title={title} />
+  <section class="section-sm pb-0 pt-0">
+    <div class="container">
+      <div class="row justify-center mb-12">
+        <div class="lg:col-8 text-center">
+          <p class="text-lg">{description}</p>
+        </div>
+      </div>
+      <div class="row justify-center">
+        {
+          sortedSpotlights.map((spotlight: any) => (
+            <div class="mb-14 md:col-6 lg:col-4">
+              <a href={`/brewer-spotlight/${slugify(spotlight.name)}`}>
+                <div class="h-full rounded-lg bg-light dark:bg-darkmode-light p-8 text-center transition-all hover:shadow-lg">
+                  {spotlight.avatar && (
+                    <ImageMod
+                      class="mx-auto mb-6 rounded-full"
+                      src={spotlight.avatar}
+                      alt={spotlight.name}
+                      width={150}
+                      height={150}
+                      format="webp"
+                    />
+                  )}
+                  <h3 class="h4 mb-2">{spotlight.name}</h3>
+                  <p class="text-text-dark dark:text-white mb-2">
+                    {spotlight.designation}
+                  </p>
+                  <p class="text-sm text-text-light dark:text-darkmode-text-light">
+                    {spotlight.date}
+                  </p>
+                </div>
+              </a>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Base>

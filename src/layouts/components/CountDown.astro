@@ -1,10 +1,19 @@
 ---
+import ImageMod from "./ImageMod.astro";
 const { image, title, date, link } = Astro.props;
 const eventDate = new Date(date).getTime();
 ---
 
 <div class="max-w-sm rounded text-center overflow-hidden shadow-lg">
-  <img class="w-full" src={image} alt={title} />
+  <ImageMod
+    class="w-full"
+    src={image}
+    alt={title}
+    width={576}
+    height={576}
+    format="webp"
+    loading="eager"
+  />
   <div class="px-6 py-4">
     <div class="font-bold text-xl mb-2">{title}</div>
     <div class="text-gray-700 text-base mb-4">
@@ -27,11 +36,33 @@ const eventDate = new Date(date).getTime();
         </div>
       </div>
       <p class="text-sm mt-2">
-        Event Date: {date.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} at {date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZoneName: 'short' })}
+        Event Date: {
+          date.toLocaleDateString("en-US", {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })
+        } at {
+          date.toLocaleTimeString("en-US", {
+            hour: "numeric",
+            minute: "2-digit",
+            timeZoneName: "short",
+          })
+        }
       </p>
-      {link && (
-        <a href={link} target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">More Info</a>
-      )}
+      {
+        link && (
+          <a
+            href={link}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-blue-600 hover:underline"
+          >
+            Bluebonnet Brewoff
+          </a>
+        )
+      }
     </div>
   </div>
 </div>
@@ -42,25 +73,37 @@ const eventDate = new Date(date).getTime();
     const distance = eventDate - now;
 
     if (distance < 0) {
-      document.getElementById('days').textContent = '0';
-      document.getElementById('hours').textContent = '0';
-      document.getElementById('minutes').textContent = '0';
-      document.getElementById('seconds').textContent = '0';
+      document.getElementById("days").textContent = "0";
+      document.getElementById("hours").textContent = "0";
+      document.getElementById("minutes").textContent = "0";
+      document.getElementById("seconds").textContent = "0";
       return;
     }
 
     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const hours = Math.floor(
+      (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
+    );
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    document.getElementById('days').textContent = days;
-    document.getElementById('hours').textContent = hours;
-    document.getElementById('minutes').textContent = minutes;
-    document.getElementById('seconds').textContent = seconds;
+    document.getElementById("days").textContent = days;
+    document.getElementById("hours").textContent = hours;
+    document.getElementById("minutes").textContent = minutes;
+    document.getElementById("seconds").textContent = seconds;
   }
 
-  // Update immediately and then every second
+  // Update immediately and then every second using requestAnimationFrame
   updateCountdown();
-  setInterval(updateCountdown, 1000);
+
+  let lastUpdate = Date.now();
+  function animate() {
+    const now = Date.now();
+    if (now - lastUpdate >= 1000) {
+      updateCountdown();
+      lastUpdate = now;
+    }
+    requestAnimationFrame(animate);
+  }
+  requestAnimationFrame(animate);
 </script>

@@ -1,6 +1,15 @@
 import { slug } from "github-slugger";
 import { marked } from "marked";
 
+// Configure marked to open links in new tab
+const renderer = new marked.Renderer();
+const originalLinkRenderer = renderer.link.bind(renderer);
+renderer.link = (href, title, text) => {
+  const html = originalLinkRenderer(href, title, text);
+  return html.replace(/^<a /, '<a target="_blank" rel="noopener noreferrer" ');
+};
+marked.setOptions({ renderer });
+
 // slugify
 export const slugify = (content: string) => {
   return slug(content);

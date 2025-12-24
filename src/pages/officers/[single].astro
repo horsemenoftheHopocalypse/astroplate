@@ -1,0 +1,82 @@
+---
+import BlogCard from "@/components/BlogCard.astro";
+import ImageMod from "@/components/ImageMod.astro";
+import Social from "@/components/Social.astro";
+import Base from "@/layouts/Base.astro";
+import { getSinglePage } from "@/lib/contentParser.astro";
+import { slugify } from "@/lib/utils/textConverter";
+import { render } from "astro:content";
+
+// get all static paths for officers
+export async function getStaticPaths() {
+  const COLLECTION_FOLDER = "officers";
+  const officers = await getSinglePage(COLLECTION_FOLDER);
+
+  const paths = officers.map((officer) => ({
+    params: {
+      single: officer.id,
+    },
+    props: { officer },
+  }));
+  return paths;
+}
+
+const { officer } = Astro.props;
+const { title, position, social, meta_title, description, image } =
+  officer.data;
+const { Content } = await render(officer);
+
+// get all posts by officerr
+const BLOG_FOLDER = "blog";
+const posts = await getSinglePage(BLOG_FOLDER);
+const postFilterByOfficer = posts.filter((post) => {
+  const authors = post.data.authors || [post.data.author];
+  return authors.some((author) => slugify(author) === slugify(title));
+});
+---
+
+<Base
+  title={title}
+  meta_title={meta_title}
+  description={description}
+  image={image}
+>
+  <section class="section-sm pb-0">
+    <div class="container">
+      <div
+        class="row justify-center border-b border-border pb-14 dark:border-darkmode-border"
+      >
+        <div class="text-center lg:col-10">
+          {
+            image && (
+              <ImageMod
+                src={image}
+                class="mx-auto mb-10 rounded"
+                height={200}
+                width={200}
+                alt={title}
+                format="webp"
+              />
+            )
+          }
+          <h1 class="h3 mb-6">{title}</h1>
+          <h3 class="h4 mb-6">{position}</h3>
+          <div class="content text-justify">
+            <Content />
+          </div>
+          <Social source={social} className="social-icons" />
+        </div>
+      </div>
+
+      <div class="row justify-center pb-16 pt-14">
+        {
+          postFilterByOfficer.map((post) => (
+            <div class="mb-12 md:col-6 lg:col-4">
+              <BlogCard data={post} />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Base>

@@ -39,7 +39,7 @@ function updateCartDisplay() {
     <div class="cart-item flex flex-col sm:flex-row sm:justify-between sm:items-center py-3 border-b gap-2">
       <div class="flex-1 min-w-0 pr-2">
         <h4 class="font-semibold text-sm">${item.name}</h4>
-        <p class="text-xs text-gray-600">$${item.price.toFixed(2)} each</p>
+        <p class="text-sm text-gray-600">$${item.price.toFixed(2)} each</p>
       </div>
       <div class="flex items-center gap-2 shrink-0">
         <div class="flex items-center gap-1">
