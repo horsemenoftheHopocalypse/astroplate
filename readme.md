@@ -2,6 +2,9 @@
 
 <p align=center>Astroplate is a free starter template built with Astro, TailwindCSS & TypeScript, providing everything you need to jumpstart your Astro project and save valuable time.</p>
 
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/b55d82d7-6e90-471f-99c8-01b96502aa11/deploy-status)](https://app.netlify.com/projects/quiet-sfogliatella-645bd2/deploys)
+
 <p align=center>Made with ♥ by <a href="https://zeon.studio/">Zeon Studio</a></p>
 
 <p align=center> If you find this project useful, please give it a ⭐ to show your support. </p>

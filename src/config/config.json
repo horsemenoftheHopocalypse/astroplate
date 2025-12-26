@@ -1,7 +1,7 @@
 {
   "site": {
     "title": "Horsemen of the Hopocalypse",
-    "base_url": "https://astro.horsemenofthehops.com",
+    "base_url": "https://horsemenofthehops.com",
     "base_path": "/",
     "trailing_slash": false,
     "favicon": "/images/cropped-HorsemenLogo-favicon-01.png",
