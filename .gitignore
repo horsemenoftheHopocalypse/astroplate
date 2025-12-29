@@ -16,7 +16,7 @@ package-lock.json
 
 
 # environment variables
-.env
+.env*
 .env.production
 .env.development
 
