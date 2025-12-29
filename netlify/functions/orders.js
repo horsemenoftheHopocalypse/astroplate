@@ -10,6 +10,8 @@ import { readFileSync } from "fs";
 import { join } from "path";
 import { cwd } from "process";
 
+console.log('=== ORDERS MODULE LOADED ===');
+
 let membershipsData, eventsData, priceMap, client, ordersController;
 
 function initializePayPal() {
