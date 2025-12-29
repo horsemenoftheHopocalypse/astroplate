@@ -6,66 +6,121 @@ import {
   LogLevel,
   OrdersController,
 } from "@paypal/paypal-server-sdk";
-import membershipsData from "../../src/config/memberships.json" with { type: "json" };
-import eventsData from "../../src/config/events.json" with { type: "json" };
+import { readFileSync } from "fs";
+import { join } from "path";
+import { cwd } from "process";
 
-const { PUBLIC_PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET, CONTEXT } = process.env;
+console.log('=== ORDERS MODULE LOADED ===');
 
-// Validate credentials are present
-if (!PUBLIC_PAYPAL_CLIENT_ID || !PAYPAL_CLIENT_SECRET) {
-  console.error('Missing PayPal credentials:', {
-    hasClientId: !!PUBLIC_PAYPAL_CLIENT_ID,
-    hasSecret: !!PAYPAL_CLIENT_SECRET,
-    context: CONTEXT
-  });
+let membershipsData, eventsData, priceMap, client, ordersController;
+
+function initializePayPal() {
+  if (client) return; // Already initialized
+
+  try {
+    console.log('Initializing PayPal...');
+    console.log('cwd:', cwd());
+
+    // Try multiple path strategies - in Netlify deployment, files may be in dist or root
+    const possiblePaths = [
+      join(cwd(), "src/config/memberships.json"),
+      join(cwd(), "../../src/config/memberships.json"),
+    ];
+
+    let membershipsPath;
+    let eventsPath;
+
+    // Find the correct path
+    for (const path of possiblePaths) {
+      try {
+        readFileSync(path, "utf-8");
+        membershipsPath = path;
+        eventsPath = path.replace("memberships.json", "events.json");
+        console.log(`Found files at: ${path}`);
+        break;
+      } catch (error) {
+        console.log(`Path not found: ${path}`);
+        continue;
+      }
+    }
+
+    if (!membershipsPath) {
+      throw new Error(`Could not find memberships.json. Tried paths: ${possiblePaths.join(', ')}. cwd: ${cwd()}`);
+    }
+
+    console.log('Loading memberships from:', membershipsPath);
+    console.log('Loading events from:', eventsPath);
+
+    membershipsData = JSON.parse(
+      readFileSync(membershipsPath, "utf-8")
+    );
+    eventsData = JSON.parse(
+      readFileSync(eventsPath, "utf-8")
+    );
+
+    const { PUBLIC_PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET, CONTEXT } = process.env;
+
+    // Validate credentials are present
+    if (!PUBLIC_PAYPAL_CLIENT_ID || !PAYPAL_CLIENT_SECRET) {
+      throw new Error('Missing PayPal credentials');
+    }
+
+    // Determine PayPal environment:
+    // - Production context: use Production
+    // - Everything else (dev, branch-deploy, deploy-preview): use Sandbox
+    const isProduction = CONTEXT === 'production';
+    const paypalEnvironment = isProduction ? Environment.Production : Environment.Sandbox;
+    const paypalBaseUrl = isProduction ? 'https://api-m.paypal.com' : 'https://api-m.sandbox.paypal.com';
+
+    console.log(`PayPal Environment: ${isProduction ? 'Production' : 'Sandbox'} (Netlify context: ${CONTEXT || 'local'})`);
+    console.log(`PayPal API Base URL: ${paypalBaseUrl}`);
+
+    // Create a price lookup map
+    priceMap = new Map();
+
+    // Add memberships to price map
+    membershipsData.memberships.forEach((membership) => {
+      priceMap.set(membership.name, {
+        price: membership.price,
+        type: "membership",
+        id: membership.id,
+      });
+    });
+
+    // Add events to price map (append " Ticket" to match cart item names)
+    eventsData.events.forEach((event) => {
+      priceMap.set(`${event.name} Ticket`, {
+        price: event.price,
+        type: "event",
+        id: event.id,
+      });
+    });
+
+    client = new Client({
+      clientCredentialsAuthCredentials: {
+        oAuthClientId: PUBLIC_PAYPAL_CLIENT_ID,
+        oAuthClientSecret: PAYPAL_CLIENT_SECRET,
+      },
+      timeout: 0,
+      environment: paypalEnvironment,
+      logging: {
+        logLevel: LogLevel.Info,
+        logRequest: {
+          logBody: true,
+        },
+        logResponse: {
+          logHeaders: true,
+        },
+      },
+    });
+
+    ordersController = new OrdersController(client);
+    console.log('PayPal initialized successfully');
+  } catch (error) {
+    console.error('Failed to initialize PayPal:', error);
+    throw error;
+  }
 }
-
-// Determine environment based on Netlify context
-// Use production for production deploys, sandbox for everything else
-const paypalEnvironment = CONTEXT === 'production' ? Environment.Production : Environment.Sandbox;
-
-console.log(`PayPal Environment: ${CONTEXT === 'production' ? 'Production' : 'Sandbox'} (Netlify context: ${CONTEXT})`);
-
-// Create a price lookup map
-const priceMap = new Map();
-
-// Add memberships to price map
-membershipsData.memberships.forEach((membership) => {
-  priceMap.set(membership.name, {
-    price: membership.price,
-    type: "membership",
-    id: membership.id,
-  });
-});
-
-// Add events to price map (append " Ticket" to match cart item names)
-eventsData.events.forEach((event) => {
-  priceMap.set(`${event.name} Ticket`, {
-    price: event.price,
-    type: "event",
-    id: event.id,
-  });
-});
-
-const client = new Client({
-  clientCredentialsAuthCredentials: {
-    oAuthClientId: PUBLIC_PAYPAL_CLIENT_ID,
-    oAuthClientSecret: PAYPAL_CLIENT_SECRET,
-  },
-  timeout: 0,
-  environment: paypalEnvironment,
-  logging: {
-    logLevel: LogLevel.Info,
-    logRequest: {
-      logBody: true,
-    },
-    logResponse: {
-      logHeaders: true,
-    },
-  },
-});
-
-const ordersController = new OrdersController(client);
 
 /**
  * Create an order to start the transaction.
@@ -167,33 +222,48 @@ const captureOrder = async (orderID) => {
 };
 
 export const handler = async (event) => {
-  // Handle CORS
-  const headers = {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Headers": "Content-Type",
-    "Access-Control-Allow-Methods": "POST, OPTIONS",
-    "Content-Type": "application/json",
+  const debugInfo = {
+    context: process.env.CONTEXT,
+    hasClientId: !!process.env.PUBLIC_PAYPAL_CLIENT_ID,
+    hasSecret: !!process.env.PAYPAL_CLIENT_SECRET,
+    timestamp: new Date().toISOString()
   };
 
-  // Handle preflight
-  if (event.httpMethod === "OPTIONS") {
-    return {
-      statusCode: 200,
-      headers,
-      body: "",
-    };
-  }
-
-  if (event.httpMethod !== "POST") {
-    return {
-      statusCode: 405,
-      headers,
-      body: JSON.stringify({ error: "Method not allowed" }),
-    };
-  }
-
   try {
-    console.log("Event path:", event.path);
+    console.log('Handler invoked');
+
+    // Handle CORS
+    const headers = {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Headers": "Content-Type",
+      "Access-Control-Allow-Methods": "POST, OPTIONS",
+      "Content-Type": "application/json",
+    };
+
+    // Handle preflight
+    if (event.httpMethod === "OPTIONS") {
+      return {
+        statusCode: 200,
+        headers,
+        body: "",
+      };
+    }
+
+    if (event.httpMethod !== "POST") {
+      return {
+        statusCode: 405,
+        headers,
+        body: JSON.stringify({ error: "Method not allowed" }),
+      };
+    }
+
+    // Initialize PayPal on first request
+    initializePayPal();
+
+    const isProduction = process.env.CONTEXT === 'production';
+    debugInfo.environment = isProduction ? 'Production' : 'Sandbox';
+    debugInfo.baseUrl = isProduction ? 'https://api-m.paypal.com' : 'https://api-m.sandbox.paypal.com';
+    debugInfo.path = event.path;
 
     // Check if this is a capture request: /.netlify/functions/orders/{orderID}/capture
     const pathParts = event.path.split("/").filter(p => p);
@@ -202,50 +272,66 @@ export const handler = async (event) => {
     if (isCaptureRequest) {
       // Extract orderID: path is like /.netlify/functions/orders/{orderID}/capture
       const orderID = pathParts[pathParts.length - 2];
-      console.log("Capturing order:", orderID);
+      debugInfo.action = 'capture';
+      debugInfo.orderId = orderID;
 
       if (!orderID || orderID === "orders") {
         return {
           statusCode: 400,
           headers,
-          body: JSON.stringify({ error: "Order ID is required", path: event.path }),
+          body: JSON.stringify({ error: "Order ID is required", path: event.path, debug: debugInfo }),
         };
       }
 
       const { jsonResponse, httpStatusCode } = await captureOrder(orderID);
 
+      const response = typeof jsonResponse === 'object' ? { ...jsonResponse, debug: debugInfo } : { result: jsonResponse, debug: debugInfo };
       return {
         statusCode: httpStatusCode,
         headers,
-        body: JSON.stringify(jsonResponse),
+        body: JSON.stringify(response),
       };
     } else {
       // Create order
-      console.log("Creating order");
+      debugInfo.action = 'create';
       const { cart } = JSON.parse(event.body || "{}");
       const { jsonResponse, httpStatusCode } = await createOrder(cart);
 
+      const response = typeof jsonResponse === 'object' ? { ...jsonResponse, debug: debugInfo } : { result: jsonResponse, debug: debugInfo };
       return {
         statusCode: httpStatusCode,
         headers,
-        body: JSON.stringify(jsonResponse),
+        body: JSON.stringify(response),
       };
     }
   } catch (error) {
-    console.error("PayPal API error:", error);
+    debugInfo.error = error.message;
+    debugInfo.errorType = error.constructor.name;
+
+    const headers = {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Headers": "Content-Type",
+      "Access-Control-Allow-Methods": "POST, OPTIONS",
+      "Content-Type": "application/json",
+    };
 
     if (error instanceof ApiError) {
       return {
         statusCode: error.statusCode || 500,
         headers,
-        body: JSON.stringify({ error: error.message }),
+        body: JSON.stringify({ error: error.message, debug: debugInfo }),
       };
     }
 
     return {
       statusCode: 500,
       headers,
-      body: JSON.stringify({ error: "Failed to process PayPal request" }),
+      body: JSON.stringify({
+        error: "Failed to process PayPal request",
+        message: error.message,
+        type: error.constructor.name,
+        debug: debugInfo
+      }),
     };
   }
 };

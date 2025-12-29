@@ -3,6 +3,11 @@ command = "yarn build"
 functions = "netlify/functions"
 publish = "dist"
 
+[functions]
+external_node_modules = ["@paypal/paypal-server-sdk"]
+included_files = ["src/config/*.json"]
+node_bundler = "esbuild"
+
 [dev]
 command = "yarn dev:astro"
 functions = "netlify/functions"
