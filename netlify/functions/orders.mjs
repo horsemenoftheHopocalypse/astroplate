@@ -7,18 +7,8 @@ import {
   OrdersController,
 } from "@paypal/paypal-server-sdk";
 import { readFileSync } from "fs";
-import { fileURLToPath } from "url";
-import { dirname, join, resolve } from "path";
+import { join } from "path";
 import { cwd } from "process";
-
-// Use process.cwd() as fallback for bundled environments
-let __dirname;
-try {
-  const __filename = fileURLToPath(import.meta.url);
-  __dirname = dirname(__filename);
-} catch {
-  __dirname = cwd();
-}
 
 let membershipsData, eventsData, priceMap, client, ordersController;
 
@@ -27,16 +17,12 @@ function initializePayPal() {
 
   try {
     console.log('Initializing PayPal...');
-    console.log('__dirname:', __dirname);
     console.log('cwd:', cwd());
 
     // Try multiple path strategies - in Netlify deployment, files may be in dist or root
     const possiblePaths = [
-      join(__dirname, "../../src/config/memberships.json"),
       join(cwd(), "src/config/memberships.json"),
-      join(cwd(), "dist/_astro/../src/config/memberships.json"),
       join(cwd(), "../../src/config/memberships.json"),
-      resolve(cwd(), "src/config/memberships.json")
     ];
 
     let membershipsPath;
