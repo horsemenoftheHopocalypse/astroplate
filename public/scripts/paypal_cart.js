@@ -177,7 +177,7 @@ window.paypal
           throw new Error('Your cart is empty');
         }
 
-        const response = await fetch("/api/orders", {
+        const response = await fetch("/.netlify/functions/orders", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -206,7 +206,7 @@ window.paypal
 
     async onApprove(data, actions) {
       try {
-        const response = await fetch(`/api/orders/${data.orderID}/capture`, {
+        const response = await fetch(`/.netlify/functions/orders/${data.orderID}/capture`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
