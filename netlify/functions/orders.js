@@ -11,6 +11,15 @@ import eventsData from "../../src/config/events.json" with { type: "json" };
 
 const { PUBLIC_PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET, CONTEXT } = process.env;
 
+// Validate credentials are present
+if (!PUBLIC_PAYPAL_CLIENT_ID || !PAYPAL_CLIENT_SECRET) {
+  console.error('Missing PayPal credentials:', {
+    hasClientId: !!PUBLIC_PAYPAL_CLIENT_ID,
+    hasSecret: !!PAYPAL_CLIENT_SECRET,
+    context: CONTEXT
+  });
+}
+
 // Determine environment based on Netlify context
 // Use production for production deploys, sandbox for everything else
 const paypalEnvironment = CONTEXT === 'production' ? Environment.Production : Environment.Sandbox;
