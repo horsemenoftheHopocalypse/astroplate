@@ -126,7 +126,7 @@ const activeEvents = events.filter((event) => event.active);
 
 <script is:inline define:vars={{ PAYPAL_CLIENT_ID }}>
   const script = document.createElement("script");
-  script.src = `https://www.paypal.com/sdk/js?client-id=${PAYPAL_CLIENT_ID}&buyer-country=US&currency=USD&components=buttons&enable-funding=venmo`;
+  script.src = `https://www.paypal.com/sdk/js?client-id=${PAYPAL_CLIENT_ID}&currency=USD&components=buttons&enable-funding=venmo`;
   script.onload = () => {
     // Load the cart script after PayPal SDK is loaded
     const cartScript = document.createElement("script");
