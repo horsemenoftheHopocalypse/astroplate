@@ -30,10 +30,12 @@ function initializePayPal() {
     console.log('__dirname:', __dirname);
     console.log('cwd:', cwd());
 
-    // Try multiple path strategies
+    // Try multiple path strategies - in Netlify deployment, files may be in dist or root
     const possiblePaths = [
       join(__dirname, "../../src/config/memberships.json"),
       join(cwd(), "src/config/memberships.json"),
+      join(cwd(), "dist/_astro/../src/config/memberships.json"),
+      join(cwd(), "../../src/config/memberships.json"),
       resolve(cwd(), "src/config/memberships.json")
     ];
 
@@ -46,14 +48,16 @@ function initializePayPal() {
         readFileSync(path, "utf-8");
         membershipsPath = path;
         eventsPath = path.replace("memberships.json", "events.json");
+        console.log(`Found files at: ${path}`);
         break;
-      } catch {
+      } catch (error) {
+        console.log(`Path not found: ${path}`);
         continue;
       }
     }
 
     if (!membershipsPath) {
-      throw new Error(`Could not find memberships.json. Tried paths: ${possiblePaths.join(', ')}`);
+      throw new Error(`Could not find memberships.json. Tried paths: ${possiblePaths.join(', ')}. cwd: ${cwd()}`);
     }
 
     console.log('Loading memberships from:', membershipsPath);
