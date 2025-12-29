@@ -222,6 +222,13 @@ const captureOrder = async (orderID) => {
 };
 
 export const handler = async (event) => {
+  const debugInfo = {
+    context: process.env.CONTEXT,
+    hasClientId: !!process.env.PUBLIC_PAYPAL_CLIENT_ID,
+    hasSecret: !!process.env.PAYPAL_CLIENT_SECRET,
+    timestamp: new Date().toISOString()
+  };
+
   try {
     console.log('Handler invoked');
 
@@ -253,7 +260,10 @@ export const handler = async (event) => {
     // Initialize PayPal on first request
     initializePayPal();
 
-    console.log("Event path:", event.path);
+    const isProduction = process.env.CONTEXT === 'production';
+    debugInfo.environment = isProduction ? 'Production' : 'Sandbox';
+    debugInfo.baseUrl = isProduction ? 'https://api-m.paypal.com' : 'https://api-m.sandbox.paypal.com';
+    debugInfo.path = event.path;
 
     // Check if this is a capture request: /.netlify/functions/orders/{orderID}/capture
     const pathParts = event.path.split("/").filter(p => p);
@@ -262,38 +272,41 @@ export const handler = async (event) => {
     if (isCaptureRequest) {
       // Extract orderID: path is like /.netlify/functions/orders/{orderID}/capture
       const orderID = pathParts[pathParts.length - 2];
-      console.log("Capturing order:", orderID);
+      debugInfo.action = 'capture';
+      debugInfo.orderId = orderID;
 
       if (!orderID || orderID === "orders") {
         return {
           statusCode: 400,
           headers,
-          body: JSON.stringify({ error: "Order ID is required", path: event.path }),
+          body: JSON.stringify({ error: "Order ID is required", path: event.path, debug: debugInfo }),
         };
       }
 
       const { jsonResponse, httpStatusCode } = await captureOrder(orderID);
 
+      const response = typeof jsonResponse === 'object' ? { ...jsonResponse, debug: debugInfo } : { result: jsonResponse, debug: debugInfo };
       return {
         statusCode: httpStatusCode,
         headers,
-        body: JSON.stringify(jsonResponse),
+        body: JSON.stringify(response),
       };
     } else {
       // Create order
-      console.log("Creating order");
+      debugInfo.action = 'create';
       const { cart } = JSON.parse(event.body || "{}");
       const { jsonResponse, httpStatusCode } = await createOrder(cart);
 
+      const response = typeof jsonResponse === 'object' ? { ...jsonResponse, debug: debugInfo } : { result: jsonResponse, debug: debugInfo };
       return {
         statusCode: httpStatusCode,
         headers,
-        body: JSON.stringify(jsonResponse),
+        body: JSON.stringify(response),
       };
     }
   } catch (error) {
-    console.error("Handler error:", error);
-    console.error("Error stack:", error.stack);
+    debugInfo.error = error.message;
+    debugInfo.errorType = error.constructor.name;
 
     const headers = {
       "Access-Control-Allow-Origin": "*",
@@ -306,7 +319,7 @@ export const handler = async (event) => {
       return {
         statusCode: error.statusCode || 500,
         headers,
-        body: JSON.stringify({ error: error.message }),
+        body: JSON.stringify({ error: error.message, debug: debugInfo }),
       };
     }
 
@@ -316,7 +329,8 @@ export const handler = async (event) => {
       body: JSON.stringify({
         error: "Failed to process PayPal request",
         message: error.message,
-        type: error.constructor.name
+        type: error.constructor.name,
+        debug: debugInfo
       }),
     };
   }
