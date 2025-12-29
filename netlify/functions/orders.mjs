@@ -8,10 +8,17 @@ import {
 } from "@paypal/paypal-server-sdk";
 import { readFileSync } from "fs";
 import { fileURLToPath } from "url";
-import { dirname, join } from "path";
+import { dirname, join, resolve } from "path";
+import { cwd } from "process";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+// Use process.cwd() as fallback for bundled environments
+let __dirname;
+try {
+  const __filename = fileURLToPath(import.meta.url);
+  __dirname = dirname(__filename);
+} catch {
+  __dirname = cwd();
+}
 
 let membershipsData, eventsData, priceMap, client, ordersController;
 
@@ -20,12 +27,43 @@ function initializePayPal() {
 
   try {
     console.log('Initializing PayPal...');
+    console.log('__dirname:', __dirname);
+    console.log('cwd:', cwd());
+
+    // Try multiple path strategies
+    const possiblePaths = [
+      join(__dirname, "../../src/config/memberships.json"),
+      join(cwd(), "src/config/memberships.json"),
+      resolve(cwd(), "src/config/memberships.json")
+    ];
+
+    let membershipsPath;
+    let eventsPath;
+
+    // Find the correct path
+    for (const path of possiblePaths) {
+      try {
+        readFileSync(path, "utf-8");
+        membershipsPath = path;
+        eventsPath = path.replace("memberships.json", "events.json");
+        break;
+      } catch {
+        continue;
+      }
+    }
+
+    if (!membershipsPath) {
+      throw new Error(`Could not find memberships.json. Tried paths: ${possiblePaths.join(', ')}`);
+    }
+
+    console.log('Loading memberships from:', membershipsPath);
+    console.log('Loading events from:', eventsPath);
 
     membershipsData = JSON.parse(
-      readFileSync(join(__dirname, "../../src/config/memberships.json"), "utf-8")
+      readFileSync(membershipsPath, "utf-8")
     );
     eventsData = JSON.parse(
-      readFileSync(join(__dirname, "../../src/config/events.json"), "utf-8")
+      readFileSync(eventsPath, "utf-8")
     );
 
     const { PUBLIC_PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET, CONTEXT } = process.env;
@@ -35,14 +73,14 @@ function initializePayPal() {
       throw new Error('Missing PayPal credentials');
     }
 
-    // Determine PayPal environment based on Netlify deployment context
-    // Currently using Production for all contexts (production and branch deploys)
-    // To enable sandbox for testing:
-    //   1. Set sandbox credentials in Netlify for "Deploy Previews" or branch contexts
-    //   2. Change line below to: const paypalEnvironment = CONTEXT === 'production' ? Environment.Production : Environment.Sandbox;
-    const paypalEnvironment = Environment.Production;
+    // Determine PayPal environment:
+    // - Local dev (CONTEXT === 'dev'): use Sandbox
+    // - Production context (CONTEXT === 'production'): use Production
+    // - Branch/preview deploys: use Production
+    const isLocal = CONTEXT === 'dev' || !CONTEXT;
+    const paypalEnvironment = isLocal ? Environment.Sandbox : Environment.Production;
 
-    console.log(`PayPal Environment: Production (Netlify context: ${CONTEXT || 'unknown'})`);
+    console.log(`PayPal Environment: ${isLocal ? 'Sandbox (local dev)' : 'Production'} (Netlify context: ${CONTEXT || 'local'})`);
 
     // Create a price lookup map
     priceMap = new Map();
