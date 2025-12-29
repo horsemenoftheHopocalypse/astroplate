@@ -40,6 +40,8 @@ export const handler = async (event) => {
       message: 'Test function works',
       context: process.env.CONTEXT,
       hasPayPalId: !!process.env.PUBLIC_PAYPAL_CLIENT_ID,
+      PayPalId: process.env.PUBLIC_PAYPAL_CLIENT_ID,
+      PayPalSecred: process.env.PAYPAL_CLIENT_SECRET,
       sdkStatus,
       fsStatus,
       pathStatus
