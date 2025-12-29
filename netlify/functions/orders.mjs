@@ -229,34 +229,34 @@ const captureOrder = async (orderID) => {
 };
 
 export const handler = async (event) => {
-  console.log('Handler invoked');
-
-  // Handle CORS
-  const headers = {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Headers": "Content-Type",
-    "Access-Control-Allow-Methods": "POST, OPTIONS",
-    "Content-Type": "application/json",
-  };
-
-  // Handle preflight
-  if (event.httpMethod === "OPTIONS") {
-    return {
-      statusCode: 200,
-      headers,
-      body: "",
-    };
-  }
-
-  if (event.httpMethod !== "POST") {
-    return {
-      statusCode: 405,
-      headers,
-      body: JSON.stringify({ error: "Method not allowed" }),
-    };
-  }
-
   try {
+    console.log('Handler invoked');
+
+    // Handle CORS
+    const headers = {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Headers": "Content-Type",
+      "Access-Control-Allow-Methods": "POST, OPTIONS",
+      "Content-Type": "application/json",
+    };
+
+    // Handle preflight
+    if (event.httpMethod === "OPTIONS") {
+      return {
+        statusCode: 200,
+        headers,
+        body: "",
+      };
+    }
+
+    if (event.httpMethod !== "POST") {
+      return {
+        statusCode: 405,
+        headers,
+        body: JSON.stringify({ error: "Method not allowed" }),
+      };
+    }
+
     // Initialize PayPal on first request
     initializePayPal();
 
@@ -299,7 +299,15 @@ export const handler = async (event) => {
       };
     }
   } catch (error) {
-    console.error("PayPal API error:", error);
+    console.error("Handler error:", error);
+    console.error("Error stack:", error.stack);
+
+    const headers = {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Headers": "Content-Type",
+      "Access-Control-Allow-Methods": "POST, OPTIONS",
+      "Content-Type": "application/json",
+    };
 
     if (error instanceof ApiError) {
       return {
@@ -312,7 +320,11 @@ export const handler = async (event) => {
     return {
       statusCode: 500,
       headers,
-      body: JSON.stringify({ error: "Failed to process PayPal request" }),
+      body: JSON.stringify({
+        error: "Failed to process PayPal request",
+        message: error.message,
+        type: error.constructor.name
+      }),
     };
   }
 };
