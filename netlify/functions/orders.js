@@ -66,13 +66,14 @@ function initializePayPal() {
     }
 
     // Determine PayPal environment:
-    // - Local dev (CONTEXT === 'dev'): use Sandbox
-    // - Production context (CONTEXT === 'production'): use Production
-    // - Branch/preview deploys: use Production
-    const isLocal = CONTEXT === 'dev' || !CONTEXT;
-    const paypalEnvironment = isLocal ? Environment.Sandbox : Environment.Production;
+    // - Production context: use Production
+    // - Everything else (dev, branch-deploy, deploy-preview): use Sandbox
+    const isProduction = CONTEXT === 'production';
+    const paypalEnvironment = isProduction ? Environment.Production : Environment.Sandbox;
+    const paypalBaseUrl = isProduction ? 'https://api-m.paypal.com' : 'https://api-m.sandbox.paypal.com';
 
-    console.log(`PayPal Environment: ${isLocal ? 'Sandbox (local dev)' : 'Production'} (Netlify context: ${CONTEXT || 'local'})`);
+    console.log(`PayPal Environment: ${isProduction ? 'Production' : 'Sandbox'} (Netlify context: ${CONTEXT || 'local'})`);
+    console.log(`PayPal API Base URL: ${paypalBaseUrl}`);
 
     // Create a price lookup map
     priceMap = new Map();
