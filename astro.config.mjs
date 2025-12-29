@@ -18,7 +18,7 @@ export default defineConfig({
   trailingSlash: config.site.trailing_slash ? "always" : "never",
   image: { service: sharp() },
   vite: { plugins: [tailwindcss()] },
-  output: "hybrid",
+  output: "server",
   adapter: netlify(),
   integrations: [
     react(),
