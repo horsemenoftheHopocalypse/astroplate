@@ -9,7 +9,13 @@ import {
 import membershipsData from "../../src/config/memberships.json" with { type: "json" };
 import eventsData from "../../src/config/events.json" with { type: "json" };
 
-const { PUBLIC_PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET } = process.env;
+const { PUBLIC_PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET, CONTEXT } = process.env;
+
+// Determine environment based on Netlify context
+// Use production for production deploys, sandbox for everything else
+const paypalEnvironment = CONTEXT === 'production' ? Environment.Production : Environment.Sandbox;
+
+console.log(`PayPal Environment: ${CONTEXT === 'production' ? 'Production' : 'Sandbox'} (Netlify context: ${CONTEXT})`);
 
 // Create a price lookup map
 const priceMap = new Map();
@@ -38,7 +44,7 @@ const client = new Client({
     oAuthClientSecret: PAYPAL_CLIENT_SECRET,
   },
   timeout: 0,
-  environment: Environment.Sandbox,
+  environment: paypalEnvironment,
   logging: {
     logLevel: LogLevel.Info,
     logRequest: {
