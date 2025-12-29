@@ -6,66 +6,90 @@ import {
   LogLevel,
   OrdersController,
 } from "@paypal/paypal-server-sdk";
-import membershipsData from "../../src/config/memberships.json" with { type: "json" };
-import eventsData from "../../src/config/events.json" with { type: "json" };
+import { readFileSync } from "fs";
+import { fileURLToPath } from "url";
+import { dirname, join } from "path";
 
-const { PUBLIC_PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET, CONTEXT } = process.env;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
-// Validate credentials are present
-if (!PUBLIC_PAYPAL_CLIENT_ID || !PAYPAL_CLIENT_SECRET) {
-  console.error('Missing PayPal credentials:', {
-    hasClientId: !!PUBLIC_PAYPAL_CLIENT_ID,
-    hasSecret: !!PAYPAL_CLIENT_SECRET,
-    context: CONTEXT
-  });
+let membershipsData, eventsData, priceMap, client, ordersController;
+
+function initializePayPal() {
+  if (client) return; // Already initialized
+
+  try {
+    console.log('Initializing PayPal...');
+
+    membershipsData = JSON.parse(
+      readFileSync(join(__dirname, "../../src/config/memberships.json"), "utf-8")
+    );
+    eventsData = JSON.parse(
+      readFileSync(join(__dirname, "../../src/config/events.json"), "utf-8")
+    );
+
+    const { PUBLIC_PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET, CONTEXT } = process.env;
+
+    // Validate credentials are present
+    if (!PUBLIC_PAYPAL_CLIENT_ID || !PAYPAL_CLIENT_SECRET) {
+      throw new Error('Missing PayPal credentials');
+    }
+
+    // Determine PayPal environment based on Netlify deployment context
+    // Currently using Production for all contexts (production and branch deploys)
+    // To enable sandbox for testing:
+    //   1. Set sandbox credentials in Netlify for "Deploy Previews" or branch contexts
+    //   2. Change line below to: const paypalEnvironment = CONTEXT === 'production' ? Environment.Production : Environment.Sandbox;
+    const paypalEnvironment = Environment.Production;
+
+    console.log(`PayPal Environment: Production (Netlify context: ${CONTEXT || 'unknown'})`);
+
+    // Create a price lookup map
+    priceMap = new Map();
+
+    // Add memberships to price map
+    membershipsData.memberships.forEach((membership) => {
+      priceMap.set(membership.name, {
+        price: membership.price,
+        type: "membership",
+        id: membership.id,
+      });
+    });
+
+    // Add events to price map (append " Ticket" to match cart item names)
+    eventsData.events.forEach((event) => {
+      priceMap.set(`${event.name} Ticket`, {
+        price: event.price,
+        type: "event",
+        id: event.id,
+      });
+    });
+
+    client = new Client({
+      clientCredentialsAuthCredentials: {
+        oAuthClientId: PUBLIC_PAYPAL_CLIENT_ID,
+        oAuthClientSecret: PAYPAL_CLIENT_SECRET,
+      },
+      timeout: 0,
+      environment: paypalEnvironment,
+      logging: {
+        logLevel: LogLevel.Info,
+        logRequest: {
+          logBody: true,
+        },
+        logResponse: {
+          logHeaders: true,
+        },
+      },
+    });
+
+    ordersController = new OrdersController(client);
+    console.log('PayPal initialized successfully');
+  } catch (error) {
+    console.error('Failed to initialize PayPal:', error);
+    throw error;
+  }
 }
-
-// Determine environment based on Netlify context
-// Use production for production deploys, sandbox for everything else
-const paypalEnvironment = CONTEXT === 'production' ? Environment.Production : Environment.Sandbox;
-
-console.log(`PayPal Environment: ${CONTEXT === 'production' ? 'Production' : 'Sandbox'} (Netlify context: ${CONTEXT})`);
-
-// Create a price lookup map
-const priceMap = new Map();
-
-// Add memberships to price map
-membershipsData.memberships.forEach((membership) => {
-  priceMap.set(membership.name, {
-    price: membership.price,
-    type: "membership",
-    id: membership.id,
-  });
-});
-
-// Add events to price map (append " Ticket" to match cart item names)
-eventsData.events.forEach((event) => {
-  priceMap.set(`${event.name} Ticket`, {
-    price: event.price,
-    type: "event",
-    id: event.id,
-  });
-});
-
-const client = new Client({
-  clientCredentialsAuthCredentials: {
-    oAuthClientId: PUBLIC_PAYPAL_CLIENT_ID,
-    oAuthClientSecret: PAYPAL_CLIENT_SECRET,
-  },
-  timeout: 0,
-  environment: paypalEnvironment,
-  logging: {
-    logLevel: LogLevel.Info,
-    logRequest: {
-      logBody: true,
-    },
-    logResponse: {
-      logHeaders: true,
-    },
-  },
-});
-
-const ordersController = new OrdersController(client);
 
 /**
  * Create an order to start the transaction.
@@ -167,6 +191,8 @@ const captureOrder = async (orderID) => {
 };
 
 export const handler = async (event) => {
+  console.log('Handler invoked');
+
   // Handle CORS
   const headers = {
     "Access-Control-Allow-Origin": "*",
@@ -193,6 +219,9 @@ export const handler = async (event) => {
   }
 
   try {
+    // Initialize PayPal on first request
+    initializePayPal();
+
     console.log("Event path:", event.path);
 
     // Check if this is a capture request: /.netlify/functions/orders/{orderID}/capture
