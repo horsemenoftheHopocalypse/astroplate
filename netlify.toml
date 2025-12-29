@@ -6,7 +6,7 @@ publish = "dist"
 [functions]
 external_node_modules = ["@paypal/paypal-server-sdk"]
 included_files = ["src/config/*.json"]
-node_bundler = "esbuild"
+node_bundler = "nft"
 
 [dev]
 command = "yarn dev:astro"
