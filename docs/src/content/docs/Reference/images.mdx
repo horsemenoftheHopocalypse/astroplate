@@ -1,0 +1,24 @@
+---
+title: Images
+description: How to get your image displayed on the website
+sidebar:
+  order: 3
+---
+
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- public
+  - **images**
+  - scripts
+- scripts
+- src
+
+</FileTree>
+
+Storing images in this folder is essential. If they are not placed here, the build process cannot find them and our users will get a sad `image not found` substitue.
+
+Using the `ImageMod.astro` component is also essential. It lives to resize, optimize, and shrink images for speedy delivery to browsers everywhere. Big images equal slow download speeds and nobody likes slow pages.
+
+Please provide `alt` text descriptions. These are important for screen readers.
