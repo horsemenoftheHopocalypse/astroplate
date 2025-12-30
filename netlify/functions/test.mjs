@@ -31,6 +31,26 @@ export const handler = async (event) => {
     pathStatus = `failed: ${error.message}`;
   }
 
+  // Determine deployment type
+  const context = process.env.CONTEXT;
+  let deploymentType;
+  switch(context) {
+    case 'production':
+      deploymentType = 'Production Build';
+      break;
+    case 'deploy-preview':
+      deploymentType = 'Deploy Preview';
+      break;
+    case 'branch-deploy':
+      deploymentType = 'Branch Deploy';
+      break;
+    case 'dev':
+      deploymentType = 'Local Development';
+      break;
+    default:
+      deploymentType = context ? `Unknown (${context})` : 'Not Set';
+  }
+
   return {
     statusCode: 200,
     headers: {
@@ -38,7 +58,9 @@ export const handler = async (event) => {
     },
     body: JSON.stringify({
       message: 'Test function works',
+      deploymentType,
       context: process.env.CONTEXT,
+      paypalEnv: process.env.PAYPAL_ENV,
       hasPayPalId: !!process.env.PUBLIC_PAYPAL_CLIENT_ID,
       PayPalId: process.env.PUBLIC_PAYPAL_CLIENT_ID,
       PayPalSecred: process.env.PAYPAL_CLIENT_SECRET,

@@ -21,3 +21,15 @@ to = "/.netlify/functions/:splat"
 
 [build.environment]
 NODE_VERSION = "22.20.0"
+
+# Production context
+[context.production.environment]
+PAYPAL_ENV = "Production"
+
+# All branch deploys
+[context.branch-deploy.environment]
+PAYPAL_ENV = "Sandbox"
+
+# Deploy previews
+[context.deploy-preview.environment]
+PAYPAL_ENV = "Sandbox"
