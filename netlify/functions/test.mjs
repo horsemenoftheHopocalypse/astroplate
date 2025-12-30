@@ -4,12 +4,32 @@ export const handler = async (event) => {
   let sdkStatus = 'not tested';
   let fsStatus = 'not tested';
   let pathStatus = 'not tested';
+  let paypalClientStatus = 'not tested';
 
+  // Test SDK import (just confirms SDK is available, not which env is being used)
   try {
     const { Environment } = await import("@paypal/paypal-server-sdk");
-    sdkStatus = `imported - has Production: ${!!Environment.Production}`;
+    sdkStatus = `SDK imported successfully (enum exists but doesn't indicate active environment)`;
   } catch (error) {
     sdkStatus = `failed: ${error.message}`;
+  }
+
+  // Test actual PayPal client initialization to see which environment would be used
+  try {
+    const { Client, Environment } = await import("@paypal/paypal-server-sdk");
+    const { PUBLIC_PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET, PAYPAL_ENV } = process.env;
+
+    if (!PUBLIC_PAYPAL_CLIENT_ID || !PAYPAL_CLIENT_SECRET) {
+      paypalClientStatus = 'Missing credentials - cannot initialize';
+    } else {
+      const isProduction = PAYPAL_ENV === 'Production';
+      const paypalEnvironment = isProduction ? Environment.Production : Environment.Sandbox;
+      const baseUrl = isProduction ? 'https://api-m.paypal.com' : 'https://api-m.sandbox.paypal.com';
+
+      paypalClientStatus = `Would initialize with: ${PAYPAL_ENV || 'Sandbox (default)'} → ${baseUrl}`;
+    }
+  } catch (error) {
+    paypalClientStatus = `failed: ${error.message}`;
   }
 
   try {
@@ -59,14 +79,24 @@ export const handler = async (event) => {
     body: JSON.stringify({
       message: 'Test function works',
       deploymentType,
-      context: process.env.CONTEXT,
-      paypalEnv: process.env.PAYPAL_ENV,
-      hasPayPalId: !!process.env.PUBLIC_PAYPAL_CLIENT_ID,
-      PayPalId: process.env.PUBLIC_PAYPAL_CLIENT_ID,
-      PayPalSecred: process.env.PAYPAL_CLIENT_SECRET,
-      sdkStatus,
-      fsStatus,
-      pathStatus
+      environmentVariables: {
+        CONTEXT: process.env.CONTEXT || 'NOT SET',
+        PAYPAL_ENV: process.env.PAYPAL_ENV || 'NOT SET',
+        NODE_VERSION: process.env.NODE_VERSION || 'NOT SET',
+        NODE_ENV: process.env.NODE_ENV || 'NOT SET',
+      },
+      paypalCredentials: {
+        hasClientId: !!process.env.PUBLIC_PAYPAL_CLIENT_ID,
+        clientIdPreview: process.env.PUBLIC_PAYPAL_CLIENT_ID ?
+          `${process.env.PUBLIC_PAYPAL_CLIENT_ID.substring(0, 10)}...` : 'NOT SET',
+        hasSecret: !!process.env.PAYPAL_CLIENT_SECRET,
+      },
+      diagnostics: {
+        sdkStatus,
+        paypalClientStatus,
+        fsStatus,
+        pathStatus
+      }
     }, null, 2),
   };
 };
