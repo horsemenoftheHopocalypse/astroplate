@@ -1,8 +1,8 @@
-name: Docs - GitHub Pages
+name: Deploy Docs to GitHub Pages
 
 on:
   push:
-    branches: [main]
+    branches: [develop]
     paths:
       - "docs/**"
       - ".github/workflows/docs-pages.yml"
@@ -28,21 +28,22 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: "npm"
-          cache-dependency-path: "docs/package-lock.json"
+
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v4
 
       - name: Install dependencies
         run: npm ci
         working-directory: ./docs
 
       - name: Build with Astro
-        run: npm run build
+        env:
+          ASTRO_TELEMETRY_DISABLED: 1
+        run: npm run build -- --site "${{ steps.pages.outputs.origin }}" --base "${{ steps.pages.outputs.base_path }}"
         working-directory: ./docs
 
-      - name: Add .nojekyll file
-        run: touch ./docs/dist/.nojekyll
-
-      - name: Upload Pages artifact
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./docs/dist
