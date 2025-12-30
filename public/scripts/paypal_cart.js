@@ -136,6 +136,15 @@ window.clearCart = function() {
 
 // Initialize cart display and attach event listeners
 function initializeCart() {
+  // Ensure all containers are visible on page load (reset from any previous success state)
+  const cartContainer = document.querySelector('.shopping-cart');
+  const catalogContainer = document.querySelector('.product-catalog');
+  const resultMessageContainer = document.querySelector('#result-message');
+
+  if (cartContainer) cartContainer.style.display = '';
+  if (catalogContainer) catalogContainer.style.display = '';
+  if (resultMessageContainer) resultMessageContainer.innerHTML = '';
+
   updateCartDisplay();
 
   // Add event delegation for "Add to Cart" buttons
