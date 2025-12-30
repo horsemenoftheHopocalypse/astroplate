@@ -5,6 +5,7 @@ import starlightThemeBlack from 'starlight-theme-black'
 
 export default defineConfig({
   site: 'https://horsemenofthehops.github.io',
+  base: '/docs/',
   integrations: [
     starlight({
       plugins: [
