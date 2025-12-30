@@ -248,9 +248,27 @@ window.paypal
           // Clear the cart after successful payment
           clearCart();
 
+          // Hide the cart and PayPal button
+          const cartContainer = document.querySelector('.shopping-cart');
+          const paypalContainer = document.getElementById('paypal-button-container');
+          const catalogContainer = document.querySelector('.product-catalog');
+
+          if (cartContainer) cartContainer.style.display = 'none';
+          if (paypalContainer) paypalContainer.style.display = 'none';
+          if (catalogContainer) catalogContainer.style.display = 'none';
+
           resultMessage(
-            `Transaction ${transaction?.status || orderData.status}: ${transaction?.id || orderData.id}<br>
-          <br>Thank you for your purchase!<br>See console for all available details`
+            `<div class="bg-green-100 border border-green-400 text-green-700 px-6 py-4 rounded-lg">
+              <div class="flex items-center mb-2">
+                <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <h3 class="text-xl font-bold">Payment Successful!</h3>
+              </div>
+              <p class="mb-2">Thank you for your purchase!</p>
+              <p class="text-sm">Transaction ID: ${transaction?.id || orderData.id}</p>
+              <p class="text-sm mt-3">You should receive a confirmation email shortly.</p>
+            </div>`
           );
         } else {
           // If status is not COMPLETED, something went wrong
