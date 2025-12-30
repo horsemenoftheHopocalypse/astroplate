@@ -71,6 +71,19 @@ export const handler = async (event) => {
       deploymentType = context ? `Unknown (${context})` : 'Not Set';
   }
 
+  // Get all environment variables to see what's actually available
+  const allEnvVars = Object.keys(process.env).reduce((acc, key) => {
+    // Mask sensitive values
+    if (key.includes('SECRET') || key.includes('KEY') || key.includes('PASSWORD')) {
+      acc[key] = '[MASKED]';
+    } else if (key.includes('CLIENT_ID')) {
+      acc[key] = process.env[key] ? `${process.env[key].substring(0, 10)}...` : '';
+    } else {
+      acc[key] = process.env[key];
+    }
+    return acc;
+  }, {});
+
   return {
     statusCode: 200,
     headers: {
@@ -79,6 +92,8 @@ export const handler = async (event) => {
     body: JSON.stringify({
       message: 'Test function works',
       deploymentType,
+      note: 'CONTEXT and PAYPAL_ENV are NOT SET - netlify.toml [context.*.environment] vars are build-time only',
+      solution: 'Set PAYPAL_ENV in Netlify UI: Site settings > Environment variables',
       environmentVariables: {
         CONTEXT: process.env.CONTEXT || 'NOT SET',
         PAYPAL_ENV: process.env.PAYPAL_ENV || 'NOT SET',
@@ -96,7 +111,8 @@ export const handler = async (event) => {
         paypalClientStatus,
         fsStatus,
         pathStatus
-      }
+      },
+      allAvailableEnvVars: allEnvVars
     }, null, 2),
   };
 };
