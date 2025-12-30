@@ -58,22 +58,20 @@ function initializePayPal() {
       readFileSync(eventsPath, "utf-8")
     );
 
-    const { PUBLIC_PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET, CONTEXT } = process.env;
+    const { PUBLIC_PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET, PAYPAL_ENV } = process.env;
 
     // Validate credentials are present
     if (!PUBLIC_PAYPAL_CLIENT_ID || !PAYPAL_CLIENT_SECRET) {
       throw new Error('Missing PayPal credentials');
     }
 
-    // Determine PayPal environment:
-    // - Production context: use Production
-    // - Everything else (dev, branch-deploy, deploy-preview): use Sandbox
-    const isProduction = CONTEXT === 'production';
+    // Determine PayPal environment from PAYPAL_ENV variable
+    // Defaults to Sandbox if not set (for local development)
+    const isProduction = PAYPAL_ENV === 'Production';
     const paypalEnvironment = isProduction ? Environment.Production : Environment.Sandbox;
     const paypalBaseUrl = isProduction ? 'https://api-m.paypal.com' : 'https://api-m.sandbox.paypal.com';
 
-    console.log(`PayPal Environment: ${isProduction ? 'Production' : 'Sandbox'} (Netlify context: ${CONTEXT || 'local'})`);
-    console.log(`PayPal API Base URL: ${paypalBaseUrl}`);
+    console.log(`PayPal Environment: ${PAYPAL_ENV || 'Sandbox (default)'} (${paypalBaseUrl})`);
 
     // Create a price lookup map
     priceMap = new Map();
@@ -260,9 +258,7 @@ export const handler = async (event) => {
     // Initialize PayPal on first request
     initializePayPal();
 
-    const isProduction = process.env.CONTEXT === 'production';
-    debugInfo.environment = isProduction ? 'Production' : 'Sandbox';
-    debugInfo.baseUrl = isProduction ? 'https://api-m.paypal.com' : 'https://api-m.sandbox.paypal.com';
+    debugInfo.environment = process.env.PAYPAL_ENV || 'Sandbox (default)';
     debugInfo.path = event.path;
 
     // Check if this is a capture request: /.netlify/functions/orders/{orderID}/capture
