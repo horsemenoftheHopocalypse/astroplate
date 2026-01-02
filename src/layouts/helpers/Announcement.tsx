@@ -65,7 +65,7 @@ const Announcement: React.FC = () => {
         const response = await fetch(gist_url);
         if (response.ok) {
           const text = await response.text();
-          setContisLoading || ent(text);
+          setContent(text);
           if (text && !Cookies.get("announcement-close")) {
             setIsVisible(true);
           }
