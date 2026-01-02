@@ -52,7 +52,19 @@ const Cookies = {
 const Announcement: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [content, setContent] = useState<string>("");
+  const [contentHash, setContentHash] = useState<string>("");
   const [isLoading, setIsLoading] = useState(true);
+
+  // Simple hash function for content
+  const hashContent = (str: string): string => {
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+      const char = str.charCodeAt(i);
+      hash = ((hash << 5) - hash) + char;
+      hash = hash & hash;
+    }
+    return Math.abs(hash).toString(36);
+  };
 
   useEffect(() => {
     const fetchAnnouncement = async () => {
@@ -65,8 +77,12 @@ const Announcement: React.FC = () => {
         const response = await fetch(gist_url);
         if (response.ok) {
           const text = await response.text();
+          const hash = hashContent(text);
           setContent(text);
-          if (text && !Cookies.get("announcement-close")) {
+          setContentHash(hash);
+          
+          // Check if user dismissed this specific version
+          if (text && !Cookies.get(`announcement-close-${hash}`)) {
             setIsVisible(true);
           }
         }
@@ -81,7 +97,7 @@ const Announcement: React.FC = () => {
   }, []);
 
   const handleClose = () => {
-    Cookies.set("announcement-close", "true", {
+    Cookies.set(`announcement-close-${contentHash}`, "true", {
       expires: expire_days,
     });
     setIsVisible(false);
