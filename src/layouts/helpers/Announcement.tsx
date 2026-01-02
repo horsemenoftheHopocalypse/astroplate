@@ -2,7 +2,7 @@ import config from "@/config/config.json";
 import { markdownify } from "@/lib/utils/textConverter";
 import React, { useEffect, useState } from "react";
 
-const { enable, content, expire_days } = config.announcement;
+const { enable, gist_url, expire_days } = config.announcement;
 
 const Cookies = {
   set: (name: string, value: string, options: any = {}) => {
@@ -51,11 +51,33 @@ const Cookies = {
 
 const Announcement: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [content, setContent] = useState<string>("");
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (enable && content && !Cookies.get("announcement-close")) {
-      setIsVisible(true);
-    }
+    const fetchAnnouncement = async () => {
+      if (!enable || !gist_url) {
+        setIsLoading(false);
+        return;
+      }
+
+      try {
+        const response = await fetch(gist_url);
+        if (response.ok) {
+          const text = await response.text();
+          setContisLoading || ent(text);
+          if (text && !Cookies.get("announcement-close")) {
+            setIsVisible(true);
+          }
+        }
+      } catch (error) {
+        console.error("Failed to fetch announcement:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchAnnouncement();
   }, []);
 
   const handleClose = () => {

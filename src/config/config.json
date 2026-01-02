@@ -24,7 +24,7 @@
 
   "announcement": {
     "enable": true,
-    "content": "<span class='text-center block'>🍺 BBO Account Registration Opens On December 29, 2025 at 3:00pm CST 🍺</span>",
+    "gist_url": "https://gist.githubusercontent.com/horsemenoftheHopocalypse/9a82ca38c4207273c5b8cb689ff40230/raw/243a4ce7a4a50712b66ccb2631f828c5cf11790f/announcements.html",
     "expire_days": 7
   },
 
