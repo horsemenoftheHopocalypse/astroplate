@@ -1,0 +1,102 @@
+---
+title: YML (YAML)
+description: Yet another Markupo Language
+sidebar:
+  # Set a custom label for the link
+  # label: Custom sidebar label
+  # Set a custom order for the link (lower numbers display higher up)
+  order: 1
+  # Add a badge to the link
+  badge:
+    text: New
+    variant: tip
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside type="tip" title="from yaml.org">
+YAML: YAML Ain't Markup Language™
+
+What It Is:
+  YAML is a human-friendly data serialization
+  language for all programming languages.
+</Aside>
+
+
+It (YML) is sensitive to white space and formatting. Most of the parsers are awesome at telling us why, and where, our formatting is incorrect.
+
+Our site uses YML everywhere. It allows us to store data for our site in a more human readable format than CSV or other file types.
+
+We store Brewer Spotlight information like this:
+
+```yml
+---
+enable: true
+title: "Brewer Spotlight"
+description: "Get to know our club members through their brewing journey."
+
+# Brewer Spotlights
+spotlights:
+  - name: "Jarrett Long"
+    avatar: "/images/jarrett-spotlight.jpg"
+    designation: "Director of War (Competition)"
+    date: "December 3, 2022"
+    questions:
+      - question: "Tell us about your first batch of homebrew. When did you start?"
+        answer: "My fist batch was an extract kit called Caribou Slobber based on Moose Drool from Big Sky Brewing (a brown ale)."
+---
+```
+
+Our image gallery uses it:
+
+```yml
+---
+enable: true
+title: "Horsemen Club Adventures"
+description: "Snaps from our Historian and Social Media Maven taken at club events."
+
+# Photos
+photos:
+  - name: "Happy Hour @ Cowtown Brewing"
+    alt-text: "Club members at Cowtown Brewing"
+    description: "Club members at Cowtown Brewing"
+    image: "/images/horsemen-1.jpg"
+---
+```
+
+And most of our content pages use it for `front-matter` or `grey-matter` like this from a blog post:
+
+```yml
+---
+title: "STYLE SPOTLIGHT: Cream Ale"
+meta_title: ""
+description: "STYLE SPOTLIGHT: Cream Ale"
+date: 2024-05-09T05:00:00Z
+image: "/images/finings-part-2.jpeg"
+categories: ["Education"]
+authors: ["Jarrett Long"]
+tags: ["education", "Brew School"]
+draft: false
+---
+
+```
+
+or this from an officer bio:
+
+```yml
+---
+title: Amy Yvonne Patton
+position: Historian
+sort: 7
+email: history@horsemenofthehops.com
+image: "/images/amy-tx-whiskey.jpg"
+description: this is meta description
+social:
+  - name: facebook
+    icon: FaFacebook
+    link: https://www.facebook.com/amy.y.patton
+
+---
+```
+
+You see? YAML sounds scare, but it's super useful for running a website.

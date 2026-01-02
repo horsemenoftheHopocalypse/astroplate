@@ -1,0 +1,58 @@
+---
+title: Photo Gallery
+description: How to add to the photo gallery
+sidebar:
+  order: 3
+---
+
+import { FileTree } from '@astrojs/starlight/components';
+
+<FileTree>
+
+- src
+  - layouts
+    - components
+    - partials
+      - **PhotoGallery.astro**
+  - lib
+  - pages
+
+</FileTree>
+
+We use the Photo Gallery component on our homepage to highlight our club's adventures.
+
+The data file for changing these images can be found here:
+
+<FileTree>
+- src
+  - content
+    - pages
+    - sections
+      - brewer-spotlight.md
+      - **image-gallary.md**
+  - hooks
+
+</FileTree>
+
+This is a YAML data file with this structure:
+
+```yml
+---
+enable: true
+title: "Horsemen Club Adventures"
+description: "Snaps from our Historian and Social Media Maven taken at club events."
+
+# Photos
+photos:
+  - name: "Happy Hour @ Cowtown Brewing"
+    alt-text: "Club members at Cowtown Brewing"
+    description: "Club members at Cowtown Brewing"
+    image: "/images/horsemen-1.jpg"
+    
+```
+
+Setting `enable` to false will prevent the gallery from loading any images and the pages using the gallery will not have images to show.
+
+To add images, repeat the YAML structure with new values and ensure that the `image` is stores in the `public/images` folder.
+
+To remove an image, delete its entry in the image-gallary.md file and delete the image from the public/images folder.
