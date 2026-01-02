@@ -32,3 +32,6 @@ The `gist_url` is where the site looks to find the announcement. This enables us
 `expire_days` controls the shelf-life of the cookie. After 7 days the cookie expires and retrieved from the `gist_uri`
 
 ![alt text](edit_announcement.png)
+
+
+The `Announcement` component generates a hash from the announcement content and checks to see if the hash value from the `gist_uri` has changed. This ensures that users see fresh announcments.
