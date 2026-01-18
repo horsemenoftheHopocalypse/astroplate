@@ -63,8 +63,10 @@ try {
 <Base>
   <PageHeader title="Competitions" />
   <section class="section pt-0">
-    <div class="container max-w-3xl mx-auto">
-      <div class="row justify-center">
+    <div class="container">
+      <div class="row gx-5">
+        <!-- Main Content -->
+        <div class="lg:col-9">
         <!-- Club Competition Card -->
         <div
           id="card1"
@@ -210,26 +212,22 @@ try {
             </div>
           </div>
         </div>
+        </div>
 
-        <!-- Previous Competitions Section -->
-        <div class="w-full mb-8 bg-white dark:bg-gray-800 border pt-8 p-8">
-          <div class="text-center">
-            <h3 class="mb-6">Previous Competitions</h3>
-            <p class="mb-6 text-gray-600 dark:text-gray-400">View standings and results from past years</p>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl mx-auto">
+        <!-- Sidebar Navigation -->
+        <aside class="lg:col-3">
+          <div class="lg:sticky lg:top-4 bg-white dark:bg-gray-800 border rounded-lg p-6">
+            <h4 class="text-lg font-semibold mb-4">Prior Results</h4>
+            <nav class="space-y-2">
               <a
                 href="/competitions/2025"
-                class="block p-6 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-primary hover:text-white transition-colors duration-200"
+                class="block px-4 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
               >
-                <h4 class="text-xl font-semibold mb-2">2025</h4>
-                <p class="text-sm opacity-80">Club Competition & Circuit Results</p>
+                2025
               </a>
-
-              <!-- Add more years as needed -->
-            </div>
+            </nav>
           </div>
-        </div>
+        </aside>
       </div>
     </div>
   </section>
