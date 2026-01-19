@@ -1,0 +1,181 @@
+---
+import Base from "@/layouts/Base.astro";
+import PageHeader from "@/partials/PageHeader.astro";
+---
+
+<Base>
+  <PageHeader title="2025 Competition Results" />
+  <section class="section pt-0">
+    <div class="container max-w-3xl mx-auto">
+      <div class="row justify-center">
+        <!-- Back Navigation -->
+        <div class="w-full mb-4">
+          <a href="/competitions" class="text-primary hover:underline"
+            >← Back to Current Year</a
+          >
+        </div>
+
+        <!-- Club Competition Card -->
+        <div
+          id="club-comp"
+          class="w-full mb-8 bg-white dark:bg-gray-800 borde pt-8 p-8"
+        >
+          <div class="text-center">
+            <h3 class="mb-6">2025 Club Competition Final Standings</h3>
+            <div
+              class="border rounded-lg bg-white dark:bg-gray-800 overflow-hidden p-3 m-3"
+            >
+              <div
+                class="bg-gray-100 dark:bg-gray-700 p-3 font-semibold text-center"
+              >
+                2025 BJCP Final Standings
+              </div>
+              <div class="p-4 overflow-y-auto">
+                <div id="bjcp-standings">
+                  <iframe
+                    title="2025 BJCP Final Standings"
+                    src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRtNbksTKKPY6SPtfJHSw8vjB_1B5_b-4SJ-ftLlFGVjB1mJiLvuusbHTniCMMVtNShEcHe6HodTfSG/pubhtml?gid=1618906676&single=true&widget=true&headers=false"
+                    style="width:100%; height:300px;"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="border rounded-lg bg-white dark:bg-gray-800 overflow-hidden p-3 m-3"
+            >
+              <div
+                class="bg-gray-100 dark:bg-gray-700 p-3 font-semibold text-center"
+              >
+                2025 Seasonal Final Standings
+              </div>
+              <div class="p-4 overflow-y-auto">
+                <div id="seasonal-standings">
+                  <iframe
+                    title="2025 Seasonal Final Standings"
+                    src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRtNbksTKKPY6SPtfJHSw8vjB_1B5_b-4SJ-ftLlFGVjB1mJiLvuusbHTniCMMVtNShEcHe6HodTfSG/pubhtml?gid=0&single=true&widget=true&headers=false"
+                    style="width:100%; height:300px;"
+                    class="bordershadow-md p-2"></iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Texas Competition Circuits Card -->
+
+        <div
+          id="north-texas-comp"
+          class="w-full mb-8 bg-white dark:bg-gray-800 borde pt-8 p-8"
+        >
+          <div class="text-center">
+            <h3 class="mb-6">North Texas Circuit Standings</h3>
+            <div
+              class="border rounded-lg bg-white dark:bg-gray-800 overflow-hidden p-3 m-3"
+            >
+              <div
+                class="bg-gray-100 dark:bg-gray-700 p-3 font-semibold text-center"
+              >
+                2025 Individual Final Standings
+              </div>
+              <div class="p-4 overflow-y-auto">
+                <div id="bjcp-standings">
+                  <iframe
+                    title="2025 BJCP Final Standings"
+                    src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRwg93Shd6Snb5aAcJY5OH238_DrxaWsXiAiY9ixNtnMZvkfoqQ0Xlo0OIJNAIMPI6OALaEtVr7-3hF/pubhtml?gid=0&single=true&widget=true&headers=false"
+                    style="width:100%; height:300px;"></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="border rounded-lg bg-white dark:bg-gray-800 overflow-hidden p-3 m-3"
+            >
+              <div
+                class="bg-gray-100 dark:bg-gray-700 p-3 font-semibold text-center"
+              >
+                2025 Team Final Standings
+              </div>
+              <div class="p-4 overflow-y-auto">
+                <div id="seasonal-standings">
+                  <iframe
+                    title="2025 Seasonal Final Standings"
+                    src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRwg93Shd6Snb5aAcJY5OH238_DrxaWsXiAiY9ixNtnMZvkfoqQ0Xlo0OIJNAIMPI6OALaEtVr7-3hF/pubhtml?gid=2116002501&single=true&widget=true&headers=false"
+                    style="width:100%; height:300px;"
+                    class="bordershadow-md p-2"></iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          id="north-texas-comp"
+          class="w-full mb-8 bg-white dark:bg-gray-800 borde pt-8 p-8"
+        >
+          <div class="text-center">
+            <h3 class="mb-6">Lone Star Circuit Standings</h3>
+            <div
+              class="border rounded-lg bg-white dark:bg-gray-800 overflow-hidden p-3 m-3"
+            >
+              <div
+                class="border rounded-lg bg-white dark:bg-gray-800 overflow-hidden p-3 m-3"
+              >
+                <div
+                  class="bg-gray-100 dark:bg-gray-700 p-3 font-semibold text-center"
+                >
+                  2025 Individual Final Standings
+                </div>
+                <div class="p-4 overflow-y-auto">
+                  <div id="bjcp-standings">
+                    <iframe
+                      title="2025 BJCP Final Standings"
+                      src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRwg93Shd6Snb5aAcJY5OH238_DrxaWsXiAiY9ixNtnMZvkfoqQ0Xlo0OIJNAIMPI6OALaEtVr7-3hF/pubhtml?gid=0&single=true&widget=true&headers=false"
+                      style="width:100%; height:300px;"></iframe>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="border rounded-lg bg-white dark:bg-gray-800 overflow-hidden p-3 m-3"
+              >
+                <div
+                  class="bg-gray-100 dark:bg-gray-700 p-3 font-semibold text-center"
+                >
+                  2025 Team Final Standings
+                </div>
+                <div class="p-4 overflow-y-auto">
+                  <div id="seasonal-standings">
+                    <iframe
+                      title="2025 Seasonal Final Standings"
+                      src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRwg93Shd6Snb5aAcJY5OH238_DrxaWsXiAiY9ixNtnMZvkfoqQ0Xlo0OIJNAIMPI6OALaEtVr7-3hF/pubhtml?gid=2116002501&single=true&widget=true&headers=false"
+                      style="width:100%; height:300px;"
+                      class="bordershadow-md p-2"></iframe>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="border rounded-lg bg-white dark:bg-gray-800 overflow-hidden p-3 m-3"
+              >
+                <div
+                  class="bg-gray-100 dark:bg-gray-700 p-3 font-semibold text-center"
+                >
+                  2025 Club Standings
+                </div>
+                <div class="p-4 overflow-y-auto">
+                  <div id="seasonal-standings">
+                    <iframe
+                      title="2025 Club Standings"
+                      src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQwlQ8gPeZsqDd5lb-PvlsiJwUjP9bmim6hMqXK9Mg4QY8xj3NboZDNlimLQMqCYVZLjqvJpPvOYBy4/pubhtml?gid=1600072460&single=true&widget=true&headers=false"
+                      style="width:100%; height:300px;"
+                      class="bordershadow-md p-2"></iframe>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
