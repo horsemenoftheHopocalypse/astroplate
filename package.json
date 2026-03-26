@@ -17,7 +17,8 @@
     "check": "astro check",
     "format": "prettier -w ./src",
     "generate-json": "node scripts/jsonGenerator.js",
-    "remove-darkmode": "node scripts/removeDarkmode.js && yarn format"
+    "remove-darkmode": "node scripts/removeDarkmode.js && yarn format",
+    "postinstall": "git config core.hooksPath .githooks"
   },
   "dependencies": {
     "@astrojs/check": "0.9.5",

@@ -3,7 +3,8 @@
     "allow": [
       "Bash(npm info:*)",
       "Bash(python3 -c \"import json,sys; print\\(json.load\\(sys.stdin\\)[-5:]\\)\")",
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "Bash(chmod +x /Users/barryforrest/Projects/Horsemen/astro/astroplate/.githooks/pre-push)"
     ]
   }
 }

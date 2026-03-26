@@ -1,0 +1,14 @@
+#!/bin/sh
+
+echo "Running docs build before push..."
+
+cd docs && npm run build
+
+if [ $? -ne 0 ]; then
+  echo ""
+  echo "Docs build failed. Push aborted."
+  echo "Fix the errors above, then push again."
+  exit 1
+fi
+
+echo "Docs build passed."
