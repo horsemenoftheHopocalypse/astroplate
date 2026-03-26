@@ -1,7 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
-import starlightThemeBlack from 'starlight-theme-black'
+// import starlightThemeBlack from 'starlight-theme-black'
 
 export default defineConfig({
   site: 'https://horsemenofthehops.github.io',
@@ -19,12 +19,12 @@ export default defineConfig({
           autogenerate: {directory: 'reference'},
         }
       ],
-      plugins: [
-        starlightThemeBlack({
-          footerText: //optional
-            '© 2026 Horsemen of the Hopocalypse. All rights reserved.',
-        })
-      ],
+      // plugins: [
+      //   starlightThemeBlack({
+      //     footerText: //optional
+      //       '© 2026 Horsemen of the Hopocalypse. All rights reserved.',
+      //   })
+      // ],
     }),
   ],
 });
