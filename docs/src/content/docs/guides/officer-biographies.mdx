@@ -1,0 +1,51 @@
+---
+title: Officer Biographies
+description: How to update officer and director biographies
+sidebar:
+  order: 3
+---
+
+import { FileTree } from '@astrojs/starlight/components';
+
+All of the data for officers and directors is located here:
+
+<FileTree>
+- src
+  - config
+  - content
+    - about
+    - **officers**
+      - Amanda.md
+      - barry.md
+    - pages
+    - pages
+  - hooks
+
+</FileTree>
+
+Title is used for the person's display name, not their actual title. Sorry;
+
+`Position` stores the office/director role name.
+
+`Sort` controls when that bio renders on the index page.
+
+```yml
+---
+title: Amanda Berckenhoff Long
+position: Secretary
+sort: 3
+email: secretary@horsemenofthehops.com
+image: "/images/amanda-tx-whiskey.jpg"
+description: this is meta description
+social:
+  - name: facebook
+    icon: FaFacebook
+    link: https://www.facebook.com/amandakttx
+
+---
+```
+
+`icon` refers to the Font Awesome icon name for which ever social platform we need.
+[FontAwesome](https://fontawesome.com/) hosts the complete universe of icons, but general sticking `fa` and the platform name together will get you what you need.
+
+Below this yaml based front-matter is where the biograph should go. We can use `markdown` in these pages. Basic usage documented here -> [GitHub](https://github.github.com/gfm/)

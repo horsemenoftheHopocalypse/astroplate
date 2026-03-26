@@ -1,0 +1,35 @@
+---
+title: Count Down Timer
+description: Change up the count down timer
+sidebar:
+  order: 3
+---
+import { FileTree } from '@astrojs/starlight/components';
+
+The layout for the count down timer controlled by the CountDown component.
+
+<FileTree>
+
+- src
+  - layouts
+    - components
+      - ContactUs.astro
+      - **CountDown.astro**
+      - ImageMod.astro
+    - helpers
+
+</FileTree>
+
+The properties found in the 'content.config.ts' file are:
+
+```yml
+countdown:
+  image: "/images/2026 BBO Logo.jpeg"
+  title: "BBO Account Registration"
+  date: 2025-12-29T15:00:00-06:00
+  link: https://www.bcoem.bluebonnetbrewoff.org/
+```
+
+
+It is used on the Home Page and the settings are read from src/content/homepage/-index.md
+
