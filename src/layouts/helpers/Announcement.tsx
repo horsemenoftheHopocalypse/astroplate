@@ -2,7 +2,9 @@ import config from "@/config/config.json";
 import { markdownify } from "@/lib/utils/textConverter";
 import React, { useEffect, useState } from "react";
 
-const { enable, gist_url, expire_days } = config.announcement;
+const { enable, message, expire_days } = config.announcement;
+
+const COOKIE_KEY = "announcement-close";
 
 const Cookies = {
   set: (name: string, value: string, options: any = {}) => {
@@ -43,74 +45,30 @@ const Cookies = {
     }
     return null;
   },
-
-  remove: (name: string, options: any = {}) => {
-    Cookies.set(name, "", { ...options, expires: -1 });
-  },
 };
 
 const Announcement: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [content, setContent] = useState<string>("");
-  const [contentHash, setContentHash] = useState<string>("");
-  const [isLoading, setIsLoading] = useState(true);
-
-  // Simple hash function for content
-  const hashContent = (str: string): string => {
-    let hash = 0;
-    for (let i = 0; i < str.length; i++) {
-      const char = str.charCodeAt(i);
-      hash = ((hash << 5) - hash) + char;
-      hash = hash & hash;
-    }
-    return Math.abs(hash).toString(36);
-  };
 
   useEffect(() => {
-    const fetchAnnouncement = async () => {
-      if (!enable || !gist_url) {
-        setIsLoading(false);
-        return;
-      }
-
-      try {
-        const response = await fetch(gist_url);
-        if (response.ok) {
-          const text = await response.text();
-          const hash = hashContent(text);
-          setContent(text);
-          setContentHash(hash);
-          
-          // Check if user dismissed this specific version
-          if (text && !Cookies.get(`announcement-close-${hash}`)) {
-            setIsVisible(true);
-          }
-        }
-      } catch (error) {
-        console.error("Failed to fetch announcement:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchAnnouncement();
+    if (enable && message && !Cookies.get(COOKIE_KEY)) {
+      setIsVisible(true);
+    }
   }, []);
 
   const handleClose = () => {
-    Cookies.set(`announcement-close-${contentHash}`, "true", {
-      expires: expire_days,
-    });
+    Cookies.set(COOKIE_KEY, "true", { expires: expire_days });
     setIsVisible(false);
   };
 
-  if (!enable || !content || !isVisible) {
+  if (!enable || !message || !isVisible) {
     return null;
   }
 
   return (
     <div className="relative z-999 bg-body dark:bg-darkmode-body shadow-[1px_0_10px_7px_rgba(154,154,154,0.11)] pl-4 pr-20 sm:pr-16 py-4 md:text-lg transition-all duration-300">
       <p
-        dangerouslySetInnerHTML={{ __html: markdownify(content) }}
+        dangerouslySetInnerHTML={{ __html: markdownify(message) }}
       />
       <button
         onClick={handleClose}
