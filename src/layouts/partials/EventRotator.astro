@@ -1,0 +1,309 @@
+---
+import ImageMod from "@/components/ImageMod.astro";
+import { getCollection } from "astro:content";
+import { getListPage } from "@/lib/contentParser.astro";
+import { markdownify } from "@/lib/utils/textConverter";
+
+interface Props {
+  compact?: boolean;
+}
+
+const { compact = false } = Astro.props;
+
+const eventsRotatorSection = await getListPage("eventsRotatorSection", "events-rotator");
+const allEvents = await getCollection("events", ({ data }) => !data.draft);
+const events = allEvents.sort(
+  (a, b) => a.data.milestones.awards.getTime() - b.data.milestones.awards.getTime(),
+);
+
+const nonAwardKeys = ["entries_open", "entries_close", "shipping_open", "shipping_close"] as const;
+type NonAwardKey = typeof nonAwardKeys[number];
+
+const milestoneLabels: Record<NonAwardKey | "awards", string> = {
+  entries_open:   "Entries Open",
+  entries_close:  "Entries Close",
+  shipping_open:  "Shipping Opens",
+  shipping_close: "Shipping Closes",
+  awards:         "Awards",
+};
+
+const milestoneAttr: Record<NonAwardKey | "awards", string> = {
+  entries_open:   "entries-open",
+  entries_close:  "entries-close",
+  shipping_open:  "shipping-open",
+  shipping_close: "shipping-close",
+  awards:         "awards",
+};
+---
+
+{
+  eventsRotatorSection.data.enable && (
+    <section class="section">
+      <div class="container">
+        <div class="row">
+          <div class="mx-auto mb-12 text-center md:col-10 lg:col-8 xl:col-6">
+            <h2 set:html={markdownify(eventsRotatorSection.data.title)} class="mb-4" />
+            <p set:html={markdownify(eventsRotatorSection.data.description)} />
+          </div>
+          <div class="col-12">
+            <div
+              class="swiper event-rotator-slider"
+              data-compact={compact ? "true" : "false"}
+            >
+              <div class="swiper-wrapper">
+                {events.map((event) => {
+                  const ms = event.data.milestones;
+                  return (
+                    <div class="swiper-slide">
+                      <div
+                        class="event-card rounded-lg bg-light dark:bg-darkmode-light overflow-hidden"
+                        data-event-card
+                        data-entries-open={ms.entries_open.getTime()}
+                        data-entries-close={ms.entries_close.getTime()}
+                        data-shipping-open={ms.shipping_open.getTime()}
+                        data-shipping-close={ms.shipping_close.getTime()}
+                        data-awards={ms.awards.getTime()}
+                      >
+                        <ImageMod
+                          src={event.data.image}
+                          alt={event.data.title}
+                          width={576}
+                          height={300}
+                          class="w-full object-cover"
+                          format="webp"
+                          loading="eager"
+                        />
+                        <div class="px-6 py-4">
+                          <div class="font-bold text-xl mb-3 text-text-dark dark:text-white">
+                            {event.data.title}
+                          </div>
+
+                          <div class="completed-badge hidden mb-3">
+                            <span class="inline-block bg-gray-500 text-white text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wide">
+                              Completed
+                            </span>
+                          </div>
+
+                          <div class="countdown-section">
+                            <div class="text-sm font-semibold text-amber-500 mb-2">
+                              ⏱ Next: <span data-milestone-label>—</span>
+                            </div>
+                            <div class="flex justify-center gap-3 mb-4">
+                              <div class="text-center bg-body dark:bg-darkmode-body rounded-lg px-3 py-2 min-w-[52px]">
+                                <div class="text-2xl font-bold text-text-dark dark:text-white" data-days>--</div>
+                                <div class="text-xs text-text-light dark:text-darkmode-text-light uppercase">Days</div>
+                              </div>
+                              <div class="text-center bg-body dark:bg-darkmode-body rounded-lg px-3 py-2 min-w-[52px]">
+                                <div class="text-2xl font-bold text-text-dark dark:text-white" data-hours>--</div>
+                                <div class="text-xs text-text-light dark:text-darkmode-text-light uppercase">Hrs</div>
+                              </div>
+                              <div class="text-center bg-body dark:bg-darkmode-body rounded-lg px-3 py-2 min-w-[52px]">
+                                <div class="text-2xl font-bold text-text-dark dark:text-white" data-minutes>--</div>
+                                <div class="text-xs text-text-light dark:text-darkmode-text-light uppercase">Min</div>
+                              </div>
+                              <div class="text-center bg-body dark:bg-darkmode-body rounded-lg px-3 py-2 min-w-[52px]">
+                                <div class="text-2xl font-bold text-text-dark dark:text-white" data-seconds>--</div>
+                                <div class="text-xs text-text-light dark:text-darkmode-text-light uppercase">Sec</div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="grid grid-cols-2 gap-2">
+                            {nonAwardKeys.map((key) => (
+                              <div
+                                class="milestone-tile rounded px-3 py-2 border-l-4 border-border dark:border-darkmode-border bg-body dark:bg-darkmode-body"
+                                data-milestone={milestoneAttr[key]}
+                                data-date={ms[key].toLocaleDateString("en-US", { month: "short", day: "numeric" })}
+                              >
+                                <div class="text-xs text-text-light dark:text-darkmode-text-light uppercase">
+                                  {milestoneLabels[key]}
+                                </div>
+                                <div class="text-sm font-semibold text-text dark:text-darkmode-text milestone-date">
+                                  {ms[key].toLocaleDateString("en-US", { month: "short", day: "numeric" })}
+                                </div>
+                              </div>
+                            ))}
+                            <div
+                              class="milestone-tile col-span-2 rounded px-3 py-2 border-l-4 border-border dark:border-darkmode-border bg-body dark:bg-darkmode-body"
+                              data-milestone="awards"
+                              data-date={ms.awards.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric", year: "numeric" })}
+                            >
+                              <div class="text-xs text-text-light dark:text-darkmode-text-light uppercase">
+                                Awards
+                              </div>
+                              <div class="text-sm font-semibold text-text dark:text-darkmode-text milestone-date">
+                                {ms.awards.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric", year: "numeric" })}
+                              </div>
+                            </div>
+                          </div>
+
+                          {event.data.link && (
+                            <div class="mt-4 text-center">
+                              <a
+                                href={event.data.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="text-primary hover:underline text-sm font-semibold"
+                              >
+                                Visit Competition Site →
+                              </a>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {!compact && <div class="swiper-button-prev" />}
+              {!compact && <div class="swiper-button-next" />}
+
+              <div class="event-rotator-slider-pagination mt-9 flex items-center justify-center text-center" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+<script>
+  import { Swiper } from "swiper";
+  import "swiper/css";
+  import "swiper/css/pagination";
+  import "swiper/css/navigation";
+  import { Autoplay, Pagination, Navigation } from "swiper/modules";
+
+  const MILESTONES = [
+    { key: "entries-open",   label: "Entries Open" },
+    { key: "entries-close",  label: "Entries Close" },
+    { key: "shipping-open",  label: "Shipping Opens" },
+    { key: "shipping-close", label: "Shipping Closes" },
+    { key: "awards",         label: "Awards" },
+  ];
+
+  function initCard(card: HTMLElement) {
+    const now = Date.now();
+    const timestamps: Record<string, number> = {
+      "entries-open":   Number(card.dataset.entriesOpen),
+      "entries-close":  Number(card.dataset.entriesClose),
+      "shipping-open":  Number(card.dataset.shippingOpen),
+      "shipping-close": Number(card.dataset.shippingClose),
+      "awards":         Number(card.dataset.awards),
+    };
+
+    const active = MILESTONES.find(({ key }) => timestamps[key] > now);
+
+    MILESTONES.forEach(({ key }) => {
+      const tile = card.querySelector<HTMLElement>(`[data-milestone="${key}"]`);
+      if (!tile) return;
+      const dateEl = tile.querySelector<HTMLElement>(".milestone-date");
+      const original = tile.dataset.date ?? "";
+
+      tile.classList.remove("border-green-500", "border-amber-500", "opacity-60");
+
+      if (timestamps[key] <= now) {
+        tile.classList.add("border-green-500", "opacity-60");
+        if (dateEl) dateEl.textContent = "✓ " + original;
+      } else if (active && key === active.key) {
+        tile.classList.add("border-amber-500");
+        if (dateEl) dateEl.textContent = original;
+      } else {
+        if (dateEl) dateEl.textContent = original;
+      }
+    });
+
+    if (!active) {
+      card.querySelector(".countdown-section")?.classList.add("hidden");
+      card.querySelector(".completed-badge")?.classList.remove("hidden");
+      return;
+    }
+
+    const labelEl = card.querySelector<HTMLElement>("[data-milestone-label]");
+    if (labelEl) labelEl.textContent = active.label;
+
+    const daysEl    = card.querySelector<HTMLElement>("[data-days]")!;
+    const hoursEl   = card.querySelector<HTMLElement>("[data-hours]")!;
+    const minutesEl = card.querySelector<HTMLElement>("[data-minutes]")!;
+    const secondsEl = card.querySelector<HTMLElement>("[data-seconds]")!;
+
+    const target = timestamps[active.key];
+    let lastUpdate = Date.now();
+
+    function animate() {
+      const t = Date.now();
+      if (t - lastUpdate >= 1000) {
+        lastUpdate = t;
+        const dist = target - t;
+        if (dist <= 0) {
+          initCard(card);
+          return;
+        }
+        daysEl.textContent    = String(Math.floor(dist / 86400000));
+        hoursEl.textContent   = String(Math.floor((dist % 86400000) / 3600000)).padStart(2, "0");
+        minutesEl.textContent = String(Math.floor((dist % 3600000) / 60000)).padStart(2, "0");
+        secondsEl.textContent = String(Math.floor((dist % 60000) / 1000)).padStart(2, "0");
+      }
+      requestAnimationFrame(animate);
+    }
+    requestAnimationFrame(animate);
+  }
+
+  document.addEventListener("astro:page-load", () => {
+    const slider = document.querySelector<HTMLElement>(".event-rotator-slider");
+    if (!slider) return;
+
+    const isCompact  = slider.dataset.compact === "true";
+    const eventCount = document.querySelectorAll("[data-event-card]").length;
+
+    document.querySelectorAll<HTMLElement>("[data-event-card]").forEach(initCard);
+
+    new Swiper(".event-rotator-slider", {
+      modules: [Pagination, Autoplay, Navigation],
+      spaceBetween: 24,
+      loop: eventCount > 1,
+      autoplay: eventCount > 1
+        ? { delay: isCompact ? 4000 : 5000, disableOnInteraction: false }
+        : false,
+      navigation: isCompact
+        ? false
+        : { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
+      pagination: {
+        el: ".event-rotator-slider-pagination",
+        type: "bullets",
+        clickable: true,
+      },
+      breakpoints: isCompact ? {} : {
+        768: { slidesPerView: 2 },
+        992: { slidesPerView: 3 },
+      },
+    });
+  });
+</script>
+
+<style is:global>
+  .event-rotator-slider-pagination .swiper-pagination-bullet {
+    width: 14px !important;
+    height: 14px !important;
+    background-color: #666 !important;
+    opacity: 1 !important;
+    border: 2px solid #333 !important;
+    margin: 0 6px !important;
+  }
+
+  .event-rotator-slider-pagination .swiper-pagination-bullet-active {
+    background-color: var(--color-primary) !important;
+    border-color: var(--color-primary) !important;
+  }
+
+  .dark .event-rotator-slider-pagination .swiper-pagination-bullet {
+    background-color: #999 !important;
+    border: 2px solid #fff !important;
+  }
+
+  .dark .event-rotator-slider-pagination .swiper-pagination-bullet-active {
+    background-color: var(--color-darkmode-primary) !important;
+    border-color: var(--color-darkmode-primary) !important;
+  }
+</style>
