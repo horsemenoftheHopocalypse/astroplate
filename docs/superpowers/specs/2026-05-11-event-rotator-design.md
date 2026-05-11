@@ -27,7 +27,8 @@ const eventsCollection = defineCollection({
     milestones: z.object({
       entries_open:  z.date(),
       entries_close: z.date(),
-      shipping:      z.date(),
+      shipping_open: z.date(),
+      shipping_close: z.date(),
       awards:        z.date(),
     }),
     draft: z.boolean().optional(),
@@ -45,7 +46,8 @@ link: "https://www.bcoem.bluebonnetbrewoff.org/"
 milestones:
   entries_open:  2026-01-15T00:00:00-06:00
   entries_close: 2026-02-01T00:00:00-06:00
-  shipping:      2026-02-10T00:00:00-06:00
+  shipping_open: 2026-02-10T00:00:00-06:00
+  shipping_close: 2026-02-24T00:00:00-06:00
   awards:        2026-03-08T12:00:00-06:00
 draft: false
 ---
@@ -117,17 +119,22 @@ Each `swiper-slide` div carries milestone timestamps as `data-` attributes for t
     data-event-card
     data-entries-open="{ms}"
     data-entries-close="{ms}"
-    data-shipping="{ms}"
+    data-shipping-open="{ms}"
+    data-shipping-close="{ms}"
     data-awards="{ms}"
   >
     <!-- image -->
     <!-- countdown display: data-days / data-hours / data-minutes / data-seconds -->
     <!-- active milestone label: data-milestone-label -->
-    <!-- 4 milestone tiles (green/amber/dark border states set by JS) -->
+    <!-- 5 milestone tiles (green/amber/dark border states set by JS) -->
     <!-- optional link -->
   </div>
 </div>
 ```
+
+**Milestone tile grid layout:**
+
+5 tiles in a `grid-cols-2` layout. The `awards` tile uses `col-span-2` to span the full width — it's the headline milestone and the full-width treatment reinforces that.
 
 Milestone tile visual states:
 
@@ -139,7 +146,7 @@ Milestone tile visual states:
 
 **Past event handling:**
 
-When all 4 milestones are in the past, JS sets `data-completed` on the card. CSS class `event-card--completed` reduces card opacity to 0.6 and shows a "Completed" badge over the image. No countdown digits shown — awards date displayed instead.
+When all 5 milestones are in the past, JS sets `data-completed` on the card. CSS class `event-card--completed` reduces card opacity to 0.6 and shows a "Completed" badge over the image. No countdown digits shown — awards date displayed instead.
 
 ### Modified files
 
@@ -157,11 +164,11 @@ Runs in `<script>` block inside `EventRotator.astro`, triggered on `astro:page-l
 
 **Algorithm per card:**
 
-1. Read all 4 milestone timestamps from `data-` attributes.
+1. Read all 5 milestone timestamps from `data-` attributes.
 2. Find the first milestone whose timestamp is greater than `Date.now()` — this is the active target.
 3. Write the milestone name to `[data-milestone-label]` within the card.
 4. Start a `requestAnimationFrame` loop that writes `days/hours/minutes/seconds` into `[data-days]`, `[data-hours]`, `[data-minutes]`, `[data-seconds]` **scoped to that card** via `card.querySelector(...)` — no global element IDs.
-5. Apply border color classes to the 4 milestone tiles based on past/active/future state.
+5. Apply border color classes to the 5 milestone tiles based on past/active/future state.
 6. If no milestone is in the future, set `card.dataset.completed = "true"` and skip the timer.
 
 All countdown loops for all cards start simultaneously on page load (all slides are in the DOM even when not visible in Swiper). This is intentional — it avoids flicker when the user navigates between slides.
