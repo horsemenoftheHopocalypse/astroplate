@@ -2,6 +2,7 @@
 import ImageMod from "@/components/ImageMod.astro";
 import Base from "@/layouts/Base.astro";
 import PageHeader from "@/partials/PageHeader.astro";
+import EventRotator from "@/partials/EventRotator.astro";
 
 // Fetch Lone Star Circuit standings at build time directly from source
 let standingsHtml = "";
@@ -62,6 +63,7 @@ try {
 
 <Base>
   <PageHeader title="Competitions" />
+  <EventRotator />
   <section class="section pt-0">
     <div class="container">
       <div class="row gx-5">
