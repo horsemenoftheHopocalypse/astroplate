@@ -8,7 +8,7 @@ import Testimonial from "@/partials/Testimonial.astro";
 import BrewerSpotlight from "@/partials/BrewerSpotlight.astro";
 import { FaCheck } from "react-icons/fa";
 import ContactUs from "@/components/ContactUs.astro";
-import CountDown from "@/components/CountDown.astro";
+import EventRotator from "@/partials/EventRotator.astro";
 import PhotoGallery from "@/partials/PhotoGallery.astro";
 
 const homepage = await getListPage("homepage", "-index");
@@ -19,7 +19,7 @@ const brewerSpotlight = await getListPage(
   "brewerSpotlightSection",
   "brewer-spotlight",
 );
-const { banner, countdown } = homepage.data;
+const { banner } = homepage.data;
 ---
 
 <Base>
@@ -70,16 +70,5 @@ const { banner, countdown } = homepage.data;
     </div>
   </section>
 
-  <section class="section pt-0">
-    <div class="container">
-      <div class="row justify-center">
-        <CountDown
-          image={countdown.image}
-          title={countdown.title}
-          date={countdown.date}
-          link={countdown.link}
-        />
-      </div>
-    </div>
-  </section>
+  <EventRotator compact={true} />
 </Base>
