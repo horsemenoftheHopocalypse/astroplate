@@ -4,8 +4,8 @@ import starlight from '@astrojs/starlight';
 // import starlightThemeBlack from 'starlight-theme-black'
 
 export default defineConfig({
-  site: 'https://horsemenofthehops.github.io',
-  base: '/docs/',
+  site: 'https://horsemenofthehopocalypse.github.io',
+  base: '/astroplate/',
   integrations: [
     starlight({
       title: "Horsemen of the Hops Site Documentation",

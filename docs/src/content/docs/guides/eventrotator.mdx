@@ -3,6 +3,8 @@ title: Event Rotator
 description: How to show upcoming events
 ---
 import { FileTree, Card, CardGrid } from '@astrojs/starlight/components';
+import eventCard from '../../../assets/event-card.jpg';
+import completedEvent from '../../../assets/completed-event.jpg';
 
 
 The spiffy EventRotator is straightforward to use
@@ -49,9 +51,9 @@ The count down timer for the event tracks the next relevant date.
 
 <CardGrid>
 <Card title="Upcoming Event">
-<img src="/docs/images/event-card.jpg" title="Event Card" alt="Event Card" height="250" width="400" />
+<img src={eventCard.src} title="Event Card" alt="Event Card" height="250" width="400" />
 </Card>
 <Card title="Completed Event">
-<img src="/docs/images/completed-event.jpg" title="Completed Event Card" alt="Completed Event Card" height="250" width="400" />
+<img src={completedEvent.src} title="Completed Event Card" alt="Completed Event Card" height="250" width="400" />
 </Card>
 </CardGrid>
