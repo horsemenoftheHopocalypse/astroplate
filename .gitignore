@@ -31,3 +31,6 @@ package-lock.json
 
 # Local Netlify folder
 .netlify
+
+# brainstorming session files
+.superpowers/
