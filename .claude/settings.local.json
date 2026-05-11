@@ -4,7 +4,12 @@
       "Bash(npm info:*)",
       "Bash(python3 -c \"import json,sys; print\\(json.load\\(sys.stdin\\)[-5:]\\)\")",
       "Bash(npm install:*)",
-      "Bash(chmod +x /Users/barryforrest/Projects/Horsemen/astro/astroplate/.githooks/pre-push)"
+      "Bash(chmod +x /Users/barryforrest/Projects/Horsemen/astro/astroplate/.githooks/pre-push)",
+      "Bash(ls /Users/barryforrest/.claude/plugins/cache/claude-plugins-official/superpowers/5.0.7/skills/brainstorming/scripts/)",
+      "Read(//Users/barryforrest/.claude/plugins/cache/claude-plugins-official/superpowers/5.0.7/skills/brainstorming/scripts/**)",
+      "Bash(bash /Users/barryforrest/.claude/plugins/cache/claude-plugins-official/superpowers/5.0.7/skills/brainstorming/scripts/start-server.sh --project-dir /Users/barryforrest/Projects/Horsemen/astro/astroplate)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)"
     ]
   }
 }
