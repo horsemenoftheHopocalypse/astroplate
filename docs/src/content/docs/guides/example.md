@@ -10,4 +10,4 @@ Writing a good guide requires thinking about what your users are trying to do.
 
 ## Further reading
 
-- Read [about how-to guides](https://diataxis.fr/how-to-guides/) in the Diátaxis framework
+- Read <a href="https://diataxis.fr/how-to-guides/" target="_blank">about how-to guides</a> in the Diátaxis framework
