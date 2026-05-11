@@ -1,0 +1,57 @@
+---
+title: Event Rotator
+description: How to show upcoming events
+---
+import { FileTree, Card, CardGrid } from '@astrojs/starlight/components';
+
+
+The spiffy EventRotator is straightforward to use
+
+Navigate to the Events content folder and add a new *.mdx file for the event:
+<FileTree>
+- src
+  - config
+  - content
+    - contact
+    - **events**
+      - draft-horse.md
+      - santa-bee.md
+  - homepage
+</FileTree>
+
+This file needs the following yml `front-matter` to render the event:
+
+```yml
+---
+title: "Spirity of '76"
+image: "/images/spiritof76.jpg"
+link: "https://brewingcompetitions.com/northtexas/"
+milestones:
+  entries_open:   2026-04-15T00:00:00-06:00
+  entries_close:  2026-05-05T00:00:00-06:00
+  shipping_open:  2026-04-25T00:00:00-06:00
+  shipping_close: 2026-05-15T00:00:00-06:00
+  awards:         2026-07-11T15:00:00-06:00
+draft: false
+---
+```
+
+The time stamps for the `milestones` looks scarry. It is just a very compact, computer‑friendly way of saying a specific local time on a specific date, plus “and this is which time zone I mean.”
+
+So, in plain language:
+- It means **3:00 PM on July 11, 2026**, in a place that is 6 hours behind UTC.
+- In North America, UTC-06:00 is the offset used by Central Standard Time (like Chicago or Dallas in winter) or by some Mountain Time areas when they’re on summer time, but the code itself is just saying “UTC minus six hours,” not the city or region.
+
+The count down timer for the event tracks the next relevant date.
+- Once the entry deadline has passed, the timer will count down until the shipping window closes.
+- When the shipping window closes, the timer will advance to the awards presentation date.
+- After the awards presentation date, the card will have a `completed` badge like the Bluebonnet card below.
+
+<CardGrid>
+<Card title="Upcoming Event">
+<img src="/public/images/event-card.jpg" title="Event Card" alt-text="Event Card" height="250" width="400"></img>
+</Card>
+<Card title="Completed Event">
+<img src="/public/images/completed-event.jpg" title="Completed Event Card" alt-text="Completed Event Card" height="250" width="400"></img>
+</Card>
+</CardGrid>

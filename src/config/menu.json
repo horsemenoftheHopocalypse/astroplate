@@ -45,6 +45,10 @@
         {
           "name": "Tags",
           "url": "/tags"
+        },
+        {
+          "name": "Site Documentation",
+          "url": "https://horsemenofthehopocalypse.github.io/astroplate/"
         }
       ]
     }

@@ -7,6 +7,6 @@ milestones:
   entries_close:  2026-05-05T00:00:00-06:00
   shipping_open:  2026-04-25T00:00:00-06:00
   shipping_close: 2026-05-15T00:00:00-06:00
-  awards:         2026-07-11T12:00:00-06:00
+  awards:         2026-07-11T15:00:00-06:00
 draft: false
 ---

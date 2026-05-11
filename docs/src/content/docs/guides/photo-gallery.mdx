@@ -48,11 +48,23 @@ photos:
     alt-text: "Club members at Cowtown Brewing"
     description: "Club members at Cowtown Brewing"
     image: "/images/horsemen-1.jpg"
-    
+
 ```
 
 Setting `enable` to false will prevent the gallery from loading any images and the pages using the gallery will not have images to show.
 
-To add images, repeat the YAML structure with new values and ensure that the `image` is stores in the `public/images` folder.
+To add images, repeat the YAML structure with new values and store the `image` in the `public/images` folder.
+
+<FileTree>
+- public
+  - **images**
+    - german-beer.jpg
+    - horsement-1.jpg
+  - scripts
+- scripts
+- src
+</FileTree>
 
 To remove an image, delete its entry in the image-gallary.md file and delete the image from the public/images folder.
+
+
