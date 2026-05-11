@@ -196,6 +196,37 @@ const brewerSpotlightSectionCollection = defineCollection({
   }),
 });
 
+// Events collection schema — one file per event
+const eventsCollection = defineCollection({
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "src/content/events" }),
+  schema: z.object({
+    title: z.string(),
+    image: z.string(),
+    link: z.string().optional(),
+    milestones: z.object({
+      entries_open:   z.date(),
+      entries_close:  z.date(),
+      shipping_open:  z.date(),
+      shipping_close: z.date(),
+      awards:         z.date(),
+    }),
+    draft: z.boolean().optional(),
+  }),
+});
+
+// Events Rotator section header schema
+const eventsRotatorSectionCollection = defineCollection({
+  loader: glob({
+    pattern: "events-rotator.{md,mdx}",
+    base: "src/content/sections",
+  }),
+  schema: z.object({
+    enable: z.boolean(),
+    title: z.string(),
+    description: z.string(),
+  }),
+});
+
 // Export collections
 export const collections = {
   // Pages
@@ -211,4 +242,6 @@ export const collections = {
   testimonialSection: testimonialSectionCollection,
   imageGallarySection: photoGalleryCollection,
   brewerSpotlightSection: brewerSpotlightSectionCollection,
+  events: eventsCollection,
+  eventsRotatorSection: eventsRotatorSectionCollection,
 };
