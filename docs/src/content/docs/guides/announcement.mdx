@@ -22,17 +22,15 @@ contains an item for Announcement that looks like this:
 ```json
   "announcement": {
     "enable": true,
-    "gist_url": "https://gist.github.com/horsemenoftheHopocalypse/9a82ca38c4207273c5b8cb689ff40230#file-announcements-html",
+    "message": "🍺 Spirit of '76 Beer Sort - May 16th, 2pm - Long's House 🍺",
     "expire_days": 7
   },
 ```
 
 The `enable` flag controls the visibility of the announcent.
 
-The `gist_url` is where the site looks to find the announcement. This enables us to use GitHub to change an announcements without requiring a full site re-deployment.
 
-`expire_days` controls the shelf-life of the cookie. After 7 days the cookie expires and retrieved from the `gist_uri`
-
+`expire_days` controls the shelf-life of the cookie. After 7 days the cookie expires.
 ![alt text](../../../assets/edit_announcement.png)
 
 
