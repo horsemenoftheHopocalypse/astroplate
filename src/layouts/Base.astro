@@ -191,9 +191,9 @@ const { title, meta_title, description, image, noindex, canonical } =
     }
 
     <TwSizeIndicator />
-    <Announcement client:idle />
+    <Announcement client:only="react" transition:persist />
     <Header />
-    <SearchModal client:idle />
+    <SearchModal client:only="react" transition:persist />
     <main id="main-content">
       <slot />
     </main>

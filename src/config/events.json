@@ -1,6 +1,29 @@
 {
   "events": [
     {
+      "id": "spirit-of-76-2026",
+      "name": "Spirit of '76",
+      "description": "Celebrate the spirit of independence with our annual Spirit of '76 event!",
+      "fullDescription": "The fun for The Spirit of ‘76 Awards Ceremony will start July 11th  at 1pm at the Keller KC Hall. Your $20 entry ticket includes:",
+      "price": 20.00,
+      "date": "July 11th, 2026",
+      "time": "1 PM until 4 PM",
+      "location": "Knights of Columbus Hall, 1907 Whitley Rd, Keller, TX 76248",
+      "highlights": [
+        {
+          "icon": "🍺",
+          "title": "BBQ Lunch",
+          "description": "🇺🇸 Homebrew and commercial beers. 🇺🇸 A front-row seat to the awards ceremony for our all-American homebrew competition."
+        },
+        {
+          "icon": "🇺🇸",
+          "title": "Door prizes, silent auction, and raffle items",
+          "description": "Take a chance and try your luck with our entertaining raffles! Prizes suitable for any homebrewer!"
+        }
+      ],
+      "active": true
+    },
+    {
       "id": "christmas-party-2025",
       "name": "Christmas Party",
       "description": "Saddle up for the most festive and hop-tastic event of the season - the Horsemen of the Hopocalypse Christmas Party!",

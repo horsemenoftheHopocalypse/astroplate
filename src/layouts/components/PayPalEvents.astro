@@ -9,7 +9,14 @@ console.log(
 );
 
 const { events } = eventsData;
-const activeEvents = events.filter((event) => event.active);
+const activeEvents = events
+  .filter((event) => event.active)
+  .map((event) => ({
+    ...event,
+    desktopMapUrl: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(event.location)}`,
+    appleMapUrl: `https://maps.apple.com/?q=${encodeURIComponent(event.location)}`,
+    androidMapUrl: `geo:0,0?q=${encodeURIComponent(event.location)}`,
+  }));
 ---
 
 <div class="paypal-checkout-container max-w-4xl mx-auto p-4">
@@ -19,7 +26,10 @@ const activeEvents = events.filter((event) => event.active);
     <div class="grid grid-cols-1 gap-4">
       {
         activeEvents.map((event) => (
-          <div class="product-card border rounded-lg p-4 shadow-sm flex flex-col">
+          <div
+            id={`${event.id}`}
+            class="product-card border rounded-lg p-4 shadow-sm flex flex-col"
+          >
             <div class="flex-1">
               <h3 class="font-semibold text-lg">{event.name}</h3>
               <p class="text-gray-600 my-2">{event.description}</p>
@@ -45,6 +55,19 @@ const activeEvents = events.filter((event) => event.active);
                     <strong>LOCATION:</strong> {event.location}
                   </li>
                 </ul>
+                <a
+                  href={event.desktopMapUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-2 mt-3 text-blue-600 hover:text-blue-800 hover:underline event-map-link"
+                  aria-label={`Open ${event.name} location in maps`}
+                  data-desktop-map-url={event.desktopMapUrl}
+                  data-apple-map-url={event.appleMapUrl}
+                  data-android-map-url={event.androidMapUrl}
+                >
+                  <i class="fa-solid fa-map-location-dot" aria-hidden="true" />
+                  <span>Open in Maps</span>
+                </a>
               </div>
               <p class="text-xl font-bold mb-3">${event.price.toFixed(2)}</p>
             </div>
@@ -125,6 +148,28 @@ const activeEvents = events.filter((event) => event.active);
 />
 
 <script is:inline define:vars={{ PAYPAL_CLIENT_ID }}>
+  const isIPhone = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+  const isAndroid = /Android/i.test(navigator.userAgent);
+
+  document.querySelectorAll(".event-map-link").forEach((link) => {
+    link.addEventListener("click", (event) => {
+      if (!(link instanceof HTMLAnchorElement)) {
+        return;
+      }
+
+      if (isIPhone) {
+        event.preventDefault();
+        window.location.href = link.dataset.appleMapUrl || link.href;
+        return;
+      }
+
+      if (isAndroid) {
+        event.preventDefault();
+        window.location.href = link.dataset.androidMapUrl || link.href;
+      }
+    });
+  });
+
   const script = document.createElement("script");
   script.src = `https://www.paypal.com/sdk/js?client-id=${PAYPAL_CLIENT_ID}&currency=USD&components=buttons&enable-funding=venmo`;
   script.onload = () => {
