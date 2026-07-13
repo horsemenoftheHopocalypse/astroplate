@@ -35,3 +35,6 @@ package-lock.json
 # brainstorming session files
 .superpowers/
 horsemen-website.code-workspace
+
+# Google Sheet exports for scripts/import-brewer-spotlights.js (may contain member emails)
+scripts/*.csv

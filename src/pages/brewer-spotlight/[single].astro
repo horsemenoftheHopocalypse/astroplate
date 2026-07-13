@@ -1,29 +1,25 @@
 ---
 import ImageMod from "@/components/ImageMod.astro";
 import Base from "@/layouts/Base.astro";
-import { getListPage } from "@/lib/contentParser.astro";
 import { slugify, markdownify } from "@/lib/utils/textConverter";
 import { getSinglePage } from "@/lib/contentParser.astro";
+import { getBrewerSpotlightQAs } from "@/lib/data/brewerSpotlightQuestions";
 import BlogCard from "@/components/BlogCard.astro";
 // Get all static paths for brewer spotlights
 export async function getStaticPaths() {
-  const brewerSpotlight = await getListPage(
-    "brewerSpotlightSection",
-    "brewer-spotlight",
-  );
+  const spotlights = await getSinglePage("brewerSpotlights");
 
-  const paths = brewerSpotlight.data.spotlights.map((spotlight: any) => ({
+  return spotlights.map((spotlight) => ({
     params: {
-      single: slugify(spotlight.name),
+      single: slugify(spotlight.data.name),
     },
     props: { spotlight },
   }));
-
-  return paths;
 }
 
 const { spotlight } = Astro.props;
-const { name, avatar, designation, questions } = spotlight;
+const { name, avatar, designation } = spotlight.data;
+const questions = getBrewerSpotlightQAs(spotlight.data);
 
 // get all posts by brewer
 const BLOG_FOLDER = "blog";
@@ -64,14 +60,14 @@ const postFilterByBrewer = posts.filter((post) => {
             <p
               class="text-sm text-text-light dark:text-darkmode-text-light mt-2"
             >
-              Interview Date: {spotlight.date}
+              Interview Date: {spotlight.data.date}
             </p>
           </div>
 
           {/* Q&A Section */}
           <div class="space-y-8 mb-16">
             {
-              questions.map((qa: any) => (
+              questions.map((qa) => (
                 <div class="bg-body dark:bg-darkmode-body rounded-lg p-6 border border-border dark:border-darkmode-border">
                   <h3 class="h5 text-primary mb-4 dark:text-darkmode-text">
                     Q: {qa.question}

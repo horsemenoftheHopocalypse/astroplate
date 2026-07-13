@@ -1,6 +1,6 @@
 ---
 import Base from "@/layouts/Base.astro";
-import { getListPage } from "@/lib/contentParser.astro";
+import { getListPage, getSinglePage } from "@/lib/contentParser.astro";
 import PageHeader from "@/partials/PageHeader.astro";
 import ImageMod from "@/components/ImageMod.astro";
 import { slugify } from "@/lib/utils/textConverter";
@@ -9,12 +9,13 @@ const brewerSpotlight = await getListPage(
   "brewerSpotlightSection",
   "brewer-spotlight",
 );
-const { title, description, spotlights } = brewerSpotlight.data;
+const { title, description } = brewerSpotlight.data;
+const spotlights = await getSinglePage("brewerSpotlights");
 
 // Sort spotlights by last name
-const sortedSpotlights = [...spotlights].sort((a: any, b: any) => {
-  const lastNameA = a.name.split(" ").pop()?.toLowerCase() || "";
-  const lastNameB = b.name.split(" ").pop()?.toLowerCase() || "";
+const sortedSpotlights = [...spotlights].sort((a, b) => {
+  const lastNameA = a.data.name.split(" ").pop()?.toLowerCase() || "";
+  const lastNameB = b.data.name.split(" ").pop()?.toLowerCase() || "";
   return lastNameA.localeCompare(lastNameB);
 });
 ---
@@ -30,26 +31,26 @@ const sortedSpotlights = [...spotlights].sort((a: any, b: any) => {
       </div>
       <div class="row justify-center">
         {
-          sortedSpotlights.map((spotlight: any) => (
+          sortedSpotlights.map((spotlight) => (
             <div class="mb-14 md:col-6 lg:col-4">
-              <a href={`/brewer-spotlight/${slugify(spotlight.name)}`}>
+              <a href={`/brewer-spotlight/${slugify(spotlight.data.name)}`}>
                 <div class="h-full rounded-lg bg-light dark:bg-darkmode-light p-8 text-center transition-all hover:shadow-lg">
-                  {spotlight.avatar && (
+                  {spotlight.data.avatar && (
                     <ImageMod
                       class="mx-auto mb-6 rounded-full"
-                      src={spotlight.avatar}
-                      alt={spotlight.name}
+                      src={spotlight.data.avatar}
+                      alt={spotlight.data.name}
                       width={150}
                       height={150}
                       format="webp"
                     />
                   )}
-                  <h3 class="h4 mb-2">{spotlight.name}</h3>
+                  <h3 class="h4 mb-2">{spotlight.data.name}</h3>
                   <p class="text-text-dark dark:text-white mb-2">
-                    {spotlight.designation}
+                    {spotlight.data.designation}
                   </p>
                   <p class="text-sm text-text-light dark:text-darkmode-text-light">
-                    {spotlight.date}
+                    {spotlight.data.date}
                   </p>
                 </div>
               </a>

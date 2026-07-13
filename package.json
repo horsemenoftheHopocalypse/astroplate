@@ -18,6 +18,7 @@
     "format": "prettier -w ./src",
     "generate-json": "node scripts/jsonGenerator.js",
     "remove-darkmode": "node scripts/removeDarkmode.js && yarn format",
+    "import-brewer-spotlights": "node scripts/import-brewer-spotlights.js",
     "postinstall": "git config core.hooksPath .githooks"
   },
   "dependencies": {
@@ -53,6 +54,7 @@
     "@types/node": "24.10.1",
     "@types/react": "19.2.6",
     "@types/react-dom": "19.2.3",
+    "csv-parse": "^7.0.1",
     "eslint": "^9.39.1",
     "netlify-cli": "^23.12.3",
     "prettier": "^3.6.2",

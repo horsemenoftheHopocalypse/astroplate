@@ -169,7 +169,7 @@ const photoGalleryCollection = defineCollection({
   }),
 });
 
-// Brewer Spotlight Section collection schema
+// Brewer Spotlight Section header schema
 const brewerSpotlightSectionCollection = defineCollection({
   loader: glob({
     pattern: "brewer-spotlight.{md,mdx}",
@@ -179,20 +179,39 @@ const brewerSpotlightSectionCollection = defineCollection({
     enable: z.boolean(),
     title: z.string(),
     description: z.string(),
-    spotlights: z.array(
-      z.object({
-        name: z.string(),
-        avatar: z.string(),
-        designation: z.string(),
-        date: z.string(),
-        questions: z.array(
-          z.object({
-            question: z.string(),
-            answer: z.string(),
-          }),
-        ),
-      }),
-    ),
+  }),
+});
+
+// Brewer Spotlights collection schema — one file per brewer
+const brewerSpotlightsCollection = defineCollection({
+  loader: glob({
+    pattern: "**/*.{md,mdx}",
+    base: "src/content/brewer-spotlights",
+  }),
+  schema: z.object({
+    name: z.string(),
+    avatar: z.string(),
+    designation: z.string(),
+    date: z.string(),
+    first_batch: z.string().optional(),
+    favorite_beer: z.string().optional(),
+    biggest_fail: z.string().optional(),
+    go_to_beer: z.string().optional(),
+    fermenter_now: z.string().optional(),
+    favorite_style: z.string().optional(),
+    brewery_setup: z.string().optional(),
+    why_homebrew: z.string().optional(),
+    horsemen_highlight: z.string().optional(),
+    fun_facts: z.string().optional(),
+    extra_questions: z
+      .array(
+        z.object({
+          question: z.string(),
+          answer: z.string(),
+        }),
+      )
+      .optional(),
+    draft: z.boolean().optional(),
   }),
 });
 
@@ -242,6 +261,7 @@ export const collections = {
   testimonialSection: testimonialSectionCollection,
   imageGallarySection: photoGalleryCollection,
   brewerSpotlightSection: brewerSpotlightSectionCollection,
+  brewerSpotlights: brewerSpotlightsCollection,
   events: eventsCollection,
   eventsRotatorSection: eventsRotatorSectionCollection,
 };

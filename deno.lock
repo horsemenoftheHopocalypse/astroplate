@@ -28,6 +28,7 @@
         "npm:astro-auto-import@~0.4.5",
         "npm:astro-font@^1.1.0",
         "npm:astro@5.15.9",
+        "npm:csv-parse@^7.0.1",
         "npm:date-fns@^4.1.0",
         "npm:disqus-react@^1.1.7",
         "npm:eslint@^9.39.1",
