@@ -23,7 +23,7 @@
   },
 
   "announcement": {
-    "enable": true,
+    "enable": false,
     "message": "🍺 Spirit of '76 Beer Awards - July 11th, 1pm - 4pm KC Hall, Keller 🍺",
     "expire_days": 7
   },
