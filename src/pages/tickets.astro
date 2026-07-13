@@ -2,10 +2,20 @@
 import Base from "@/layouts/Base.astro";
 import PageHeader from "@/partials/PageHeader.astro";
 import PayPalEvents from "@/components/PayPalEvents.astro";
+import ImageMod from "@/components/ImageMod.astro";
 ---
 
 <Base>
   <PageHeader title="Event Tickets" />
+
+  <ImageMod
+    src="/images/paypal_qrcode.png"
+    class="mx-auto mb-6"
+    height={150}
+    width={150}
+    alt="PayPal QR Code"
+    format="webp"
+  />
   <section class="section pt-14">
     <div class="container">
       <div class="row justify-center">
