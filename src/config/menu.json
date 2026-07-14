@@ -43,6 +43,10 @@
           "url": "/contact"
         },
         {
+          "name": "Member Messaging",
+          "url": "/member-messaging"
+        },
+        {
           "name": "Tags",
           "url": "/tags"
         },

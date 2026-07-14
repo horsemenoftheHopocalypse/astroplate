@@ -1,0 +1,174 @@
+---
+import Base from "@/layouts/Base.astro";
+import PageHeader from "@/partials/PageHeader.astro";
+---
+
+<Base title="Member Messaging" meta_title="Member Messaging">
+  <PageHeader title="Member Messaging" />
+  <section class="section-sm">
+    <div class="container max-w-4xl">
+      <div class="rounded-lg border border-border bg-light p-6 dark:border-darkmode-border dark:bg-darkmode-light">
+        <p class="mb-4 text-sm">
+          Send a message to members using Amazon SES (email) or Amazon SNS (SMS).
+          This page requires your admin token and backend environment variables.
+        </p>
+
+        <form id="member-messaging-form" class="space-y-4">
+          <div>
+            <label class="mb-2 block text-sm font-semibold" for="adminToken">Admin Token</label>
+            <input
+              id="adminToken"
+              name="adminToken"
+              type="password"
+              class="w-full rounded border border-border px-3 py-2 dark:border-darkmode-border dark:bg-darkmode-body"
+              placeholder="MESSAGE_ADMIN_TOKEN"
+              required
+            />
+          </div>
+
+          <div class="grid gap-4 md:grid-cols-2">
+            <div>
+              <label class="mb-2 block text-sm font-semibold" for="channel">Channel</label>
+              <select
+                id="channel"
+                name="channel"
+                class="w-full rounded border border-border px-3 py-2 dark:border-darkmode-border dark:bg-darkmode-body"
+              >
+                <option value="email">Email (SES)</option>
+                <option value="sms">SMS (SNS)</option>
+              </select>
+            </div>
+
+            <div id="fromAddressWrap">
+              <label class="mb-2 block text-sm font-semibold" for="fromAddress">From Address</label>
+              <input
+                id="fromAddress"
+                name="fromAddress"
+                type="email"
+                class="w-full rounded border border-border px-3 py-2 dark:border-darkmode-border dark:bg-darkmode-body"
+                placeholder="optional (uses SES_FROM_EMAIL by default)"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label class="mb-2 block text-sm font-semibold" for="recipients">Recipients</label>
+            <textarea
+              id="recipients"
+              name="recipients"
+              rows="4"
+              class="w-full rounded border border-border px-3 py-2 dark:border-darkmode-border dark:bg-darkmode-body"
+              placeholder="Email: one per line or comma-separated\nSMS: E.164 format, e.g. +18175551234"
+            ></textarea>
+            <label class="mt-2 flex items-center gap-2 text-sm">
+              <input id="useDefaultRecipients" name="useDefaultRecipients" type="checkbox" />
+              Include server defaults (`MEMBER_EMAILS` or `MEMBER_PHONES`)
+            </label>
+          </div>
+
+          <div id="subjectWrap">
+            <label class="mb-2 block text-sm font-semibold" for="subject">Email Subject</label>
+            <input
+              id="subject"
+              name="subject"
+              type="text"
+              class="w-full rounded border border-border px-3 py-2 dark:border-darkmode-border dark:bg-darkmode-body"
+              placeholder="Monthly club update"
+            />
+          </div>
+
+          <div>
+            <label class="mb-2 block text-sm font-semibold" for="message">Message</label>
+            <textarea
+              id="message"
+              name="message"
+              rows="8"
+              class="w-full rounded border border-border px-3 py-2 dark:border-darkmode-border dark:bg-darkmode-body"
+              placeholder="Write your member announcement..."
+              required
+            ></textarea>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <button type="submit" class="btn btn-primary">Send Message</button>
+            <p id="status" class="text-sm"></p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script>
+  // @ts-nocheck
+  const form = document.querySelector("#member-messaging-form");
+  const channel = document.querySelector("#channel");
+  const subjectWrap = document.querySelector("#subjectWrap");
+  const fromAddressWrap = document.querySelector("#fromAddressWrap");
+  const status = document.querySelector("#status");
+
+  if (
+    !(form instanceof HTMLFormElement) ||
+    !(channel instanceof HTMLSelectElement) ||
+    !(subjectWrap instanceof HTMLElement) ||
+    !(fromAddressWrap instanceof HTMLElement) ||
+    !(status instanceof HTMLElement)
+  ) {
+    console.error("Member messaging page could not initialize: expected DOM nodes were not found.");
+  } else {
+    function syncChannelFields() {
+      const isEmail = channel.value === "email";
+      subjectWrap.style.display = isEmail ? "block" : "none";
+      fromAddressWrap.style.display = isEmail ? "block" : "none";
+    }
+
+    channel.addEventListener("change", syncChannelFields);
+    syncChannelFields();
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      status.textContent = "Sending...";
+
+      const formData = new FormData(form);
+      const token = String(formData.get("adminToken") || "").trim();
+
+      if (!token) {
+        status.textContent = "Admin token is required.";
+        return;
+      }
+
+      const payload = {
+        channel: formData.get("channel"),
+        recipients: formData.get("recipients"),
+        useDefaultRecipients: formData.get("useDefaultRecipients") === "on",
+        subject: formData.get("subject"),
+        fromAddress: formData.get("fromAddress"),
+        message: formData.get("message"),
+      };
+
+      try {
+        const response = await fetch("/api/member-messaging", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(payload),
+        });
+
+        const result = await response.json();
+        if (!response.ok) {
+          throw new Error(result.error || "Failed to send message");
+        }
+
+        status.textContent = result.message || "Message sent.";
+        status.classList.remove("text-red-600");
+        status.classList.add("text-green-700");
+      } catch (error) {
+        status.textContent = error instanceof Error ? error.message : "Failed to send message.";
+        status.classList.remove("text-green-700");
+        status.classList.add("text-red-600");
+      }
+    });
+  }
+</script>
