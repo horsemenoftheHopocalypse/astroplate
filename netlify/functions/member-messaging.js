@@ -1,11 +1,14 @@
 import { SESv2Client, SendEmailCommand } from "@aws-sdk/client-sesv2";
-import { SNSClient, PublishCommand } from "@aws-sdk/client-sns";
+import { PinpointSMSVoiceV2Client, SendTextMessageCommand } from "@aws-sdk/client-pinpoint-sms-voice-v2";
+import { randomUUID } from "node:crypto";
+import { authenticate } from "./lib/message-auth.js";
+import { CONFIGURATION_SET_NAME } from "./lib/message-config.js";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const E164_PHONE_REGEX = /^\+[1-9]\d{6,14}$/;
 const CORS_HEADERS = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "Content-Type, Authorization, X-Admin-Token",
+  "Access-Control-Allow-Headers": "Content-Type, Authorization, X-Access-Code",
   "Access-Control-Allow-Methods": "POST, OPTIONS",
   "Content-Type": "application/json",
 };
@@ -98,23 +101,12 @@ export const handler = async (event) => {
     };
   }
 
-  const expectedToken = process.env.MESSAGE_ADMIN_TOKEN;
-  if (!expectedToken) {
-    return {
-      statusCode: 500,
-      headers: CORS_HEADERS,
-      body: JSON.stringify({ error: "MESSAGE_ADMIN_TOKEN is not configured" }),
-    };
+  if (!process.env.MESSAGE_USERS_JSON) {
+    console.error("member-messaging: MESSAGE_USERS_JSON is not configured");
   }
 
-  const authHeader = event.headers.authorization || event.headers.Authorization;
-  const tokenFromBearer =
-    typeof authHeader === "string" && authHeader.startsWith("Bearer ")
-      ? authHeader.slice("Bearer ".length).trim()
-      : "";
-  const token = tokenFromBearer || event.headers["x-admin-token"] || event.headers["X-Admin-Token"];
-
-  if (token !== expectedToken) {
+  const user = authenticate(event);
+  if (!user) {
     return unauthorizedResponse();
   }
 
@@ -213,6 +205,7 @@ export const handler = async (event) => {
           ok: true,
           channel,
           recipients: recipients.length,
+          sentBy: user.name,
           message: `Email sent to ${recipients.length} recipients`,
         }),
       };
@@ -233,34 +226,40 @@ export const handler = async (event) => {
         };
       }
 
-      const smsType = process.env.SNS_SMS_TYPE || "Transactional";
-      const senderId = (process.env.SNS_SENDER_ID || "").trim();
-      const messageAttributes = {
-        "AWS.SNS.SMS.SMSType": {
-          DataType: "String",
-          StringValue: smsType,
-        },
-      };
-
-      if (senderId) {
-        messageAttributes["AWS.SNS.SMS.SenderID"] = {
-          DataType: "String",
-          StringValue: senderId,
+      const originationIdentity = process.env.RCS_ORIGINATION_IDENTITY;
+      if (!originationIdentity) {
+        return {
+          statusCode: 500,
+          headers: CORS_HEADERS,
+          body: JSON.stringify({ error: "RCS_ORIGINATION_IDENTITY is not configured" }),
         };
       }
 
-      const snsClient = new SNSClient({ region });
-      await Promise.all(
+      const smsClient = new PinpointSMSVoiceV2Client({ region });
+      const batchId = randomUUID();
+      const context = { sentBy: user.name, batchId };
+
+      const outcomes = await Promise.allSettled(
         recipients.map((phoneNumber) =>
-          snsClient.send(
-            new PublishCommand({
-              PhoneNumber: phoneNumber,
-              Message: message,
-              MessageAttributes: messageAttributes,
+          smsClient.send(
+            new SendTextMessageCommand({
+              DestinationPhoneNumber: phoneNumber,
+              OriginationIdentity: originationIdentity,
+              MessageBody: message,
+              ConfigurationSetName: CONFIGURATION_SET_NAME,
+              Context: context,
             }),
           ),
         ),
       );
+
+      const failedCount = outcomes.filter((outcome) => outcome.status === "rejected").length;
+      const sentCount = recipients.length - failedCount;
+
+      if (sentCount === 0) {
+        const firstFailure = outcomes.find((outcome) => outcome.status === "rejected");
+        throw firstFailure.reason;
+      }
 
       return {
         statusCode: 200,
@@ -269,7 +268,10 @@ export const handler = async (event) => {
           ok: true,
           channel,
           recipients: recipients.length,
-          message: `SMS sent to ${recipients.length} recipients`,
+          sent: sentCount,
+          failed: failedCount,
+          sentBy: user.name,
+          message: `SMS sent to ${sentCount}/${recipients.length} recipients`,
         }),
       };
     }
