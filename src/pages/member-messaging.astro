@@ -9,19 +9,19 @@ import PageHeader from "@/partials/PageHeader.astro";
     <div class="container max-w-4xl">
       <div class="rounded-lg border border-border bg-light p-6 dark:border-darkmode-border dark:bg-darkmode-light">
         <p class="mb-4 text-sm">
-          Send a message to members using Amazon SES (email) or Amazon SNS (SMS).
-          This page requires your admin token and backend environment variables.
+          Send a message to members using Amazon SES (email) or AWS End User Messaging (SMS).
+          This page requires your personal access code.
         </p>
 
         <form id="member-messaging-form" class="space-y-4">
           <div>
-            <label class="mb-2 block text-sm font-semibold" for="adminToken">Admin Token</label>
+            <label class="mb-2 block text-sm font-semibold" for="accessCode">Access Code</label>
             <input
-              id="adminToken"
-              name="adminToken"
+              id="accessCode"
+              name="accessCode"
               type="password"
               class="w-full rounded border border-border px-3 py-2 dark:border-darkmode-border dark:bg-darkmode-body"
-              placeholder="MESSAGE_ADMIN_TOKEN"
+              placeholder="Your personal access code"
               required
             />
           </div>
@@ -35,7 +35,7 @@ import PageHeader from "@/partials/PageHeader.astro";
                 class="w-full rounded border border-border px-3 py-2 dark:border-darkmode-border dark:bg-darkmode-body"
               >
                 <option value="email">Email (SES)</option>
-                <option value="sms">SMS (SNS)</option>
+                <option value="sms">SMS (End User Messaging)</option>
               </select>
             </div>
 
@@ -94,6 +94,10 @@ import PageHeader from "@/partials/PageHeader.astro";
             <p id="status" class="text-sm"></p>
           </div>
         </form>
+
+        <p class="mt-4 text-sm">
+          <a href="/message-log" class="underline">View message log</a>
+        </p>
       </div>
     </div>
   </section>
@@ -130,10 +134,10 @@ import PageHeader from "@/partials/PageHeader.astro";
       status.textContent = "Sending...";
 
       const formData = new FormData(form);
-      const token = String(formData.get("adminToken") || "").trim();
+      const accessCode = String(formData.get("accessCode") || "").trim();
 
-      if (!token) {
-        status.textContent = "Admin token is required.";
+      if (!accessCode) {
+        status.textContent = "Access code is required.";
         return;
       }
 
@@ -151,7 +155,7 @@ import PageHeader from "@/partials/PageHeader.astro";
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${accessCode}`,
           },
           body: JSON.stringify(payload),
         });
@@ -161,7 +165,8 @@ import PageHeader from "@/partials/PageHeader.astro";
           throw new Error(result.error || "Failed to send message");
         }
 
-        status.textContent = result.message || "Message sent.";
+        const signedInAs = result.sentBy ? `Signed in as ${result.sentBy}. ` : "";
+        status.textContent = signedInAs + (result.message || "Message sent.");
         status.classList.remove("text-red-600");
         status.classList.add("text-green-700");
       } catch (error) {
