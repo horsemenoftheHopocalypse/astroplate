@@ -49,6 +49,10 @@
         {
           "name": "Site Documentation",
           "url": "https://horsemenofthehopocalypse.github.io/astroplate/"
+        },
+        {
+          "name": "Terms of Service",
+          "url": "/terms-of-service"
         }
       ]
     }
