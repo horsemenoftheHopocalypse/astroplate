@@ -30,7 +30,6 @@
     "@astrojs/sitemap": "3.6.0",
     "@aws-sdk/client-pinpoint-sms-voice-v2": "^3.940.0",
     "@aws-sdk/client-sesv2": "^3.940.0",
-    "@aws-sdk/client-sns": "^3.940.0",
     "@digi4care/astro-google-tagmanager": "^1.6.0",
     "@justinribeiro/lite-youtube": "^1.9.0",
     "@paypal/paypal-server-sdk": "^2.1.0",
