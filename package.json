@@ -19,6 +19,7 @@
     "generate-json": "node scripts/jsonGenerator.js",
     "remove-darkmode": "node scripts/removeDarkmode.js && yarn format",
     "import-brewer-spotlights": "node scripts/import-brewer-spotlights.js",
+    "send-rcs-message": "node --env-file=.env.local scripts/send-rcs-message.js",
     "postinstall": "git config core.hooksPath .githooks"
   },
   "dependencies": {
@@ -27,6 +28,7 @@
     "@astrojs/netlify": "^6.6.3",
     "@astrojs/react": "4.4.2",
     "@astrojs/sitemap": "3.6.0",
+    "@aws-sdk/client-pinpoint-sms-voice-v2": "^3.940.0",
     "@aws-sdk/client-sesv2": "^3.940.0",
     "@aws-sdk/client-sns": "^3.940.0",
     "@digi4care/astro-google-tagmanager": "^1.6.0",
