@@ -4,7 +4,7 @@ functions = "netlify/functions"
 publish = "dist"
 
 [functions]
-external_node_modules = ["@paypal/paypal-server-sdk", "@aws-sdk/client-sesv2", "@aws-sdk/client-pinpoint-sms-voice-v2"]
+external_node_modules = ["@paypal/paypal-server-sdk", "@aws-sdk/client-sesv2", "@aws-sdk/client-pinpoint-sms-voice-v2", "@aws-sdk/client-cloudwatch-logs"]
 included_files = ["src/config/*.json"]
 node_bundler = "esbuild"
 
