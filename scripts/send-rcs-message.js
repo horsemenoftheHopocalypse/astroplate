@@ -28,9 +28,12 @@
 // AWS credentials are picked up from the standard SDK provider chain
 // (AWS_PROFILE, AWS_ACCESS_KEY_ID/AWS_SECRET_ACCESS_KEY, SSO, etc).
 import fs from "node:fs";
+import os from "node:os";
 import readline from "node:readline/promises";
+import { randomUUID } from "node:crypto";
 import { parse } from "csv-parse/sync";
 import { PinpointSMSVoiceV2Client, SendRcsMessageCommand } from "@aws-sdk/client-pinpoint-sms-voice-v2";
+import { CONFIGURATION_SET_NAME } from "../netlify/functions/lib/message-config.js";
 
 const E164_PHONE_REGEX = /^\+[1-9]\d{6,14}$/;
 const THROTTLE_RETRY_DELAYS_MS = [1000, 3000, 8000];
@@ -95,7 +98,11 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-async function sendOne(client, { originationIdentity, fallbackOriginationIdentity, message, dryRun }, recipient) {
+async function sendOne(
+  client,
+  { originationIdentity, fallbackOriginationIdentity, message, dryRun, configurationSetName, context },
+  recipient,
+) {
   const command = new SendRcsMessageCommand({
     DestinationPhoneNumber: recipient.phone,
     OriginationIdentity: originationIdentity,
@@ -111,6 +118,8 @@ async function sendOne(client, { originationIdentity, fallbackOriginationIdentit
         OriginationIdentity: fallbackOriginationIdentity,
       },
     }),
+    ConfigurationSetName: configurationSetName,
+    Context: context,
     DryRun: dryRun,
   });
 
@@ -150,6 +159,7 @@ async function main() {
   }
 
   const { recipients, invalid } = readRecipients(args.file);
+  const batchId = randomUUID();
 
   if (invalid.length) {
     console.log(`Skipping ${invalid.length} row(s) with an invalid phone number (must be E.164, e.g. +18175551234):`);
@@ -184,7 +194,14 @@ async function main() {
     try {
       const response = await sendOne(
         client,
-        { originationIdentity, fallbackOriginationIdentity, message: args.message, dryRun: args.dryRun },
+        {
+          originationIdentity,
+          fallbackOriginationIdentity,
+          message: args.message,
+          dryRun: args.dryRun,
+          configurationSetName: CONFIGURATION_SET_NAME,
+          context: { sentBy: os.userInfo().username, batchId },
+        },
         recipient,
       );
       results.sent.push(recipient);
