@@ -47,6 +47,10 @@
           "url": "/member-messaging"
         },
         {
+          "name": "Message Log",
+          "url": "/message-log"
+        },
+        {
           "name": "Tags",
           "url": "/tags"
         },

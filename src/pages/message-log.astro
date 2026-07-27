@@ -1,0 +1,138 @@
+---
+import Base from "@/layouts/Base.astro";
+import PageHeader from "@/partials/PageHeader.astro";
+---
+
+<Base title="Message Log" meta_title="Message Log">
+  <PageHeader title="Message Log" />
+  <section class="section-sm">
+    <div class="container max-w-4xl">
+      <div class="rounded-lg border border-border bg-light p-6 dark:border-darkmode-border dark:bg-darkmode-light">
+        <p class="mb-4 text-sm">
+          Recent member message sends (last 30 days), from AWS End User Messaging's delivery logs.
+        </p>
+
+        <form id="message-log-form" class="mb-6 flex items-end gap-3">
+          <div class="flex-1">
+            <label class="mb-2 block text-sm font-semibold" for="accessCode">Access Code</label>
+            <input
+              id="accessCode"
+              name="accessCode"
+              type="password"
+              class="w-full rounded border border-border px-3 py-2 dark:border-darkmode-border dark:bg-darkmode-body"
+              required
+            />
+          </div>
+          <button type="submit" class="btn btn-primary">Load Log</button>
+        </form>
+
+        <p id="status" class="mb-4 text-sm"></p>
+
+        <div class="overflow-x-auto">
+          <table id="logTable" class="hidden w-full text-left text-sm">
+            <thead>
+              <tr class="border-b border-border dark:border-darkmode-border">
+                <th class="py-2 pr-4">Sent</th>
+                <th class="py-2 pr-4">By</th>
+                <th class="py-2 pr-4">Recipients</th>
+                <th class="py-2 pr-4">Successful</th>
+                <th class="py-2 pr-4">Failed</th>
+              </tr>
+            </thead>
+            <tbody id="logTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script>
+  // @ts-nocheck
+  const form = document.querySelector("#message-log-form");
+  const status = document.querySelector("#status");
+  const table = document.querySelector("#logTable");
+  const tableBody = document.querySelector("#logTableBody");
+
+  if (
+    !(form instanceof HTMLFormElement) ||
+    !(status instanceof HTMLElement) ||
+    !(table instanceof HTMLTableElement) ||
+    !(tableBody instanceof HTMLElement)
+  ) {
+    console.error("Message log page could not initialize: expected DOM nodes were not found.");
+  } else {
+    async function loadLog(accessCode, attempt = 0) {
+      const response = await fetch("/api/message-logs", {
+        headers: { Authorization: `Bearer ${accessCode}` },
+      });
+
+      const result = await response.json();
+
+      if (!response.ok && response.status !== 202) {
+        throw new Error(result.error || "Failed to load message log");
+      }
+
+      if (result.pending) {
+        if (attempt >= 3) {
+          throw new Error("Log query is still running. Try again in a moment.");
+        }
+        status.textContent = "Query still running, retrying...";
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+        return loadLog(accessCode, attempt + 1);
+      }
+
+      return result;
+    }
+
+    function renderRow(batch) {
+      const row = document.createElement("tr");
+      row.className = "border-b border-border dark:border-darkmode-border";
+
+      const values = [
+        new Date(batch.timestamp).toLocaleString(),
+        batch.sentBy,
+        String(batch.recipients),
+        String(batch.successful),
+        String(batch.failed),
+      ];
+
+      for (const value of values) {
+        const cell = document.createElement("td");
+        cell.className = "py-2 pr-4";
+        cell.textContent = value;
+        row.appendChild(cell);
+      }
+
+      return row;
+    }
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      status.textContent = "Loading...";
+      table.classList.add("hidden");
+
+      const formData = new FormData(form);
+      const accessCode = String(formData.get("accessCode") || "").trim();
+
+      if (!accessCode) {
+        status.textContent = "Access code is required.";
+        return;
+      }
+
+      try {
+        const result = await loadLog(accessCode);
+
+        tableBody.innerHTML = "";
+        for (const batch of result.batches) {
+          tableBody.appendChild(renderRow(batch));
+        }
+
+        table.classList.remove("hidden");
+        status.textContent = `Signed in as ${result.requestedBy}. ${result.batches.length} batch(es) in the last 30 days.`;
+      } catch (error) {
+        status.textContent = error instanceof Error ? error.message : "Failed to load message log.";
+      }
+    });
+  }
+</script>
