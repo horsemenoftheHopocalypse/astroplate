@@ -2,7 +2,10 @@ import { SESv2Client, SendEmailCommand } from "@aws-sdk/client-sesv2";
 import { PinpointSMSVoiceV2Client, SendTextMessageCommand } from "@aws-sdk/client-pinpoint-sms-voice-v2";
 import { randomUUID } from "node:crypto";
 import { authenticate } from "./lib/message-auth.js";
-import { CONFIGURATION_SET_NAME } from "./lib/message-config.js";
+import {
+  CONFIGURATION_SET_NAME,
+  resolveAwsCredentials,
+} from "./lib/message-config.js";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const E164_PHONE_REGEX = /^\+[1-9]\d{6,14}$/;
@@ -168,7 +171,11 @@ export const handler = async (event) => {
         };
       }
 
-      const smsClient = new PinpointSMSVoiceV2Client({ region });
+      const credentials = resolveAwsCredentials();
+      const smsClient = new PinpointSMSVoiceV2Client({
+        region,
+        ...(credentials && { credentials }),
+      });
       const batchId = randomUUID();
       const context = { sentBy: user.name,  phoneNumber: user.token ,batchId,};
 
