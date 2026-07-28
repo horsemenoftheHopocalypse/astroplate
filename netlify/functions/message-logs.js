@@ -1,6 +1,6 @@
 import { CloudWatchLogsClient, StartQueryCommand, GetQueryResultsCommand } from "@aws-sdk/client-cloudwatch-logs";
 import { authenticate } from "./lib/message-auth.js";
-import { LOG_GROUP_NAME } from "./lib/message-config.js";
+import { LOG_GROUP_NAME, resolveAwsCredentials } from "./lib/message-config.js";
 
 const CORS_HEADERS = {
   "Access-Control-Allow-Origin": "*",
@@ -101,7 +101,12 @@ export const handler = async (event) => {
     };
   }
 
-  const client = new CloudWatchLogsClient({ region });
+  const credentials = resolveAwsCredentials();
+  const client = new CloudWatchLogsClient({
+    region,
+    ...(credentials && { credentials }),
+  });
+
   const endTime = Math.floor(Date.now() / 1000);
   const startTime = endTime - QUERY_LOOKBACK_DAYS * 24 * 60 * 60;
 
