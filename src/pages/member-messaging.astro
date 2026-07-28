@@ -7,15 +7,19 @@ import PageHeader from "@/partials/PageHeader.astro";
   <PageHeader title="Member Messaging" />
   <section class="section-sm">
     <div class="container max-w-4xl">
-      <div class="rounded-lg border border-border bg-light p-6 dark:border-darkmode-border dark:bg-darkmode-light">
+      <div
+        class="rounded-lg border border-border bg-light p-6 dark:border-darkmode-border dark:bg-darkmode-light"
+      >
         <p class="mb-4 text-sm">
-          Send a message to members using Amazon SES (email) or AWS End User Messaging (SMS).
-          This page requires your personal access code.
+          Send a text message to members. This page requires your personal
+          access code.
         </p>
 
         <form id="member-messaging-form" class="space-y-4">
           <div>
-            <label class="mb-2 block text-sm font-semibold" for="accessCode">Access Code</label>
+            <label class="mb-2 block text-sm font-semibold" for="accessCode"
+              >Access Code</label
+            >
             <input
               id="accessCode"
               name="accessCode"
@@ -24,69 +28,49 @@ import PageHeader from "@/partials/PageHeader.astro";
               placeholder="Your personal access code"
               required
             />
-          </div>
-
-          <div class="grid gap-4 md:grid-cols-2">
-            <div>
-              <label class="mb-2 block text-sm font-semibold" for="channel">Channel</label>
-              <select
-                id="channel"
-                name="channel"
-                class="w-full rounded border border-border px-3 py-2 dark:border-darkmode-border dark:bg-darkmode-body"
-              >
-                <option value="email">Email (SES)</option>
-                <option value="sms">SMS (End User Messaging)</option>
-              </select>
-            </div>
-
-            <div id="fromAddressWrap">
-              <label class="mb-2 block text-sm font-semibold" for="fromAddress">From Address</label>
-              <input
-                id="fromAddress"
-                name="fromAddress"
-                type="email"
-                class="w-full rounded border border-border px-3 py-2 dark:border-darkmode-border dark:bg-darkmode-body"
-                placeholder="optional (uses SES_FROM_EMAIL by default)"
-              />
-            </div>
+            <input type="hidden" name="channel" id="channel" value="sms" />
           </div>
 
           <div>
-            <label class="mb-2 block text-sm font-semibold" for="recipients">Recipients</label>
+            <label class="mb-2 block text-sm font-semibold" for="recipients"
+              >Recipients</label
+            >
             <textarea
               id="recipients"
               name="recipients"
               rows="4"
               class="w-full rounded border border-border px-3 py-2 dark:border-darkmode-border dark:bg-darkmode-body"
-              placeholder="Email: one per line or comma-separated\nSMS: E.164 format, e.g. +18175551234"
+              placeholder="comma-separated phone number with the country code (+1) e.g. +19404358456,+12142631623"
             ></textarea>
-            <label class="mt-2 flex items-center gap-2 text-sm">
-              <input id="useDefaultRecipients" name="useDefaultRecipients" type="checkbox" />
-              Include server defaults (`MEMBER_EMAILS` or `MEMBER_PHONES`)
+            <label
+              class="mt-2
+              flex
+              items-center
+              gap-2
+              text-sm"
+            >
+              <input
+                id="useDefaultRecipients"
+                name="useDefaultRecipients"
+                type="checkbox"
+              /> Include server defaults (`MEMBER_EMAILS` or `MEMBER_PHONES`)
             </label>
           </div>
-
-          <div id="subjectWrap">
-            <label class="mb-2 block text-sm font-semibold" for="subject">Email Subject</label>
-            <input
-              id="subject"
-              name="subject"
-              type="text"
-              class="w-full rounded border border-border px-3 py-2 dark:border-darkmode-border dark:bg-darkmode-body"
-              placeholder="Monthly club update"
-            />
-          </div>
-
           <div>
-            <label class="mb-2 block text-sm font-semibold" for="message">Message</label>
+            <label
+              class="mb-2 block
+              text-sm font-semibold"
+              for="message">Message</label
+            >
             <textarea
               id="message"
               name="message"
               rows="8"
-              class="w-full rounded border border-border px-3 py-2 dark:border-darkmode-border dark:bg-darkmode-body"
-              placeholder="Write your member announcement..."
-              required
-            ></textarea>
+              class="w-full rounded border
+              border-border px-3 py-2 dark:border-darkmode-border
+              dark:bg-darkmode-body"
+              placeholder="Write your member announcement...\n160 characters for less than a penny."
+              required></textarea>
           </div>
 
           <div class="flex items-center gap-3">
@@ -94,7 +78,11 @@ import PageHeader from "@/partials/PageHeader.astro";
             <p id="status" class="text-sm"></p>
           </div>
         </form>
-
+        <div class="content">
+          <p>Byte count: <span id="byteCount">0</span> bytes</p>
+          <p>Char count: <span id="charCount">0</span> characters</p>
+          <p>Segments: <span id="segments">0</span></p>
+        </div>
         <p class="mt-4 text-sm">
           <a href="/message-log" class="underline">View message log</a>
         </p>
@@ -107,73 +95,77 @@ import PageHeader from "@/partials/PageHeader.astro";
   // @ts-nocheck
   const form = document.querySelector("#member-messaging-form");
   const channel = document.querySelector("#channel");
-  const subjectWrap = document.querySelector("#subjectWrap");
-  const fromAddressWrap = document.querySelector("#fromAddressWrap");
   const status = document.querySelector("#status");
 
   if (
     !(form instanceof HTMLFormElement) ||
     !(channel instanceof HTMLSelectElement) ||
-    !(subjectWrap instanceof HTMLElement) ||
-    !(fromAddressWrap instanceof HTMLElement) ||
     !(status instanceof HTMLElement)
   ) {
-    console.error("Member messaging page could not initialize: expected DOM nodes were not found.");
-  } else {
-    function syncChannelFields() {
-      const isEmail = channel.value === "email";
-      subjectWrap.style.display = isEmail ? "block" : "none";
-      fromAddressWrap.style.display = isEmail ? "block" : "none";
+    console.error(
+      "Member messaging page could not initialize: expected DOM nodes were not found.",
+    );
+  }
+
+  const textarea = document.getElementById("message");
+  const byteCountDisplay = document.getElementById("byteCount");
+  const charCountDisplay = document.getElementById("charCount");
+  const segmentsDisplay = document.getElementById("segments");
+  const encoder = new TextEncoder(); // Reuse the encoder instance for performance
+
+  textarea.addEventListener("input", () => {
+    const bytes = encoder.encode(textarea.value).length;
+    byteCountDisplay.textContent = bytes;
+    charCountDisplay.textContent = textarea.value.length;
+
+    // 160 characters per segment for SMS, MOST of the time.
+    segmentsDisplay.textContent = Math.ceil(textarea.value.length / 160);
+  });
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    status.textContent = "Sending...";
+
+    const formData = new FormData(form);
+    const accessCode = String(formData.get("accessCode") || "").trim();
+
+    if (!accessCode) {
+      status.textContent = "Access code is required.";
+      return;
     }
 
-    channel.addEventListener("change", syncChannelFields);
-    syncChannelFields();
+    const payload = {
+      channel: formData.get("channel"),
+      recipients: formData.get("recipients"),
+      useDefaultRecipients: formData.get("useDefaultRecipients") === "on",
+      message: formData.get("message"),
+    };
 
-    form.addEventListener("submit", async (event) => {
-      event.preventDefault();
-      status.textContent = "Sending...";
+    try {
+      const response = await fetch("/api/member-messaging", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessCode}`,
+        },
+        body: JSON.stringify(payload),
+      });
 
-      const formData = new FormData(form);
-      const accessCode = String(formData.get("accessCode") || "").trim();
-
-      if (!accessCode) {
-        status.textContent = "Access code is required.";
-        return;
+      const result = await response.json();
+      if (!response.ok) {
+        throw new Error(result.error || "Failed to send message");
       }
 
-      const payload = {
-        channel: formData.get("channel"),
-        recipients: formData.get("recipients"),
-        useDefaultRecipients: formData.get("useDefaultRecipients") === "on",
-        subject: formData.get("subject"),
-        fromAddress: formData.get("fromAddress"),
-        message: formData.get("message"),
-      };
-
-      try {
-        const response = await fetch("/api/member-messaging", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${accessCode}`,
-          },
-          body: JSON.stringify(payload),
-        });
-
-        const result = await response.json();
-        if (!response.ok) {
-          throw new Error(result.error || "Failed to send message");
-        }
-
-        const signedInAs = result.sentBy ? `Signed in as ${result.sentBy}. ` : "";
-        status.textContent = signedInAs + (result.message || "Message sent.");
-        status.classList.remove("text-red-600");
-        status.classList.add("text-green-700");
-      } catch (error) {
-        status.textContent = error instanceof Error ? error.message : "Failed to send message.";
-        status.classList.remove("text-green-700");
-        status.classList.add("text-red-600");
-      }
-    });
-  }
+      const signedInAs = result.sentBy ? `Signed in as ${result.sentBy}. ` : "";
+      status.textContent = signedInAs + (result.message || "Message sent.");
+      status.classList.remove("text-red-600");
+      status.classList.add("text-green-700");
+      form.reset();
+    } catch (error) {
+      status.textContent =
+        error instanceof Error ? error.message : "Failed to send message.";
+      status.classList.remove("text-green-700");
+      status.classList.add("text-red-600");
+    }
+  });
 </script>

@@ -34,6 +34,8 @@ function sleep(ms) {
 }
 
 function summarizeRows(rows) {
+
+  console.log("summarizeRows: rows", rows);
   const batches = new Map();
 
   for (const row of rows) {
@@ -43,7 +45,7 @@ function summarizeRows(rows) {
     if (!batches.has(batchId)) {
       batches.set(batchId, {
         batchId,
-        sentBy: fields.sentBy || "unknown",
+        sentBy: fields.sentBy || "web user",
         timestamp: fields["@timestamp"],
         recipients: 0,
         successful: 0,
