@@ -38,7 +38,8 @@ function extractToken(event) {
 // Resolves a request's per-person access code against MESSAGE_USERS_JSON.
 // Returns { name } on success, or null if the token is missing, unknown,
 // or MESSAGE_USERS_JSON is unset/malformed.
-export function authenticate(event) {
+export async function authenticate(event) {
+
   const token = extractToken(event);
   if (!token) return null;
 

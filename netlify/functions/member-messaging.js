@@ -143,73 +143,6 @@ export const handler = async (event) => {
   }
 
   try {
-    if (channel === "email") {
-      const defaultEmails = useDefaultRecipients
-        ? parseRecipients(process.env.MEMBER_EMAILS || "")
-        : [];
-      const suppliedEmails = parseRecipients(payload.recipients);
-      const recipients = normalizeEmailList([...defaultEmails, ...suppliedEmails]);
-      const subject = String(payload.subject || "").trim();
-      const fromAddress = String(payload.fromAddress || process.env.SES_FROM_EMAIL || "").trim();
-
-      if (!subject) {
-        return {
-          statusCode: 400,
-          headers: CORS_HEADERS,
-          body: JSON.stringify({ error: "Subject is required for email" }),
-        };
-      }
-
-      if (!fromAddress || !EMAIL_REGEX.test(fromAddress)) {
-        return {
-          statusCode: 400,
-          headers: CORS_HEADERS,
-          body: JSON.stringify({
-            error: "A valid fromAddress is required or set SES_FROM_EMAIL",
-          }),
-        };
-      }
-
-      if (recipients.length === 0) {
-        return {
-          statusCode: 400,
-          headers: CORS_HEADERS,
-          body: JSON.stringify({ error: "No valid email recipients provided" }),
-        };
-      }
-
-      const sesClient = new SESv2Client({ region });
-      const recipientChunks = chunk(recipients, 50);
-
-      for (const recipientChunk of recipientChunks) {
-        await sesClient.send(
-          new SendEmailCommand({
-            FromEmailAddress: fromAddress,
-            Destination: { ToAddresses: recipientChunk },
-            Content: {
-              Simple: {
-                Subject: { Data: subject, Charset: "UTF-8" },
-                Body: {
-                  Text: { Data: message, Charset: "UTF-8" },
-                },
-              },
-            },
-          }),
-        );
-      }
-
-      return {
-        statusCode: 200,
-        headers: CORS_HEADERS,
-        body: JSON.stringify({
-          ok: true,
-          channel,
-          recipients: recipients.length,
-          sentBy: user.name,
-          message: `Email sent to ${recipients.length} recipients`,
-        }),
-      };
-    }
 
     if (channel === "sms") {
       const defaultPhones = useDefaultRecipients
@@ -237,7 +170,7 @@ export const handler = async (event) => {
 
       const smsClient = new PinpointSMSVoiceV2Client({ region });
       const batchId = randomUUID();
-      const context = { sentBy: user.name, batchId };
+      const context = { sentBy: user.name,  phoneNumber: user.token ,batchId,};
 
       const outcomes = await Promise.allSettled(
         recipients.map((phoneNumber) =>
