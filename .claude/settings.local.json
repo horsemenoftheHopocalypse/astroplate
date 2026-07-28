@@ -13,7 +13,8 @@
       "Bash(curl -s -A \"Mozilla/5.0\" \"https://docs.aws.amazon.com/pinpoint/latest/apireference_smsvoicev2/API_SendRcsMessage.html\")",
       "Bash(npm view *)",
       "Bash(tar xzf *)",
-      "Bash(yarn send-rcs-message *)"
+      "Bash(yarn send-rcs-message *)",
+      "WebSearch"
     ]
   }
 }
