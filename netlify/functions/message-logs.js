@@ -1,6 +1,10 @@
 import { CloudWatchLogsClient, StartQueryCommand, GetQueryResultsCommand } from "@aws-sdk/client-cloudwatch-logs";
 import { authenticate } from "./lib/message-auth.js";
-import { LOG_GROUP_NAME, resolveAwsCredentials } from "./lib/message-config.js";
+import {
+  LOG_GROUP_NAME,
+  resolveAwsCredentials,
+  resolveAwsRegion,
+} from "./lib/message-config.js";
 
 const CORS_HEADERS = {
   "Access-Control-Allow-Origin": "*",
@@ -92,7 +96,7 @@ export const handler = async (event) => {
     return unauthorizedResponse();
   }
 
-  const region = process.env.AWS_REGION || process.env.AWS_DEFAULT_REGION;
+  const region = resolveAwsRegion();
   if (!region) {
     return {
       statusCode: 500,

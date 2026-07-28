@@ -5,6 +5,7 @@ import { authenticate } from "./lib/message-auth.js";
 import {
   CONFIGURATION_SET_NAME,
   resolveAwsCredentials,
+  resolveAwsRegion,
 } from "./lib/message-config.js";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -136,7 +137,7 @@ export const handler = async (event) => {
     };
   }
 
-  const region = process.env.AWS_REGION || process.env.AWS_DEFAULT_REGION;
+  const region = resolveAwsRegion();
   if (!region) {
     return {
       statusCode: 500,
