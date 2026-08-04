@@ -61,6 +61,10 @@
         {
           "name": "Terms of Service",
           "url": "/terms-of-service"
+        },
+        {
+          "name": "Privacy Policy",
+          "url": "/privacy"
         }
       ]
     }
