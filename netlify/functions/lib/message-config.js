@@ -31,3 +31,10 @@ export function resolveAwsRegion() {
     process.env.AWS_DEFAULT_REGION
   );
 }
+
+// SMS_PROVIDER picks which provider module member-messaging.js dispatches
+// to. Defaults to "aws" so existing deployments are unaffected until this
+// is set explicitly (e.g. once a Twilio trial account is approved).
+export function resolveSmsProvider() {
+  return process.env.SMS_PROVIDER === "twilio" ? "twilio" : "aws";
+}
