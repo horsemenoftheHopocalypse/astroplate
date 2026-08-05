@@ -1,12 +1,13 @@
-import { SESv2Client, SendEmailCommand } from "@aws-sdk/client-sesv2";
-import { PinpointSMSVoiceV2Client, SendTextMessageCommand } from "@aws-sdk/client-pinpoint-sms-voice-v2";
 import { randomUUID } from "node:crypto";
 import { authenticate } from "./lib/message-auth.js";
-import {
-  CONFIGURATION_SET_NAME,
-  resolveAwsCredentials,
-  resolveAwsRegion,
-} from "./lib/message-config.js";
+import { resolveSmsProvider } from "./lib/message-config.js";
+import { sendSms as sendAwsSms } from "./lib/sms-providers/aws-eum.js";
+import { sendSms as sendTwilioSms } from "./lib/sms-providers/twilio.js";
+
+const SMS_PROVIDERS = {
+  aws: sendAwsSms,
+  twilio: sendTwilioSms,
+};
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const E164_PHONE_REGEX = /^\+[1-9]\d{6,14}$/;
@@ -80,14 +81,6 @@ function normalizePhoneList(list) {
   return normalized;
 }
 
-function chunk(items, size) {
-  const chunks = [];
-  for (let i = 0; i < items.length; i += size) {
-    chunks.push(items.slice(i, i + size));
-  }
-  return chunks;
-}
-
 export const handler = async (event) => {
   if (event.httpMethod === "OPTIONS") {
     return {
@@ -137,15 +130,6 @@ export const handler = async (event) => {
     };
   }
 
-  const region = resolveAwsRegion();
-  if (!region) {
-    return {
-      statusCode: 500,
-      headers: CORS_HEADERS,
-      body: JSON.stringify({ error: "AWS_REGION is not configured" }),
-    };
-  }
-
   try {
 
     if (channel === "sms") {
@@ -163,43 +147,18 @@ export const handler = async (event) => {
         };
       }
 
-      const originationIdentity = process.env.RCS_ORIGINATION_IDENTITY;
-      if (!originationIdentity) {
-        return {
-          statusCode: 500,
-          headers: CORS_HEADERS,
-          body: JSON.stringify({ error: "RCS_ORIGINATION_IDENTITY is not configured" }),
-        };
-      }
-
-      const credentials = resolveAwsCredentials();
-      const smsClient = new PinpointSMSVoiceV2Client({
-        region,
-        ...(credentials && { credentials }),
-      });
       const batchId = randomUUID();
-      const context = { sentBy: user.name,  phoneNumber: user.token ,batchId,};
+      const context = { sentBy: user.name, phoneNumber: user.token, batchId };
+      const sendSms = SMS_PROVIDERS[resolveSmsProvider()];
 
-      const outcomes = await Promise.allSettled(
-        recipients.map((phoneNumber) =>
-          smsClient.send(
-            new SendTextMessageCommand({
-              DestinationPhoneNumber: phoneNumber,
-              OriginationIdentity: originationIdentity,
-              MessageBody: message,
-              ConfigurationSetName: CONFIGURATION_SET_NAME,
-              Context: context,
-            }),
-          ),
-        ),
-      );
-
-      const failedCount = outcomes.filter((outcome) => outcome.status === "rejected").length;
-      const sentCount = recipients.length - failedCount;
+      const { sentCount, failedCount, firstError } = await sendSms({
+        recipients,
+        message,
+        context,
+      });
 
       if (sentCount === 0) {
-        const firstFailure = outcomes.find((outcome) => outcome.status === "rejected");
-        throw firstFailure.reason;
+        throw firstError;
       }
 
       return {
