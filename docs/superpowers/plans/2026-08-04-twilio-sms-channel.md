@@ -584,8 +584,9 @@ git commit -m "Dispatch member-messaging.js sms sends through provider abstracti
 
 - [ ] **Step 1: Start Netlify dev in the background**
 
+Run this from the git worktree this plan is being implemented in (NOT the main checkout — confirm with `pwd` and `git rev-parse --abbrev-ref HEAD` first if unsure which directory you're in):
+
 ```bash
-cd /Users/barryforrest/Projects/Horsemen/astro/astroplate
 netlify dev &
 ```
 
