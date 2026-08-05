@@ -102,7 +102,7 @@ export const handler = async (event) => {
     console.error("member-messaging: MESSAGE_USERS_JSON is not configured");
   }
 
-  const user = authenticate(event);
+  const user = await authenticate(event);
   if (!user) {
     return unauthorizedResponse();
   }
