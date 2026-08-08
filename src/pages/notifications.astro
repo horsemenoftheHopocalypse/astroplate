@@ -5,33 +5,29 @@ import ImageMod from "@/layouts/components/ImageMod.astro";
 ---
 
 <Base>
-  <PageHeader title="Memberships" />
+  <PageHeader title="Text Notifications" />
   <section class="section pt-14">
     <div class="container">
-      <div class="row justify-center flex items-end gap-4">
-        <p class="mb-6 text-center" style="width: 260px">
-          Get the latest club news! Scan to join our notification list or text
-          'Subscribe' to <span class="whitespace-nowrap">682 214 6655</span>
+      <div class="row justify-center flex">
+        <p class="mx-auto mb-6 max-w-md text-center">
+          Get the latest club news via text message. Scan to join our text list
+          or you may text 'Subscribe' to <a
+            href="tel:+16822146655"
+            class="whitespace-nowrap"
+            aria-label="6 8 2, 2 1 4, 6 6 5 5">682 214 6655</a
+          >. By doing so, you agree to receive text messages from <a
+            href="tel:+16822146655"
+            aria-label="plus 1, 6 8 2, 2 1 4, 6 6 5 5"
+            class="whitespace-nowrap">+1 682 214 6655</a
+          >. You will receive 3 to 4 text messages per month to remind you about
+          upcoming club events, including Msg & data rates may apply. To opt out
+          reply STOP to cancel, HELP for help.
           <img
             class="block mx-auto mb-6 mt-4 rounded-lg"
             src="/images/sms_subscribe_qrcode.png"
             width="200"
             height="200"
             alt="Subscribe QR Code"
-          />
-        </p>
-
-        <p class="mb-6 text-center" style="width: 260px">
-          To unsubscribe, scan the code below or text 'Unsubscribe' to <span
-            class="whitespace-nowrap">682 214 6655</span
-          >
-
-          <img
-            class="block mx-auto mb-6 mt-4 rounded-lg"
-            src="/images/sms_stop_qrcode.png"
-            width="200"
-            height="200"
-            alt="Unsubscribe QR Code"
           />
         </p>
       </div>
