@@ -49,7 +49,10 @@
       "Bash(git checkout *)",
       "Bash(git merge --no-ff -X ours worktree-twilio-sms-channel -m 'Merge worktree-twilio-sms-channel into develop *)",
       "Bash(grep -rln *)",
-      "Bash(git grep *)"
+      "Bash(git grep *)",
+      "Bash(python3 -c \"import qrcode\")",
+      "Bash(pip3 install *)",
+      "Bash(python3 make_qr.py \"sms:+16822146655?body=Stop\" sms_stop_qrcode.png)"
     ]
   }
 }

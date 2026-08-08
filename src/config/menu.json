@@ -65,6 +65,10 @@
         {
           "name": "Privacy Policy",
           "url": "/privacy"
+        },
+        {
+          "name": "Notifications",
+          "url": "/notifications"
         }
       ]
     }

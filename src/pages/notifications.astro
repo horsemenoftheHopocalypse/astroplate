@@ -1,0 +1,40 @@
+---
+import Base from "@/layouts/Base.astro";
+import PageHeader from "@/partials/PageHeader.astro";
+import ImageMod from "@/layouts/components/ImageMod.astro";
+---
+
+<Base>
+  <PageHeader title="Memberships" />
+  <section class="section pt-14">
+    <div class="container">
+      <div class="row justify-center flex items-end gap-4">
+        <p class="mb-6 text-center" style="width: 260px">
+          Get the latest club news! Scan to join our notification list or text
+          'Subscribe' to <span class="whitespace-nowrap">682 214 6655</span>
+          <img
+            class="block mx-auto mb-6 mt-4 rounded-lg"
+            src="/images/sms_subscribe_qrcode.png"
+            width="200"
+            height="200"
+            alt="Subscribe QR Code"
+          />
+        </p>
+
+        <p class="mb-6 text-center" style="width: 260px">
+          To unsubscribe, scan the code below or text 'Unsubscribe' to <span
+            class="whitespace-nowrap">682 214 6655</span
+          >
+
+          <img
+            class="block mx-auto mb-6 mt-4 rounded-lg"
+            src="/images/sms_stop_qrcode.png"
+            width="200"
+            height="200"
+            alt="Unsubscribe QR Code"
+          />
+        </p>
+      </div>
+    </div>
+  </section>
+</Base>
