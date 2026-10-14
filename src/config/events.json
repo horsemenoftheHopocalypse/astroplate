@@ -18,10 +18,10 @@
         {
           "icon": "🇺🇸",
           "title": "Door prizes, silent auction, and raffle items",
-          "description": "Take a chance and try your luck with our entertaining raffles! Prizes suitable for any homebrewer!"
+          "description": "Take a chance and try your luck with our entertaining door prizes!"
         }
       ],
-      "active": true
+      "active": false
     },
     {
       "id": "christmas-party-2025",
@@ -44,6 +44,11 @@
           "description": "Take a chance and try your luck with our entertaining raffles! Prizes suitable for any homebrewer!"
         }
       ],
+      "hotel": {
+        "name": "Hampton Inn & Suites",
+        "address": "1600 Hurst Town Center Dr, Hurst, TX",
+        "link": "https://www.hilton.com/en/book/reservation/rooms/?ctyhocn=DALHTHX&arrivalDate=2026-12-05&departureDate=2026-12-06&groupCode=CHHHOH&room1NumAdults=1&cid=OM%2CWW%2CHILTONLINK%2CEN%2CDirectLink&fbclid=IwY2xjawU8dqtleHRuA2FlbQIxMABwZG9mBWJyaWQRMUV0c3MwdEJSeFhQbnJibHBzcnRjBmFwcF9pZBAyMjIwMzkxNzg4MjAwODkyAAEeoKRdDKcikD9cQtCARzMWr2y98vlrrqrZse9tePL4fEmhF_RmUDwJ7t-ncdA_aem_BjB1whNyIGq4StGNOTfyEg"
+      },
       "active": true
     }
   ]

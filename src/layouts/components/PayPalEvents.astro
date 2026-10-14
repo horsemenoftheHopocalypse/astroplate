@@ -42,7 +42,20 @@ const activeEvents = events
                     {highlight.description}
                   </p>
                 ))}
-
+              {event.hotel && (
+                <p class="text-gray-600 my-2">
+                  <strong>HOTEL:</strong> {event.hotel.name} -{" "}
+                  {event.hotel.address}{" "}
+                  <a
+                    href={event.hotel.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-blue-600 hover:text-blue-800 hover:underline"
+                  >
+                    Book Now
+                  </a>
+                </p>
+              )}
               <div class="mt-4 mb-3">
                 <ul class="list-disc list-inside text-gray-700">
                   <li>
